@@ -163,6 +163,255 @@ button {
 
 
 /* ============================================================
+   SITE PASSWORD GATE
+   ============================================================ */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black, #000);
+}
+
+.gate__vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gate__content {
+  position: relative;
+  z-index: 2;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* ── Decorative restricted label ── */
+.gate__restricted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.gate__restricted-line {
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: rgba(204, 255, 0, 0.25);
+}
+
+.gate__restricted-text {
+  font-family: var(--font-label, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.gate__restricted-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent, #ccff00);
+  animation: gate-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes gate-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+/* ── Heading ── */
+.gate__heading {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.gate__heading-name {
+  font-family: var(--font-heading, 'Archivo Black', sans-serif);
+  color: #fff;
+  display: inline;
+}
+
+.gate__heading-accent {
+  font-family: var(--font-accent, 'Playfair Display', serif);
+  font-style: italic;
+  color: var(--color-accent, #ccff00);
+  display: inline;
+  margin-left: 0.15em;
+}
+
+/* ── Subheading ── */
+.gate__sub {
+  font-family: var(--font-body, 'Space Grotesk', sans-serif);
+  font-weight: 300;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+}
+
+/* ── Form ── */
+.gate__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Input wrapper with corner bracket treatment ── */
+.gate__input-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 14px;
+  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-radius: var(--radius-card, 4px);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gate__input-wrap::before,
+.gate__input-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(204, 255, 0, 0.6);
+  border-style: solid;
+  transition: border-color 0.3s ease;
+}
+
+.gate__input-wrap::before {
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+  border-radius: 0 0 0 var(--radius-card, 4px);
+}
+
+.gate__input-wrap::after {
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+  border-radius: 0 0 var(--radius-card, 4px) 0;
+}
+
+/* Focus state */
+.gate__input-wrap:focus-within {
+  border-color: rgba(204, 255, 0, 1);
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.06);
+}
+
+.gate__input-wrap:focus-within::before,
+.gate__input-wrap:focus-within::after {
+  border-color: rgba(204, 255, 0, 1);
+}
+
+/* Success state */
+.gate__input-wrap--success {
+  border-color: var(--color-accent, #ccff00) !important;
+}
+.gate__input-wrap--success::before,
+.gate__input-wrap--success::after {
+  border-color: var(--color-accent, #ccff00) !important;
+}
+
+/* Error state */
+.gate__input-wrap--error {
+  border-color: rgba(255, 80, 80, 0.8) !important;
+}
+.gate__input-wrap--error::before,
+.gate__input-wrap--error::after {
+  border-color: rgba(255, 80, 80, 0.8) !important;
+}
+
+/* ── Input ── */
+.gate__input {
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font-body, 'Space Grotesk', sans-serif);
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  letter-spacing: 0.25em;
+}
+
+.gate__input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.2em;
+}
+
+/* ── Message ── */
+.gate__msg {
+  font-family: var(--font-label, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  min-height: 18px;
+  opacity: 0;
+}
+
+.gate__msg--success {
+  color: var(--color-accent, #ccff00);
+}
+
+.gate__msg--error {
+  color: rgba(255, 80, 80, 0.8);
+}
+
+/* ── Button ── */
+.gate__btn {
+  font-family: var(--font-button, 'Space Grotesk', sans-serif);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--color-accent, #ccff00);
+  color: var(--black, #000);
+  border: none;
+  border-radius: 14px;
+  padding: 14px 32px;
+  width: 100%;
+  max-width: 340px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gate__btn:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* ── Mobile ── */
+@media (max-width: 767px) {
+  .gate__content {
+    padding: 0 20px;
+  }
+
+  .gate__input-wrap,
+  .gate__btn {
+    max-width: 100%;
+  }
+}
+
+
+/* ============================================================
    SECTION 00 — LOADER
    ============================================================ */
 #loader {
@@ -1205,12 +1454,33 @@ button {
   border-left-color: var(--color-accent);
 }
 
+/* Chevron indicator — signals clickable */
+.services__row::after {
+  content: '+';
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(204, 255, 0, 0.4);
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding-right: 0.5rem;
+}
+
+.services__row:hover::after {
+  color: var(--color-accent);
+}
+
 /* Active state */
 .services__row.is-active {
   border-left-color: var(--color-accent);
 }
 .services__row.is-active .services__name {
   color: var(--color-text);
+}
+
+.services__row.is-active::after {
+  content: '−';
+  color: var(--color-accent);
 }
 
 /* Right column — detail panel */
@@ -1345,6 +1615,21 @@ button {
   font-family: var(--font-heading);
   font-size: 0.95rem;
   color: var(--color-text);
+}
+
+.services__acc-trigger::after {
+  content: '+';
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(204, 255, 0, 0.4);
+  transition: color 0.2s ease;
+  padding-right: 0.5rem;
+}
+.services__acc-item.is-open .services__acc-trigger::after {
+  content: '−';
+  color: var(--color-accent);
 }
 
 .services__acc-body {
@@ -2821,7 +3106,7 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 370px);
+    margin-left: calc(-30vw + 350px);
     margin-right: calc(-30vw - 370px);
     margin-top: -10px;
     margin-bottom: -100px;

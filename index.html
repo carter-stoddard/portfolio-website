@@ -33,6 +33,53 @@
 <body>
 
   <!-- ============================================================
+       SITE PASSWORD GATE — remove or disable when site goes public
+       TO DISABLE: set SITE_PASSWORD = '' or delete this entire gate block
+  ============================================================ -->
+  <div id="site-gate" class="gate" aria-label="Password required">
+    <!-- Vignette overlay -->
+    <div class="gate__vignette"></div>
+
+    <div class="gate__content">
+      <!-- Decorative label -->
+      <div class="gate__restricted">
+        <span class="gate__restricted-line"></span>
+        <span class="gate__restricted-text">RESTRICTED ACCESS</span>
+        <span class="gate__restricted-dot"></span>
+        <span class="gate__restricted-line"></span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="gate__heading">
+        <span class="gate__heading-name">CARTER</span>
+        <span class="gate__heading-accent">Stoddard.</span>
+      </h1>
+
+      <!-- Subheading -->
+      <p class="gate__sub">Full-Stack Creative</p>
+
+      <!-- Password form -->
+      <form id="gate-form" class="gate__form" autocomplete="off">
+        <div class="gate__input-wrap" id="gate-input-wrap">
+          <input
+            type="password"
+            id="gate-input"
+            class="gate__input"
+            placeholder="ENTER PASSWORD"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <p id="gate-msg" class="gate__msg" aria-live="polite"></p>
+        <button type="submit" class="gate__btn">ENTER SITE</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- All site content hidden behind gate -->
+  <div id="site-content">
+
+  <!-- ============================================================
        SECTION 00 — LOADER
        Placeholder: 3-2-1 liftoff countdown. Final design TBD.
   ============================================================ -->
@@ -1029,6 +1076,8 @@
 
   </footer>
 
+  </div><!-- /#site-content -->
+
 
   <!-- ============================================================
        SCRIPTS
@@ -1050,6 +1099,121 @@
 
   <!-- Site modules -->
   <script src="js/starfield.js"></script>
+
+  <!-- Site password gate -->
+  <script>
+  (function() {
+    // CHANGE THIS PASSWORD before sharing the site URL
+    const SITE_PASSWORD = 'astronaut1';
+
+    const gate        = document.getElementById('site-gate');
+    const siteContent = document.getElementById('site-content');
+    const nav         = document.getElementById('nav');
+    const form        = document.getElementById('gate-form');
+    const input       = document.getElementById('gate-input');
+    const inputWrap   = document.getElementById('gate-input-wrap');
+    const msg         = document.getElementById('gate-msg');
+
+    /* ── Already authenticated this session ── */
+    if (sessionStorage.getItem('siteAccess') === 'true') {
+      gate.style.display = 'none';
+      siteContent.style.opacity = '1';
+      siteContent.style.pointerEvents = '';
+      document.body.style.overflow = '';
+      if (nav) { nav.style.opacity = '1'; nav.style.pointerEvents = ''; }
+      return;
+    }
+
+    /* ── Lock the page ── */
+    document.body.style.overflow = 'hidden';
+    siteContent.style.opacity = '0';
+    siteContent.style.pointerEvents = 'none';
+    if (nav) { nav.style.opacity = '0'; nav.style.pointerEvents = 'none'; }
+
+    /* ── Starfield behind the gate ── */
+    const gateCanvas = document.createElement('canvas');
+    gateCanvas.id = 'gate-starfield';
+    gateCanvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;z-index:998;pointer-events:none;';
+    gate.insertBefore(gateCanvas, gate.firstChild);
+    Starfield.init(gateCanvas);
+
+    /* ── Entry animation ── */
+    const els = gate.querySelectorAll('.gate__restricted, .gate__heading, .gate__sub, .gate__input-wrap, .gate__btn');
+    gsap.set(els, { opacity: 0, y: 24 });
+    gsap.to(els, {
+      opacity: 1, y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      stagger: 0.12,
+      delay: 0.3
+    });
+
+    /* ── Form submit ── */
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const val = input.value.trim();
+
+      if (val.toUpperCase() === SITE_PASSWORD.toUpperCase()) {
+        /* ── Correct ── */
+        sessionStorage.setItem('siteAccess', 'true');
+
+        // Brackets pulse lime
+        inputWrap.classList.add('gate__input-wrap--success');
+
+        // Show success message
+        msg.textContent = 'ACCESS GRANTED';
+        msg.className = 'gate__msg gate__msg--success';
+        gsap.fromTo(msg, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+
+        // Animate out after delay
+        gsap.delayedCall(0.6, function() {
+          // Destroy gate starfield so hero can init its own
+          Starfield.destroy();
+          gateCanvas.remove();
+
+          gsap.to(gate, {
+            opacity: 0, duration: 0.5,
+            onComplete: function() { gate.style.display = 'none'; }
+          });
+          gsap.to(siteContent, { opacity: 1, duration: 0.5 });
+          siteContent.style.pointerEvents = '';
+          if (nav) {
+            gsap.to(nav, { opacity: 1, duration: 0.5 });
+            nav.style.pointerEvents = '';
+          }
+          document.body.style.overflow = '';
+        });
+
+      } else {
+        /* ── Wrong ── */
+        // Shake input
+        gsap.to(inputWrap, {
+          x: [-8, 8, -8, 8, -4, 4, 0],
+          duration: 0.4,
+          ease: 'power2.inOut'
+        });
+
+        // Flash brackets red
+        inputWrap.classList.add('gate__input-wrap--error');
+        setTimeout(function() { inputWrap.classList.remove('gate__input-wrap--error'); }, 600);
+
+        // Error message
+        msg.textContent = 'INCORRECT PASSWORD.';
+        msg.className = 'gate__msg gate__msg--error';
+        gsap.fromTo(msg, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+        gsap.to(msg, { opacity: 0, duration: 0.3, delay: 2 });
+
+        // Clear and refocus
+        input.value = '';
+        input.focus();
+      }
+    });
+
+    // Focus input on load
+    setTimeout(function() { input.focus(); }, 900);
+  })();
+  </script>
+
   <script src="js/loader.js"></script>
   <script src="js/hero.js"></script>
   <script src="js/animations.js"></script>

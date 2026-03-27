@@ -2007,7 +2007,7 @@ button {
 
   /* Portrait — 25% smaller on mobile to reduce cropping */
   .hero__portrait-wrapper {
-    width: 1242px; /* ~25% smaller than original for less cropping on mobile */
+    width: 994px; /* ~45% smaller than original for less cropping on mobile */
   }
 
   /* Nav adjusts on mobile */

@@ -6,13 +6,14 @@
 
 const Starfield = (() => {
 
-  const STAR_COUNT   = 300;
+  // Desktop density — scales down on smaller screens
+  const STAR_DENSITY = 0.00015; // stars per square pixel (≈300 on 1920×1080)
   const STAR_MIN_R   = 0.3;
   const STAR_MAX_R   = 1.6;
   const TWINKLE_SPEED = 0.008;
 
   let canvas, ctx, stars = [], raf;
-  let W, H;
+  let W, H, dpr;
   // Mouse parallax — stars shift opposite to cursor for depth effect
   const PARALLAX_STRENGTH = 12; // max px offset
   let mouseX = 0.5, mouseY = 0.5; // normalized 0–1, center default
@@ -34,15 +35,22 @@ const Starfield = (() => {
   }
 
   function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
+    dpr = window.devicePixelRatio || 1;
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    // Scale canvas buffer for sharp rendering on Retina/HiDPI
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // Rebuild stars on resize so they fill the new dimensions
     if (stars.length) buildStars();
   }
 
   function buildStars() {
     stars = [];
-    for (let i = 0; i < STAR_COUNT; i++) {
+    const area = W * H;
+    const count = Math.round(area * STAR_DENSITY);
+    for (let i = 0; i < count; i++) {
       stars.push({
         x:       Math.random() * W,
         y:       Math.random() * H,

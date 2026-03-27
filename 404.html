@@ -1,0 +1,495 @@
+<!-- 404 PAGE — lost in space -->
+<!-- Configure your server or Vercel to serve this file on 404 errors. In Vercel add a vercel.json with: { "routes": [{ "src": "/(.*)", "dest": "/404.html", "status": 404 }] } -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta -->
+  <title>404 — Lost in Space | Carter Stoddard</title>
+  <meta name="description" content="This page got lost in space. Let's get you back on track." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700;1,900&family=Permanent+Marker&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- 404-specific styles -->
+  <style>
+    /* ── Layout ── */
+    body.page-404 {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #000;
+    }
+
+    .four04-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+
+    /* ── Background: CSS Earth globe (same as contact section) ── */
+    .four04-earth {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(400px, 50vw, 600px);
+      height: clamp(400px, 50vw, 600px);
+      border-radius: 50%;
+      overflow: hidden;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .four04-earth .planet-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .four04-earth .night {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_nightmap.jpg);
+      background-size: cover;
+      background-position: center;
+      animation: earthRotate 80s linear infinite;
+    }
+
+    .four04-earth .day {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg);
+      background-size: cover;
+      background-position: center;
+      animation: earthRotate 80s linear infinite;
+      mask-image: linear-gradient(to right, transparent 30%, black 70%);
+      -webkit-mask-image: linear-gradient(to right, transparent 30%, black 70%);
+    }
+
+    .four04-earth .clouds {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg);
+      background-size: cover;
+      background-position: center;
+      animation: earthRotate 50s linear infinite;
+      opacity: 0.3;
+      mix-blend-mode: screen;
+    }
+
+    .four04-earth .inner-shadow {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 50%, transparent 20%, rgba(0, 0, 0, 0.8) 80%);
+    }
+
+    @keyframes earthRotate {
+      from { background-position: 0% center; }
+      to   { background-position: 200% center; }
+    }
+
+    /* ── Background: 404 watermark ── */
+    .four04-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading);
+      font-size: clamp(200px, 35vw, 400px);
+      color: rgba(255,255,255,0.03);
+      z-index: 1;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* ── Foreground content ── */
+    .four04-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .four04-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(204,255,0,0.3);
+      margin-bottom: 20px;
+    }
+
+    .four04-italic {
+      font-family: var(--font-accent);
+      font-size: clamp(24px, 3.5vw, 48px);
+      font-style: italic;
+      color: #CCFF00;
+      color: var(--color-accent);
+      margin: 0 0 16px;
+      line-height: 1.2;
+    }
+
+    .four04-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 72px);
+      color: #fff;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+      line-height: 1.1;
+    }
+
+    .four04-subtext {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(14px, 1.5vw, 18px);
+      color: rgba(255,255,255,0.45);
+      margin: 0 0 48px;
+      line-height: 1.5;
+    }
+
+    .four04-cta {
+      display: inline-block;
+      font-family: var(--font-button);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--color-accent);
+      color: #000;
+      border-radius: 14px;
+      padding: 14px 36px;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .four04-cta:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+
+    .four04-secondary {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .four04-secondary:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── Floating astronaut ── */
+    .four04-astronaut {
+      position: absolute;
+      bottom: 10%;
+      left: 8%;
+      width: clamp(120px, 15vw, 220px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ── Nav wordmark for sub-pages ── */
+    .nav__portfolio-btn.is-active {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 767px) {
+      .four04-wrapper {
+        padding: 0 20px;
+      }
+
+      .four04-earth {
+        width: 90vw;
+        opacity: 0.08;
+      }
+
+      .four04-watermark {
+        font-size: clamp(140px, 40vw, 200px);
+      }
+
+      .four04-cta {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .four04-astronaut {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: 100px;
+        margin: 24px auto 0;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="page-404">
+
+  <!-- Full-page starfield — fixed behind everything, always visible -->
+  <canvas id="starfield-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       NAVIGATION
+       Same as other sub-pages — wordmark + portfolio pill + hamburger
+  ============================================================ -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="index.html" class="nav__wordmark">CARTER STODDARD</a>
+    <a href="portfolio.html" class="nav__portfolio-btn">
+      <svg class="nav__rocket" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1C7 1 9.5 3 9.5 7C9.5 9 8.5 10.5 7 12C5.5 10.5 4.5 9 4.5 7C4.5 3 7 1 7 1Z" fill="currentColor"/>
+        <path d="M5 9.5C4 10 2.5 10 2 11.5C3.5 11 4 10 5 9.5Z" fill="currentColor"/>
+        <path d="M9 9.5C10 10 11.5 10 12 11.5C10.5 11 10 10 9 9.5Z" fill="currentColor"/>
+        <circle cx="7" cy="7" r="1.5" fill="var(--color-accent)"/>
+      </svg>
+      PORTFOLIO
+    </a>
+    <button class="nav__menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__menu-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- HAMBURGER MENU OVERLAY — opens on nav hamburger click -->
+  <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <!-- Subtle lime glow — atmosphere -->
+    <div class="menu-overlay__glow" aria-hidden="true"></div>
+
+    <div class="menu-overlay__content">
+      <!-- Left column — navigation links -->
+      <nav class="menu-overlay__nav" aria-label="Main navigation">
+        <a href="index.html#about" class="menu-overlay__link" data-menu-link>About</a>
+        <a href="index.html#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
+        <a href="index.html#services" class="menu-overlay__link" data-menu-link>Services</a>
+        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="index.html#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
+        <a href="index.html#contact" class="menu-overlay__link" data-menu-link>Contact</a>
+      </nav>
+
+      <!-- Right column — supplementary info -->
+      <aside class="menu-overlay__aside">
+        <span class="menu-overlay__label">CONNECT</span>
+        <div class="menu-overlay__socials">
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:contact@carterstoddard.com" class="menu-overlay__social">Email</a>
+        </div>
+        <p class="menu-overlay__tagline">Create without limits.</p>
+        <p class="menu-overlay__copy">&copy; 2026 Carter Stoddard LLC</p>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       404 CONTENT
+  ============================================================ -->
+  <div class="four04-wrapper">
+
+    <!-- Background: CSS Earth globe (same as contact section) -->
+    <div class="four04-earth" aria-hidden="true" data-404-bg>
+      <div class="planet-inner">
+        <div class="night"></div>
+        <div class="day"></div>
+        <div class="clouds"></div>
+        <div class="inner-shadow"></div>
+      </div>
+    </div>
+
+    <!-- Background: 404 watermark -->
+    <div class="four04-watermark" aria-hidden="true" data-404-bg>404</div>
+
+    <!-- Foreground content -->
+    <div class="four04-content">
+      <div class="four04-line" data-404-fg></div>
+      <p class="four04-italic" data-404-fg>somewhere out there...</p>
+      <h1 class="four04-heading" data-404-fg>this page got lost.</h1>
+      <p class="four04-subtext" data-404-fg>It happens. Even astronauts take a wrong turn.</p>
+      <a href="index.html" class="four04-cta" data-404-fg>FIND YOUR WAY BACK</a>
+      <a href="index.html#contact" class="four04-secondary" data-404-fg>or contact mission control &rarr;</a>
+    </div>
+
+    <!-- Floating astronaut (upper right) -->
+    <img
+      src="assets/images/Astronaut-Floating.png"
+      alt=""
+      aria-hidden="true"
+      class="four04-astronaut"
+      id="four04-astronaut"
+    />
+
+  </div>
+
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Starfield -->
+  <script src="js/starfield.js"></script>
+
+  <!-- 404 entry animations + hamburger menu -->
+  <script>
+    (function() {
+      'use strict';
+
+      document.addEventListener('DOMContentLoaded', () => {
+
+        /* ── Starfield ── */
+        const starCanvas = document.getElementById('starfield-canvas');
+        if (starCanvas) Starfield.init(starCanvas);
+
+        /* ── Entry animation timeline ── */
+        const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+        // Background elements — fade in (no y movement)
+        const bgEls = document.querySelectorAll('[data-404-bg]');
+        bgEls.forEach(el => { gsap.set(el, { opacity: 0 }); });
+
+        tl.to(bgEls, {
+          opacity: (i, el) => {
+            // Restore to their CSS-defined opacity
+            if (el.classList.contains('four04-earth')) {
+              return window.innerWidth <= 767 ? 0.08 : 0.10;
+            }
+            return 0.03; // watermark
+          },
+          duration: 1.2
+        });
+
+        // Foreground elements — staggered fade in with y movement
+        const fgEls = document.querySelectorAll('[data-404-fg]');
+        fgEls.forEach(el => { gsap.set(el, { opacity: 0, y: 20 }); });
+
+        tl.to(fgEls, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.2
+        }, '-=0.8');
+
+        // Astronaut — fade in after 1.5s delay, then float
+        const astronaut = document.getElementById('four04-astronaut');
+        if (astronaut && window.innerWidth > 767) {
+          gsap.set(astronaut, { opacity: 0 });
+
+          gsap.to(astronaut, {
+            opacity: 0.35,
+            duration: 0.8,
+            delay: 1.5,
+            ease: 'power2.out',
+            onComplete: () => {
+              // Start idle float animation
+              gsap.to(astronaut, {
+                y: 12,
+                rotation: 2,
+                duration: 4,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1
+              });
+            }
+          });
+        }
+
+        /* ── Hamburger menu (self-contained for 404 page) ── */
+        const menuBtn = document.querySelector('.nav__menu-btn');
+        const overlay = document.getElementById('menu-overlay');
+        const links   = overlay.querySelectorAll('[data-menu-link]');
+        let isOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+          isOpen = !isOpen;
+          menuBtn.classList.toggle('is-open', isOpen);
+          menuBtn.setAttribute('aria-expanded', isOpen);
+
+          if (isOpen) {
+            overlay.style.visibility = 'visible';
+            gsap.to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+          } else {
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          }
+        });
+
+        // Close on link click
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            isOpen = false;
+            menuBtn.classList.remove('is-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          });
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && isOpen) {
+            isOpen = false;
+            menuBtn.classList.remove('is-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          }
+        });
+
+        // Set initial state
+        overlay.style.opacity = '0';
+        overlay.style.visibility = 'hidden';
+
+      });
+    })();
+  </script>
+
+</body>
+</html>

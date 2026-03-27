@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://carterstoddard.com/sitemap.xml
+
+# Do not index experimental directories
+Disallow: /3js-style-sphere-and-mapping/
+Disallow: /sections/

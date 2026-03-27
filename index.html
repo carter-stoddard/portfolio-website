@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta -->
+  <title>Carter Stoddard — Full-Stack Creative</title>
+  <meta name="description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
+  <link rel="canonical" href="https://carterstoddard.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://carterstoddard.com/" />
+  <meta property="og:title"       content="Carter Stoddard — Full-Stack Creative" />
+  <meta property="og:description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
+  <meta property="og:image"       content="https://carterstoddard.com/assets/images/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Carter Stoddard — Full-Stack Creative" />
+  <meta name="twitter:description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
+  <meta name="twitter:image"       content="https://carterstoddard.com/assets/images/og-image.jpg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700;1,900&family=Permanent+Marker&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SECTION 00 — LOADER
+       Placeholder: 3-2-1 liftoff countdown. Final design TBD.
+  ============================================================ -->
+  <div id="loader" role="status" aria-label="Loading">
+    <span class="loader__countdown" aria-hidden="true">3</span>
+    <span class="loader__label">Initiating launch sequence</span>
+    <span class="loader__liftoff marker" aria-hidden="true">Liftoff.</span>
+  </div>
+
+
+  <!-- ============================================================
+       NAVIGATION
+       Top-right. No logo for now.
+  ============================================================ -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="portfolio.html" class="nav__portfolio-btn">
+      <svg class="nav__rocket" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1C7 1 9.5 3 9.5 7C9.5 9 8.5 10.5 7 12C5.5 10.5 4.5 9 4.5 7C4.5 3 7 1 7 1Z" fill="currentColor"/>
+        <path d="M5 9.5C4 10 2.5 10 2 11.5C3.5 11 4 10 5 9.5Z" fill="currentColor"/>
+        <path d="M9 9.5C10 10 11.5 10 12 11.5C10.5 11 10 10 9 9.5Z" fill="currentColor"/>
+        <circle cx="7" cy="7" r="1.5" fill="var(--color-accent)"/>
+      </svg>
+      PORTFOLIO
+    </a>
+    <button class="nav__menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__menu-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+  </nav>
+
+  <!-- HAMBURGER MENU OVERLAY — opens on nav hamburger click -->
+  <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <!-- Subtle lime glow — atmosphere -->
+    <div class="menu-overlay__glow" aria-hidden="true"></div>
+
+    <div class="menu-overlay__content">
+      <!-- Left column — navigation links -->
+      <nav class="menu-overlay__nav" aria-label="Main navigation">
+        <a href="#about" class="menu-overlay__link" data-menu-link>About</a>
+        <a href="#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
+        <a href="#services" class="menu-overlay__link" data-menu-link>Services</a>
+        <a href="#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
+        <a href="#contact" class="menu-overlay__link" data-menu-link>Contact</a>
+      </nav>
+
+      <!-- Right column — supplementary info -->
+      <aside class="menu-overlay__aside">
+        <span class="menu-overlay__label">CONNECT</span>
+        <div class="menu-overlay__socials">
+          <!-- Replace # with real LinkedIn URL -->
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">LinkedIn</a>
+          <!-- Replace # with real Instagram URL -->
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:contact@carterstoddard.com" class="menu-overlay__social">Email</a>
+        </div>
+        <p class="menu-overlay__tagline">Create without limits.</p>
+        <p class="menu-overlay__copy">&copy; 2026 Carter Stoddard LLC</p>
+      </aside>
+    </div>
+  </div>
+
+
+  <!-- Full-page starfield — fixed behind everything, always visible -->
+  <canvas id="starfield-canvas" aria-hidden="true"></canvas>
+
+  <main>
+
+  <!-- ============================================================
+       SECTION 01 — HERO
+  ============================================================ -->
+  <section id="hero" aria-label="Hero">
+    <h1 class="sr-only">Carter Stoddard — Full-Stack Creative</h1>
+
+    <!-- Marquee — visible through the window during zoom, z-index below interior -->
+    <div class="hero__marquee" aria-hidden="true">
+      <!-- Row 1 — white text, lime dots, scrolls left -->
+      <div class="hero__marquee-row hero__marquee-row--fwd">
+        <div class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</div>
+        <div class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</div>
+      </div>
+      <!-- Row 2 — lime text, white dots, scrolls right -->
+      <div class="hero__marquee-row hero__marquee-row--rev">
+        <div class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</div>
+        <div class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</div>
+      </div>
+    </div>
+
+    <!-- Floating astronaut — behind interior, peeks through porthole window -->
+    <img
+      class="hero__astronaut-float"
+      src="assets/images/Astronaut-Floating.png"
+      alt=""
+      aria-hidden="true"
+      draggable="false"
+    />
+
+    <!-- LAYER 2: White shuttle interior — white bg with a mask hole cut where the porthole is,
+         so stars show through naturally. Fades out on scroll to reveal space. -->
+    <div class="hero__interior" aria-hidden="true"></div>
+
+    <!-- LAYER 2b: Porthole decorative frame/rim — just the ring, no fill -->
+    <div class="hero__porthole-frame" aria-hidden="true"></div>
+
+    <!-- LAYERS 3+4: Portrait (base + astronaut blended by WebGL fluid sim) -->
+    <div class="hero__portrait-wrapper hero__portrait-parallax" aria-label="Carter Stoddard portrait">
+
+      <!-- ═══════════════════════════════════════════════════
+           LAYER 1 — BASE (bottom, always visible)
+           TO SWAP: change src below OR replace the file at the same path
+           Desktop: 16:9 — Mobile: 9:16 (swap src on resize via JS when ready)
+      ════════════════════════════════════════════════════ -->
+      <img
+        class="hero__layer hero__layer--base"
+        src="assets/images/portrait-base-desktop.png"
+        alt="Carter Stoddard"
+        draggable="false"
+      />
+
+      <!-- ═══════════════════════════════════════════════════
+           LAYER 2 — REVEAL (top, shown by fluid sim on hover/idle)
+           TO SWAP: change src below OR replace the file at the same path
+           Must be same dimensions and framing as Layer 1 or alignment breaks
+      ════════════════════════════════════════════════════ -->
+      <img
+        class="hero__layer hero__layer--astronaut"
+        src="assets/images/portrait-astronaut-desktop.png"
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+      />
+
+      <!-- WebGL output canvas — renders the blended portrait via fluid sim -->
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SECTION 03 — QUOTE
+       Value prop statement. Answers "what do you do?" before "who are you?"
+       Wipe reveal — lime bar sweeps across each line, uncovering text beneath.
+       Triggered once on scroll, staggered 150ms per line.
+  ============================================================ -->
+  <section id="quote" aria-label="Quote">
+    <h2 class="sr-only">What I Do</h2>
+    <div class="quote__inner">
+      <p class="quote__text" aria-label="Most brands never leave the ground. I help build the ones that break orbit and reach outer space.">
+        <span class="quote__line"><span class="quote__line-inner">MOST BRANDS <em class="accent">NEVER</em></span><span class="quote__wipe-bar"></span></span>
+        <span class="quote__line"><span class="quote__line-inner">LEAVE THE GROUND.</span><span class="quote__wipe-bar"></span></span>
+        <span class="quote__line"><span class="quote__line-inner">I HELP <em class="accent">BUILD</em> THE</span><span class="quote__wipe-bar"></span></span>
+        <span class="quote__line"><span class="quote__line-inner">ONES THAT BREAK</span><span class="quote__wipe-bar"></span></span>
+        <span class="quote__line"><span class="quote__line-inner"><em class="accent">ORBIT</em> AND REACH</span><span class="quote__wipe-bar"></span></span>
+        <span class="quote__line"><span class="quote__line-inner">OUTER <em class="accent">SPACE.</em></span><span class="quote__wipe-bar"></span></span>
+      </p>
+    </div>
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 04 — WHO I AM
+       Horizontal scroll collage. 6 photo placeholders + 2 copy cards.
+       TO SWAP A PHOTO: replace .about__card-img background-image in CSS,
+       or add <img> inside .about__card-img and remove the bg.
+       TO ADD/REMOVE CARDS: duplicate or delete any .about__card block.
+  ============================================================ -->
+  <section id="about" aria-label="About Carter Stoddard">
+    <div class="about__header container">
+      <span class="about__label">ABOUT ME</span>
+      <h2 class="about__heading">
+        <span class="about__heading-main">THE</span>
+        <span class="about__heading-accent">mission.</span>
+      </h2>
+    </div>
+    <div class="about__track">
+
+      <!-- CARD 1 — tall portrait, bottom — opening shot -->
+      <div class="about__card about__card--tall about__card--end">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">HOMETOWN, 2019</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+        <div class="about__card-caption">
+          <span class="about__caption-text">Where it started.</span>
+        </div>
+      </div>
+
+      <!-- CARD 2 — wide landscape, center -->
+      <div class="about__card about__card--wide about__card--mid">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">FIRST CLIENT, 2021</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+        <div class="about__card-caption">
+          <span class="about__caption-text">The moment I went all in.</span>
+        </div>
+      </div>
+
+      <!-- COPY CARD — pull quote, top-aligned -->
+      <div class="about__card about__card--copy about__card--top">
+        <blockquote class="about__quote">
+          It doesn't matter <em class="accent">where</em> you start.<br>
+          It's <em class="accent">how</em> you move from there.
+        </blockquote>
+        <span class="about__quote-sig marker">— Carter</span>
+      </div>
+
+      <!-- CARD 3 — small square, top -->
+      <div class="about__card about__card--sm about__card--top">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">NEW YORK, 2022</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+      </div>
+
+      <!-- CARD 4 — portrait, bottom -->
+      <div class="about__card about__card--portrait about__card--end">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">CREATIVE PROCESS</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+        <div class="about__card-caption">
+          <span class="about__caption-text">Deep in the work.</span>
+        </div>
+      </div>
+
+      <!-- CARD 5 — hero/large, center -->
+      <div class="about__card about__card--hero about__card--mid">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">LOS ANGELES, 2024</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+        <div class="about__card-caption">
+          <span class="about__caption-text">Full-stack creative. Strategist. Brand architect.</span>
+        </div>
+      </div>
+
+      <!-- CARD 6 — small, top-offset -->
+      <div class="about__card about__card--sm about__card--offset">
+        <div class="about__card-caption about__card-caption--above">
+          <span class="about__caption-label">ON THE MOVE, 2025</span>
+        </div>
+        <div class="about__card-img" aria-hidden="true"></div>
+      </div>
+
+      <!-- CLOSING COPY CARD — center -->
+      <div class="about__card about__card--copy about__card--mid about__card--closing">
+        <p class="about__closing">
+          I've spent years building brands that <em class="accent">actually mean something</em> — learning what works, what doesn't, and how to make people stop scrolling.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 05 — STATS
+       Mission control readout — four live system stats.
+  ============================================================ -->
+  <section id="stats" aria-label="Stats">
+
+    <div class="stats__header container">
+      <span class="stats__header-label">MISSION STATS</span>
+      <h2 class="stats__heading">
+        <span class="stats__heading-main">BY THE</span>
+        <span class="stats__heading-accent">numbers.</span>
+      </h2>
+    </div>
+
+    <!-- Radar sweep line — sweeps left to right once on enter -->
+    <div class="stats__sweep" aria-hidden="true"></div>
+
+    <div class="stats__grid">
+
+      <div class="stats__cell">
+        <span class="stats__label">Skills &amp; Disciplines</span>
+        <span class="stats__number" data-target="60" data-suffix="+">0<span class="stats__accent">+</span></span>
+      </div>
+
+      <div class="stats__cell">
+        <span class="stats__label">Client Revenue Orbit</span>
+        <span class="stats__number" data-mode="revenue" data-target="1000" data-prefix="$" data-suffix="+">$0M<span class="stats__accent">+</span></span>
+      </div>
+
+      <div class="stats__cell">
+        <span class="stats__label">Crew Size</span>
+        <span class="stats__number" data-target="1">0</span>
+      </div>
+
+      <div class="stats__cell">
+        <span class="stats__label">Failure Rate</span>
+        <span class="stats__number" data-mode="countdown" data-target="0" data-start="100" data-suffix="%">100<span class="stats__accent">%</span></span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 06 — SERVICES
+       Mission briefing — 10 service categories with subcategories.
+  ============================================================ -->
+  <section id="services" aria-label="Services">
+
+    <!-- Section header -->
+    <div class="services__header container">
+      <span class="services__label">WHAT I DO</span>
+      <h2 class="services__heading">
+        <span class="services__heading-main">FULL STACK</span>
+        <span class="services__heading-accent">Creative.</span>
+      </h2>
+    </div>
+
+    <div class="services__container">
+
+      <!-- Desktop: two-column mission briefing -->
+      <div class="services__briefing">
+
+        <!-- Left column — category list -->
+        <nav class="services__nav" aria-label="Service categories">
+
+          <button class="services__row is-active" data-service="0" type="button">
+            <span class="services__num">01</span>
+            <span class="services__name">Branding &amp; Identity</span>
+          </button>
+
+          <button class="services__row" data-service="1" type="button">
+            <span class="services__num">02</span>
+            <span class="services__name">Web Design &amp; Development</span>
+          </button>
+
+          <button class="services__row" data-service="2" type="button">
+            <span class="services__num">03</span>
+            <span class="services__name">Graphic Design</span>
+          </button>
+
+          <button class="services__row" data-service="3" type="button">
+            <span class="services__num">04</span>
+            <span class="services__name">Video, Motion &amp; Photography</span>
+          </button>
+
+          <button class="services__row" data-service="4" type="button">
+            <span class="services__num">05</span>
+            <span class="services__name">Social Media</span>
+          </button>
+
+          <button class="services__row" data-service="5" type="button">
+            <span class="services__num">06</span>
+            <span class="services__name">Copywriting &amp; Email</span>
+          </button>
+
+          <button class="services__row" data-service="6" type="button">
+            <span class="services__num">07</span>
+            <span class="services__name">Paid Advertising</span>
+          </button>
+
+          <button class="services__row" data-service="7" type="button">
+            <span class="services__num">08</span>
+            <span class="services__name">SEO &amp; Search</span>
+          </button>
+
+          <button class="services__row" data-service="8" type="button">
+            <span class="services__num">09</span>
+            <span class="services__name">AI &amp; Automation</span>
+          </button>
+
+          <button class="services__row" data-service="9" type="button">
+            <span class="services__num">10</span>
+            <span class="services__name">Strategy &amp; UX</span>
+          </button>
+
+        </nav>
+
+        <!-- Right column — dynamic content panel -->
+        <div class="services__panel">
+          <div class="services__panel-inner">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile: accordion (rendered by JS from same data) -->
+      <div class="services__accordion" aria-label="Service categories">
+        <!-- Built dynamically by JS -->
+      </div>
+
+      <!-- CTA -->
+      <div class="services__cta">
+        <p class="services__cta-text">DON'T SEE WHAT YOU NEED?</p>
+        <a href="#contact" class="cta-btn">
+          <span class="cta-btn__arrow">&uarr;</span> LET'S TALK
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 07 — CLIENTS
+       Masonry-style patch grid — Lando Norris helmet grid inspired.
+       Logo format: SVG preferred, PNG fallback (transparent bg).
+       All logos should be WHITE or LIGHT colored for dark background.
+  ============================================================ -->
+  <section id="clients" aria-label="Clients">
+
+    <div class="clients__header container">
+      <span class="clients__label">BRANDS I'VE WORKED WITH</span>
+      <h2 class="clients__heading">
+        <span class="clients__heading-main">TRUSTED</span>
+        <span class="clients__heading-accent">by the best.</span>
+      </h2>
+    </div>
+
+    <!-- ── Patch grid ──
+         ADD NEW CLIENTS: duplicate a .clients__patch div, update logo/labels.
+         Use class "clients__patch--lg" for large patches, "clients__patch--sm" for small.
+         Checkerboard pattern: lg, sm, sm, lg, lg, sm, sm, lg ... -->
+    <div class="clients__grid container">
+
+      <!-- PATCH 01 — large -->
+      <div class="clients__patch clients__patch--lg">
+        <!-- SWAP: replace .clients__patch-placeholder with <img src="assets/images/logo-name.svg" alt="Client Name" class="clients__patch-logo" /> -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 01</span>
+        <span class="clients__patch-year">2024</span>
+      </div>
+
+      <!-- PATCH 02 — small -->
+      <div class="clients__patch clients__patch--sm">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 02</span>
+        <span class="clients__patch-year">2024</span>
+      </div>
+
+      <!-- PATCH 03 — small -->
+      <div class="clients__patch clients__patch--sm">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 03</span>
+        <span class="clients__patch-year">2023</span>
+      </div>
+
+      <!-- PATCH 04 — large -->
+      <div class="clients__patch clients__patch--lg">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 04</span>
+        <span class="clients__patch-year">2023</span>
+      </div>
+
+      <!-- PATCH 05 — large -->
+      <div class="clients__patch clients__patch--lg">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 05</span>
+        <span class="clients__patch-year">2024</span>
+      </div>
+
+      <!-- PATCH 06 — small -->
+      <div class="clients__patch clients__patch--sm">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 06</span>
+        <span class="clients__patch-year">2022</span>
+      </div>
+
+      <!-- PATCH 07 — small -->
+      <div class="clients__patch clients__patch--sm">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 07</span>
+        <span class="clients__patch-year">2023</span>
+      </div>
+
+      <!-- PATCH 08 — large -->
+      <div class="clients__patch clients__patch--lg">
+        <!-- SWAP: replace .clients__patch-placeholder with <img> for real logo -->
+        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <span class="clients__patch-name">CLIENT 08</span>
+        <span class="clients__patch-year">2024</span>
+      </div>
+
+    </div>
+
+    <!-- ── Portfolio CTA ── -->
+    <div class="clients__cta-wrap container">
+      <a href="portfolio.html" class="cta-btn">
+        <span class="cta-btn__arrow">&uarr;</span> PORTFOLIO
+      </a>
+    </div>
+
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 08 — TESTIMONIALS
+       Featured quote at top, horizontal scrolling card row below.
+       HEADSHOT IMAGES: download from LinkedIn, save locally to
+       /assets/images/testimonials/firstname-lastname.jpg
+       Do NOT hotlink LinkedIn URLs.
+  ============================================================ -->
+  <section id="testimonials" aria-label="Testimonials">
+
+    <!-- Section header -->
+    <div class="test__header container">
+      <span class="test__header-label">DON'T TAKE MY WORD FOR IT</span>
+      <h2 class="test__heading">
+        <span class="test__heading-main">HEAR IT</span>
+        <span class="test__heading-accent">firsthand.</span>
+      </h2>
+    </div>
+
+    <div class="test__container">
+
+      <!-- ── Featured testimonial — incoming transmission ── -->
+      <div class="test__featured">
+        <span class="test__transmission">INCOMING TRANSMISSION</span>
+
+        <!-- SWAP: Replace placeholder quote with real testimonial -->
+        <blockquote class="test__featured-quote">
+          <span class="test__quote-line">This is where the featured testimonial goes.</span>
+          <span class="test__quote-line">A powerful statement about working with Carter</span>
+          <span class="test__quote-line">that makes visitors want to reach out immediately.</span>
+        </blockquote>
+
+        <!-- SWAP: Replace placeholder name, title, company, and headshot src -->
+        <div class="test__person">
+          <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+          <img class="test__avatar test__avatar--lg" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+          <div class="test__person-info">
+            <span class="test__person-name">First Last</span>
+            <span class="test__person-title">CEO, Company Name</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Horizontal scrolling card row ── -->
+      <div class="test__row-wrap">
+        <div class="test__row">
+
+          <!-- CARD 01 — SWAP: quote, name, title, company, headshot src -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Director, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 02 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">CMO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 03 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">VP Marketing, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 04 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Founder, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 05 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">CEO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 06 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Creative Director, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 07 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Head of Growth, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 08 -->
+          <div class="test__card">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">COO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── DUPLICATE SET for seamless infinite loop ── -->
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Director, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">CMO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">VP Marketing, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Founder, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">CEO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Creative Director, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">Head of Growth, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test__card" aria-hidden="true">
+            <span class="test__transmission">INCOMING TRANSMISSION</span>
+            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <div class="test__person">
+              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <div class="test__person-info">
+                <span class="test__person-name">First Last</span>
+                <span class="test__person-title">COO, Company Name</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECTION 09 — CONTACT
+       Mission briefing contact form. Supabase backend.
+       Supabase table: contact_submissions — see column list in JS below
+  ============================================================ -->
+  <section id="contact" aria-label="Contact">
+
+    <!-- ROTATING EARTH — pure CSS globe (night/day/cloud layers) -->
+    <div id="earth-container">
+      <div class="planet-container">
+        <div class="night"></div>
+        <div class="day"></div>
+        <div class="clouds"></div>
+        <div class="inner-shadow"></div>
+      </div>
+    </div>
+
+    <div class="contact__inner container">
+
+      <!-- ── Header ── -->
+      <div class="contact__header">
+        <span class="contact__label">READY TO LAUNCH <span class="contact__status-dot" aria-hidden="true"></span></span>
+        <h2 class="contact__heading">
+          <span class="contact__heading-main">START YOUR</span>
+          <span class="contact__heading-accent">mission.</span>
+        </h2>
+        <p class="contact__subtext">Every project is custom-scoped. No strings attached.</p>
+      </div>
+
+      <!-- ── Form ── -->
+      <form id="contact-form" class="contact__form" novalidate>
+
+        <!-- Row 1 — First Name + Last Name -->
+        <div class="contact__row contact__row--split">
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-first-name">FIRST NAME</label>
+            <div class="contact__field-box">
+              <input type="text" id="contact-first-name" name="first_name" class="contact__input" placeholder="First name" required />
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-last-name">LAST NAME</label>
+            <div class="contact__field-box">
+              <input type="text" id="contact-last-name" name="last_name" class="contact__input" placeholder="Last name" required />
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Row 2 — Email -->
+        <div class="contact__row">
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-email">EMAIL</label>
+            <div class="contact__field-box">
+              <input type="email" id="contact-email" name="email" class="contact__input" placeholder="your@email.com" required />
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Row 3 — Company -->
+        <div class="contact__row">
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-company">COMPANY</label>
+            <div class="contact__field-box">
+              <input type="text" id="contact-company" name="company" class="contact__input" placeholder="Company name" required />
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Row 4 — Role / Title -->
+        <div class="contact__row">
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-role">YOUR ROLE</label>
+            <div class="contact__field-box">
+              <input type="text" id="contact-role" name="role" class="contact__input" placeholder="Your role or title" required />
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Row 5 — Services (toggle pills) -->
+        <div class="contact__row">
+          <div class="contact__field">
+            <span class="contact__field-label">WHAT CAN I HELP WITH?</span>
+            <div class="contact__pills" id="contact-services">
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Branding &amp; Identity">Branding &amp; Identity</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Web Design &amp; Development">Web Design &amp; Development</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Graphic Design">Graphic Design</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Video &amp; Motion">Video &amp; Motion</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Social Media">Social Media</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Copywriting &amp; Email">Copywriting &amp; Email</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Paid Advertising">Paid Advertising</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="SEO &amp; Search">SEO &amp; Search</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="AI &amp; Automation">AI &amp; Automation</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Strategy &amp; UX">Strategy &amp; UX</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Multiple Services">Multiple Services</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Other">Other</button>
+            </div>
+            <span class="contact__error" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Row 6 — Message -->
+        <div class="contact__row">
+          <div class="contact__field">
+            <label class="contact__field-label" for="contact-message">ANYTHING ELSE?</label>
+            <div class="contact__field-box">
+              <textarea id="contact-message" name="message" class="contact__input contact__textarea" placeholder="Tell me about your project, timeline, or anything worth knowing."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 7 — Consent checkbox -->
+        <div class="contact__row">
+          <label class="contact__consent">
+            <input type="checkbox" id="contact-consent" name="consent" class="contact__checkbox" required />
+            <span class="contact__checkmark" aria-hidden="true"></span>
+            <span class="contact__consent-text">I agree to receive occasional emails from Carter Stoddard. You can unsubscribe at any time.</span>
+          </label>
+          <span class="contact__error" aria-live="polite"></span>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="contact__submit" id="contact-submit">
+          <svg class="contact__submit-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L12 22"/><path d="M5 9l7-7 7 7"/><circle cx="12" cy="22" r="0" fill="currentColor"/></svg>
+          LAUNCH
+        </button>
+
+        <!-- Error state -->
+        <p class="contact__submit-error" id="contact-submit-error"></p>
+
+      </form>
+
+      <!-- ── Success state — hidden by default ── -->
+      <div class="contact__success" id="contact-success" style="display:none;">
+        <span class="contact__label">TRANSMISSION SENT <span class="contact__status-dot contact__status-dot--success" aria-hidden="true"></span></span>
+        <h2 class="contact__heading">
+          <span class="contact__heading-main">Transmission</span>
+          <span class="contact__heading-accent">received.</span>
+        </h2>
+        <p class="contact__subtext" style="margin-top:16px;">I'll be in touch soon.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  </main>
+
+  <!-- ============================================================
+       SECTION 10 — FOOTER
+       Re-entry — the site began in space, the footer returns to Earth
+  ============================================================ -->
+  <!-- FOOTER — keep identical across index.html, privacy-policy.html, terms.html -->
+  <footer id="footer" aria-label="Footer">
+
+    <!-- ── Large background text — sits behind astronaut ── -->
+    <div class="footer__bg-text" aria-hidden="true">
+      <span class="footer__bg-line1">CREATE WITHOUT</span>
+      <span class="footer__bg-line2">LIMITS.</span>
+    </div>
+
+    <!-- ── Mobile CTA — only visible on mobile, below heading ── -->
+    <a href="#contact" class="footer__mobile-cta">START A PROJECT &nbsp;→</a>
+
+    <!-- ── Center astronaut — sits in front of text ── -->
+    <img class="footer__astronaut" src="assets/images/portrait-astronaut-desktop.png" alt="" aria-hidden="true" loading="lazy" />
+
+    <!-- ── Footer columns — sections left, connect right ── -->
+    <div class="footer__columns">
+
+      <!-- Left — Pages/Sections -->
+      <nav class="footer__col footer__col--left" aria-label="Footer sections">
+        <span class="footer__col-label">SECTIONS</span>
+        <div class="footer__col-links">
+          <a href="#about" class="footer__col-link">ABOUT</a>
+          <a href="#stats" class="footer__col-link">NUMBERS</a>
+          <a href="#services" class="footer__col-link">SERVICES</a>
+          <a href="#clients" class="footer__col-link">CLIENTS</a>
+          <a href="#testimonials" class="footer__col-link">TESTIMONIALS</a>
+          <a href="#contact" class="footer__col-link">CONTACT</a>
+        </div>
+      </nav>
+
+      <!-- Right — Connect -->
+      <div class="footer__col footer__col--right">
+        <span class="footer__col-label">CONNECT</span>
+        <div class="footer__col-links">
+          <!-- Replace # with real LinkedIn URL -->
+          <a href="#" class="footer__col-link" target="_blank" rel="noopener">LINKEDIN</a>
+          <!-- Replace mailto with real email -->
+          <a href="mailto:contact@carterstoddard.com" class="footer__col-link">EMAIL</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Bottom bar — copyright + CTA + legal ── -->
+    <div class="footer__bottom">
+      <div class="footer__copyright-bar">
+        <span class="footer__copyright">&copy; 2026 Carter Stoddard LLC. All rights reserved.</span>
+        <a href="#contact" class="footer__cta-btn">LAUNCH PROJECT</a>
+        <div class="footer__legal">
+          <a href="privacy-policy.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="terms.html" class="footer__legal-link">Terms</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS
+       Load order: GSAP → Lenis → modules → main
+  ============================================================ -->
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Supabase JS client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1"></script>
+
+  <!-- Site modules -->
+  <script src="js/starfield.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

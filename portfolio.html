@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta -->
+  <title>Portfolio — Carter Stoddard</title>
+  <meta name="description" content="Portfolio for Carter Stoddard LLC. Enter your access code to view classified missions." />
+  <link rel="canonical" href="https://carterstoddard.com/portfolio" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700;1,900&family=Permanent+Marker&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Portfolio-specific styles -->
+  <style>
+    /* ── PASSWORD GATE ── */
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate__vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .gate__glow {
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(204,255,0,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .gate__content {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+      width: 100%;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ── Label ── */
+    .gate__label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .gate__label-line {
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--color-accent);
+      opacity: 0.5;
+    }
+
+    .gate__label-dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      animation: gateBlink 1.4s ease-in-out infinite;
+      margin-left: 6px;
+    }
+
+    @keyframes gateBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    /* ── Heading ── */
+    .gate__heading {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--color-text);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .gate__heading em {
+      font-family: var(--font-accent);
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    /* ── Subtext ── */
+    .gate__subtext {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 40px;
+    }
+
+    /* ── Input wrapper (corner brackets) ── */
+    .gate__input-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 16px;
+    }
+
+    .gate__input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: none;
+      border-top: 1.5px solid rgba(204,255,0,0.6);
+      border-radius: var(--radius-card);
+      padding: 16px 20px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 0.2em;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gate__input::placeholder {
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.2em;
+    }
+
+    /* Bottom-left L-bracket */
+    .gate__input-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-left: 1.5px solid rgba(204,255,0,0.6);
+      border-bottom: 1.5px solid rgba(204,255,0,0.6);
+      border-bottom-left-radius: var(--radius-card);
+      pointer-events: none;
+      transition: border-color 0.3s ease;
+    }
+
+    /* Bottom-right L-bracket */
+    .gate__input-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border-right: 1.5px solid rgba(204,255,0,0.6);
+      border-bottom: 1.5px solid rgba(204,255,0,0.6);
+      border-bottom-right-radius: var(--radius-card);
+      pointer-events: none;
+      transition: border-color 0.3s ease;
+    }
+
+    /* Focus state */
+    .gate__input:focus {
+      border-top-color: rgba(204,255,0,1);
+      box-shadow: inset 0 0 20px rgba(204,255,0,0.06);
+    }
+
+    .gate__input:focus ~ .gate__input-wrap::before,
+    .gate__input-wrap:focus-within::before {
+      border-color: rgba(204,255,0,1);
+    }
+
+    .gate__input-wrap:focus-within::after {
+      border-color: rgba(204,255,0,1);
+    }
+
+    /* Error state */
+    .gate__input-wrap.is-error::before,
+    .gate__input-wrap.is-error::after {
+      border-color: rgba(255,80,80,0.8);
+    }
+
+    .gate__input-wrap.is-error .gate__input {
+      border-top-color: rgba(255,80,80,0.8);
+    }
+
+    /* ── Submit button ── */
+    .gate__submit {
+      width: 100%;
+      max-width: 360px;
+      background: var(--color-accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-button);
+      padding: 14px 32px;
+      font-family: var(--font-button);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .gate__submit:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+
+    /* ── Feedback messages ── */
+    .gate__feedback {
+      height: 20px;
+      margin-top: 10px;
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .gate__feedback--success {
+      color: var(--color-accent);
+    }
+
+    .gate__feedback--error {
+      color: rgba(255,80,80,0.9);
+    }
+
+    /* ── Request access link ── */
+    .gate__request {
+      margin-top: 32px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .gate__request a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .gate__request a:hover {
+      opacity: 0.7;
+    }
+
+    /* ── Portfolio content (post-access) ── */
+    #portfolio-content {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .portfolio__label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .portfolio__heading {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--color-text);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .portfolio__heading em {
+      font-family: var(--font-accent);
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .portfolio__text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      max-width: 420px;
+    }
+
+    /* ── Nav active state for portfolio page ── */
+    .nav__portfolio-btn.is-active {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       Same as index.html — wordmark added for sub-page, portfolio btn marked active
+  ============================================================ -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="index.html" class="nav__wordmark">CARTER STODDARD</a>
+    <a href="portfolio.html" class="nav__portfolio-btn is-active">
+      <svg class="nav__rocket" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1C7 1 9.5 3 9.5 7C9.5 9 8.5 10.5 7 12C5.5 10.5 4.5 9 4.5 7C4.5 3 7 1 7 1Z" fill="currentColor"/>
+        <path d="M5 9.5C4 10 2.5 10 2 11.5C3.5 11 4 10 5 9.5Z" fill="currentColor"/>
+        <path d="M9 9.5C10 10 11.5 10 12 11.5C10.5 11 10 10 9 9.5Z" fill="currentColor"/>
+        <circle cx="7" cy="7" r="1.5" fill="var(--color-accent)"/>
+      </svg>
+      PORTFOLIO
+    </a>
+    <button class="nav__menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__menu-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- HAMBURGER MENU OVERLAY — opens on nav hamburger click -->
+  <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <!-- Subtle lime glow — atmosphere -->
+    <div class="menu-overlay__glow" aria-hidden="true"></div>
+
+    <div class="menu-overlay__content">
+      <!-- Left column — navigation links -->
+      <nav class="menu-overlay__nav" aria-label="Main navigation">
+        <a href="index.html#about" class="menu-overlay__link" data-menu-link>About</a>
+        <a href="index.html#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
+        <a href="index.html#services" class="menu-overlay__link" data-menu-link>Services</a>
+        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="index.html#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
+        <a href="index.html#contact" class="menu-overlay__link" data-menu-link>Contact</a>
+      </nav>
+
+      <!-- Right column — supplementary info -->
+      <aside class="menu-overlay__aside">
+        <span class="menu-overlay__label">CONNECT</span>
+        <div class="menu-overlay__socials">
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" class="menu-overlay__social" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:contact@carterstoddard.com" class="menu-overlay__social">Email</a>
+        </div>
+        <p class="menu-overlay__tagline">Create without limits.</p>
+        <p class="menu-overlay__copy">&copy; 2026 Carter Stoddard LLC</p>
+      </aside>
+    </div>
+  </div>
+
+
+  <!-- Full-page starfield — fixed behind everything, always visible -->
+  <canvas id="starfield-canvas" aria-hidden="true"></canvas>
+
+
+  <!-- ============================================================
+       PASSWORD GATE
+  ============================================================ -->
+  <div id="password-gate" class="gate">
+    <div class="gate__vignette" aria-hidden="true"></div>
+    <div class="gate__glow" aria-hidden="true"></div>
+
+    <div class="gate__content">
+      <div class="gate__label" data-gate-anim>
+        <span class="gate__label-line"></span>
+        CLASSIFIED ACCESS
+        <span class="gate__label-line"></span>
+        <span class="gate__label-dot"></span>
+      </div>
+
+      <h1 class="gate__heading" data-gate-anim>MISSION <em>Control.</em></h1>
+
+      <p class="gate__subtext" data-gate-anim>Enter your access code to view classified missions.</p>
+
+      <div class="gate__input-wrap" data-gate-anim>
+        <input
+          type="password"
+          id="gate-input"
+          class="gate__input"
+          placeholder="ENTER ACCESS CODE"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <button id="gate-submit" class="gate__submit" data-gate-anim>REQUEST CLEARANCE</button>
+
+      <div class="gate__feedback" id="gate-feedback" aria-live="polite"></div>
+
+      <p class="gate__request" data-gate-anim>
+        Don't have a code? <a href="index.html#contact">Request Access</a>
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PORTFOLIO CONTENT (shown after access granted)
+  ============================================================ -->
+  <div id="portfolio-content" style="display:none;">
+    <span class="portfolio__label">MISSION GRID</span>
+    <h1 class="portfolio__heading">Coming <em>soon.</em></h1>
+    <p class="portfolio__text">The mission grid is being assembled. Check back shortly.</p>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPTS — CDN + local modules
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Starfield only — no loader, hero, or animations needed on this page -->
+  <script src="js/starfield.js"></script>
+
+  <script>
+    /* ============================================================
+       PORTFOLIO PASSWORD GATE
+       Standalone logic for portfolio.html
+    ============================================================ */
+
+    // PORTFOLIO PASSWORD — change this value to update the password
+    const PORTFOLIO_PASSWORD = 'TAKEOFF!';
+
+    (() => {
+      const gate        = document.getElementById('password-gate');
+      const content     = document.getElementById('portfolio-content');
+      const input       = document.getElementById('gate-input');
+      const submitBtn   = document.getElementById('gate-submit');
+      const feedback    = document.getElementById('gate-feedback');
+      const inputWrap   = input.closest('.gate__input-wrap');
+
+      /* ── Init starfield ── */
+      const starCanvas = document.getElementById('starfield-canvas');
+      if (starCanvas && typeof Starfield !== 'undefined') {
+        Starfield.init(starCanvas);
+      }
+
+      /* ── Init hamburger menu (minimal version for this page) ── */
+      initMenu();
+
+      /* ── Check session — skip gate if already authenticated ── */
+      if (sessionStorage.getItem('portfolioAccess') === 'true') {
+        gate.style.display = 'none';
+        content.style.display = 'flex';
+        return;
+      }
+
+      /* ── Entry animation — GSAP stagger timeline ── */
+      const animEls = document.querySelectorAll('[data-gate-anim]');
+      gsap.set(animEls, { opacity: 0, y: 30 });
+
+      const entryTl = gsap.timeline({ delay: 0.3 });
+      entryTl.to(animEls[0], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+             .to(animEls[1], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35')
+             .to(animEls[2], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+             .to(animEls[3], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+             .to(animEls[4], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+             .to(animEls[5], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4');
+
+      /* ── Submit handlers ── */
+      submitBtn.addEventListener('click', attemptAccess);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') attemptAccess();
+      });
+
+      function attemptAccess() {
+        const value = input.value.trim();
+
+        if (value.toUpperCase() === PORTFOLIO_PASSWORD) {
+          onSuccess();
+        } else {
+          onFailure();
+        }
+      }
+
+      function onSuccess() {
+        // Show success message
+        feedback.className = 'gate__feedback gate__feedback--success';
+        feedback.textContent = 'ACCESS GRANTED';
+
+        // Brighten input
+        gsap.to(input, { borderTopColor: 'rgba(204,255,0,1)', duration: 0.3 });
+
+        // Store session
+        sessionStorage.setItem('portfolioAccess', 'true');
+
+        // After delay, fade out gate and show content
+        gsap.delayedCall(0.8, () => {
+          gsap.to(gate, {
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.inOut',
+            onComplete: () => {
+              gate.style.display = 'none';
+              content.style.display = 'flex';
+              gsap.fromTo(content, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+            }
+          });
+        });
+      }
+
+      function onFailure() {
+        // Shake input
+        gsap.to(inputWrap, {
+          x: 8,
+          duration: 0.08,
+          repeat: 7,
+          yoyo: true,
+          ease: 'power2.inOut',
+          onComplete: () => { gsap.set(inputWrap, { x: 0 }); }
+        });
+
+        // Flash brackets red
+        inputWrap.classList.add('is-error');
+        gsap.delayedCall(0.6, () => { inputWrap.classList.remove('is-error'); });
+
+        // Show error message
+        feedback.className = 'gate__feedback gate__feedback--error';
+        feedback.textContent = 'INVALID ACCESS CODE. TRY AGAIN.';
+
+        // Fade out error after 2s
+        gsap.to(feedback, {
+          opacity: 0,
+          delay: 2,
+          duration: 0.4,
+          onComplete: () => {
+            feedback.textContent = '';
+            gsap.set(feedback, { opacity: 1 });
+          }
+        });
+
+        // Clear and refocus
+        input.value = '';
+        input.focus();
+      }
+
+      /* ── Hamburger menu (self-contained for portfolio page) ── */
+      function initMenu() {
+        const menuBtn = document.querySelector('.nav__menu-btn');
+        const overlay = document.getElementById('menu-overlay');
+        const links   = overlay.querySelectorAll('[data-menu-link]');
+        let isOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+          isOpen = !isOpen;
+          menuBtn.classList.toggle('is-open', isOpen);
+          menuBtn.setAttribute('aria-expanded', isOpen);
+
+          if (isOpen) {
+            overlay.style.visibility = 'visible';
+            gsap.to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+          } else {
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          }
+        });
+
+        // Close on link click
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            isOpen = false;
+            menuBtn.classList.remove('is-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          });
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && isOpen) {
+            isOpen = false;
+            menuBtn.classList.remove('is-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            gsap.to(overlay, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => { overlay.style.visibility = 'hidden'; }
+            });
+          }
+        });
+
+        // Set initial state
+        overlay.style.opacity = '0';
+        overlay.style.visibility = 'hidden';
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

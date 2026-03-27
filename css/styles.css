@@ -3106,7 +3106,7 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 350px);
+    margin-left: calc(-30vw + 330px);
     margin-right: calc(-30vw - 370px);
     margin-top: -10px;
     margin-bottom: -100px;

@@ -1102,10 +1102,15 @@ button {
 .about__card-img {
   flex: 1;
   min-height: 0;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.09);
-  /* TO SWAP: add background-image: url('...') center/cover no-repeat */
-  /* OR place an <img> inside and remove this background */
+}
+.about__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ── Captions ──────────────────────────────────────────────── */

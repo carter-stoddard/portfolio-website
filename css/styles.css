@@ -2007,7 +2007,7 @@ button {
 
   /* Portrait — 25% smaller on mobile to reduce cropping */
   .hero__portrait-wrapper {
-    width: 1620px; /* 1800px × 0.90 */
+    width: 1242px; /* ~25% smaller than original for less cropping on mobile */
   }
 
   /* Nav adjusts on mobile */
@@ -2025,6 +2025,12 @@ button {
   .nav__menu-btn {
     width: 40px;
     height: 40px;
+  }
+
+  /* Quote — bigger font + force each line to stay on one row */
+  .quote__line-inner {
+    font-size: clamp(1.6rem, 6.2vw, 7.35rem);
+    white-space: nowrap;
   }
 }
 
@@ -2799,10 +2805,10 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: -30vw;
-    margin-right: -30vw;
-    margin-top: 48px;
-    margin-bottom: -60px;
+    margin-left: calc(-30vw + 400px);
+    margin-right: calc(-30vw - 400px);
+    margin-top: -10px;
+    margin-bottom: -100px;
     order: 4;
     z-index: 2;
   }
@@ -2832,10 +2838,12 @@ footer,
   .footer__legal {
     justify-content: center;
     order: -1;
+    padding-top: 20px;
   }
 
   .footer__copyright {
     order: 1;
+    padding-top: 10px;
   }
 }
 

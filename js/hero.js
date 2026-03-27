@@ -258,6 +258,24 @@ const Hero = (() => {
       raf = requestAnimationFrame(loop);
     });
 
+    // Visibility observer — restart render loop when hero scrolls back into view.
+    // Mobile browsers aggressively throttle/pause off-screen canvases; rAF alone
+    // won't resume until the canvas is on-screen AND the tab is active.
+    const heroSection = document.getElementById('hero');
+    if (heroSection && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !contextLost) {
+            // Ensure loop is running — cancel stale raf first to avoid duplicates
+            cancelAnimationFrame(raf);
+            lastTime = performance.now();
+            raf = requestAnimationFrame(loop);
+          }
+        });
+      }, { threshold: 0.05 });
+      io.observe(heroSection);
+    }
+
     // Input
     bindEvents(wrapper);
 

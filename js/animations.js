@@ -101,7 +101,12 @@ const Animations = (() => {
         hero.style.overflow = (self.progress > 0 && self.progress < 1) ? 'visible' : 'hidden';
       },
       onLeave:      () => { hero.style.overflow = 'hidden'; },
-      onEnterBack:  () => { hero.style.overflow = 'visible'; },
+      onEnterBack:  () => {
+        hero.style.overflow = 'visible';
+        // Force WebGL canvas back to visible — browser may have throttled it off-screen
+        var heroCanvas = document.getElementById('hero-canvas');
+        if (heroCanvas) heroCanvas.style.display = 'block';
+      },
     });
   }
 
@@ -370,44 +375,44 @@ const Animations = (() => {
     // ── Service data — placeholder subcategories ──
     const serviceData = [
       {
+        desc: 'Websites that don\'t just look good — they convert, perform, and scale.',
+        subs: ['Custom HTML, CSS & JavaScript development', 'GSAP & scroll-driven animation websites', 'Responsive mobile-first design', 'Landing pages optimized for conversion', 'E-commerce & Shopify builds', 'Headless CMS integration (Sanity, Contentful)', 'Website audits, redesigns & performance optimization', 'Vercel & GitHub deployment and hosting setup'],
+      },
+      {
         desc: 'Building identities that command attention and hold meaning.',
-        subs: ['Logo Design', 'Brand Strategy', 'Visual Identity Systems', 'Brand Guidelines', 'Naming & Messaging', 'Brand Collateral'],
+        subs: ['Logo design & brand mark development', 'Full visual identity systems', 'Brand strategy & positioning', 'Typography & color system design', 'Brand guidelines & style guides', 'Naming & messaging frameworks', 'Brand collateral design', 'Rebranding & brand refresh'],
       },
       {
-        desc: 'High-performance sites engineered for speed, beauty, and conversion.',
-        subs: ['Custom Website Design', 'Frontend Development', 'CMS Integration', 'E-Commerce', 'Landing Pages', 'Web Applications', 'Performance Optimization'],
+        desc: 'Visual content that stops the scroll and tells the story.',
+        subs: ['Brand & product photography', 'Short-form video content for social', 'Motion graphics & animated explainers', 'GSAP & CSS web animations', 'Reels, TikToks & YouTube content', 'Video editing & post-production', 'On-location and studio shoots', 'Content repurposing & format adaptation'],
       },
       {
-        desc: 'Visual systems that communicate instantly and scale infinitely.',
-        subs: ['Print Design', 'Packaging', 'Illustration', 'Infographics', 'Presentation Design', 'Environmental Graphics'],
+        desc: 'Consistent, strategic content that builds presence and drives growth.',
+        subs: ['Social media strategy & content planning', 'Instagram, TikTok & LinkedIn management', 'Content calendar creation & scheduling', 'Community engagement & growth tactics', 'Profile optimization & branding', 'Analytics reporting & performance tracking', 'Paid + organic content integration', 'Trend-driven content ideation'],
       },
       {
-        desc: 'Moving images and captured moments that tell stories worth watching.',
-        subs: ['Video Production', 'Motion Graphics', 'Animation', 'Product Photography', 'Lifestyle Photography', 'Photo Retouching', 'Drone & Aerial'],
+        desc: 'Design that communicates clearly and looks impossible to ignore.',
+        subs: ['Marketing & advertising creative', 'Social media graphics & templates', 'Presentation & pitch deck design', 'Print design — flyers, brochures, banners', 'Packaging & label design', 'Infographic & data visualization', 'Event & experiential design assets', 'Digital ad creative (static & animated)'],
       },
       {
-        desc: 'Content ecosystems that build communities and drive engagement.',
-        subs: ['Content Strategy', 'Content Creation', 'Community Management', 'Platform Management', 'Influencer Coordination', 'Analytics & Reporting'],
+        desc: 'Media buying and creative strategy that turns spend into returns.',
+        subs: ['Meta (Facebook & Instagram) ad campaigns', 'Google Search & Display advertising', 'TikTok paid media strategy', 'Ad creative development & testing', 'Audience targeting & retargeting setup', 'Campaign structure & funnel strategy', 'A/B testing & performance optimization', 'Monthly reporting & budget management'],
       },
       {
-        desc: 'Words that sell, emails that convert, stories that stick.',
-        subs: ['Brand Copywriting', 'Email Campaigns', 'Newsletter Design', 'Sales Pages', 'Blog & Editorial', 'Script Writing'],
-      },
-      {
-        desc: 'Precision-targeted campaigns that turn spend into revenue.',
-        subs: ['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'TikTok Ads', 'Retargeting', 'Campaign Strategy', 'Media Buying'],
-      },
-      {
-        desc: 'Organic visibility that compounds and outperforms paid channels.',
-        subs: ['Technical SEO', 'On-Page SEO', 'Content SEO', 'Local SEO', 'Link Building', 'Search Analytics'],
-      },
-      {
-        desc: 'Systems that think, learn, and execute at machine speed.',
-        subs: ['AI Workflow Design', 'Chatbot Development', 'Process Automation', 'AI Content Pipelines', 'Custom GPTs & Agents', 'Data Integration'],
+        desc: 'Words that sell, retain, and build trust at every touchpoint.',
+        subs: ['Website & landing page copywriting', 'Email marketing campaigns & sequences', 'Brand voice development & tone guides', 'Sales page & funnel copy', 'Product descriptions & category copy', 'Newsletter strategy & writing', 'Ad copy & campaign messaging', 'SMS marketing copy'],
       },
       {
         desc: 'Research-driven decisions and interfaces people actually enjoy using.',
-        subs: ['UX Research', 'User Flows', 'Wireframing', 'Prototyping', 'Usability Testing', 'Product Strategy', 'Information Architecture'],
+        subs: ['Brand & go-to-market strategy', 'UX research & user journey mapping', 'Wireframing & prototyping', 'Information architecture', 'Conversion rate optimization (CRO)', 'Competitive analysis & positioning', 'Customer persona development', 'Product strategy & roadmap consulting'],
+      },
+      {
+        desc: 'Long-term visibility that compounds over time and drives qualified traffic.',
+        subs: ['Technical SEO audits & fixes', 'On-page optimization & keyword strategy', 'Content strategy for organic growth', 'Local SEO & Google Business optimization', 'Link building & authority development', 'SEO copywriting & meta optimization', 'Core Web Vitals & site speed optimization', 'Monthly ranking reports & tracking'],
+      },
+      {
+        desc: 'Leveraging the latest AI tools to move faster, work smarter, and scale without headcount.',
+        subs: ['AI-powered content creation workflows', 'Marketing automation setup & integration', 'Chatbot & conversational AI builds', 'Prompt engineering & AI tool training', 'CRM automation & lead nurturing flows', 'AI image & video generation for brands', 'Tool stack consulting & implementation', 'Custom GPT & AI assistant development'],
       },
     ];
 
@@ -415,9 +420,9 @@ const Animations = (() => {
     const accordion = section.querySelector('.services__accordion');
     if (accordion) {
       const categoryNames = [
-        'Branding & Identity', 'Web Design & Development', 'Graphic Design',
-        'Video, Motion & Photography', 'Social Media', 'Copywriting & Email',
-        'Paid Advertising', 'SEO & Search', 'AI & Automation', 'Strategy & UX',
+        'Web Design & Development', 'Branding & Identity', 'Video, Motion & Photography',
+        'Social Media', 'Graphic Design', 'Paid Advertising',
+        'Copywriting & Email', 'Strategy & UX', 'SEO & Search', 'AI & Automation',
       ];
       categoryNames.forEach((name, i) => {
         const num = String(i + 1).padStart(2, '0');
@@ -875,6 +880,7 @@ const MenuOverlay = (() => {
   function init() {
     const btn     = document.querySelector('.nav__menu-btn');
     const overlay = document.getElementById('menu-overlay');
+    const nav     = document.getElementById('nav');
     if (!btn || !overlay) return;
 
     const links   = overlay.querySelectorAll('.menu-overlay__link');
@@ -898,6 +904,7 @@ const MenuOverlay = (() => {
       btn.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
       overlay.classList.add('is-open');
+      if (nav) nav.classList.add('nav--menu-open');
       document.body.style.overflow = 'hidden';
 
       openTl = gsap.timeline();
@@ -937,6 +944,7 @@ const MenuOverlay = (() => {
 
       btn.classList.remove('is-open');
       btn.setAttribute('aria-expanded', 'false');
+      if (nav) nav.classList.remove('nav--menu-open');
 
       closeTl = gsap.timeline({
         onComplete: function() {

@@ -242,7 +242,8 @@ button {
 }
 
 /* Elevate nav above overlay when menu is open so X button is clickable */
-#nav:has(.nav__menu-btn.is-open) {
+#nav:has(.nav__menu-btn.is-open),
+#nav.nav--menu-open {
   z-index: 501;
 }
 
@@ -474,6 +475,8 @@ button {
   #menu-overlay {
     justify-content: flex-start;
     padding: 15vh 40px 40px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .menu-overlay__content {
@@ -535,15 +538,29 @@ button {
 }
 
 .hero__marquee-row {
-  display: flex;
   width: 100%;
   overflow: visible;
 }
 
-.hero__marquee-inner {
+/* Track — single flex row that holds all copies, animated as one unit */
+.hero__marquee-track {
   display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.hero__marquee-track--fwd {
+  animation: hero-mq-fwd 30s linear infinite;
+  animation-delay: -10s; /* start 1/3 through so text appears mid-flow on load */
+}
+
+.hero__marquee-track--rev {
+  animation: hero-mq-rev 30s linear infinite;
+  animation-delay: -10s;
+}
+
+.hero__marquee-inner {
   flex-shrink: 0;
-  align-items: center;
   white-space: nowrap;
   font-family: var(--font-heading);
   font-size: clamp(3.5rem, 7vw, 8rem);
@@ -564,21 +581,14 @@ button {
   opacity: 0.7;
 }
 
-.hero__marquee-row--fwd .hero__marquee-inner {
-  animation: hero-mq-fwd 18s linear infinite;
-}
-
-.hero__marquee-row--rev .hero__marquee-inner {
-  animation: hero-mq-rev 18s linear infinite;
-}
-
+/* Shift exactly 3 of 6 copies (50%) — seamless loop */
 @keyframes hero-mq-fwd {
   from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes hero-mq-rev {
-  from { transform: translateX(-100%); }
+  from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
 
@@ -1154,7 +1164,7 @@ button {
   gap: 1rem;
   padding: clamp(0.75rem, 1.2vw, 1rem) 0;
   border: none;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(204, 255, 0, 0.2);
   border-left: 2px solid transparent;
   background: none;
   cursor: pointer;
@@ -1165,7 +1175,7 @@ button {
 }
 
 .services__row:first-child {
-  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(204, 255, 0, 0.2);
 }
 
 .services__num {
@@ -1304,11 +1314,11 @@ button {
 }
 
 .services__acc-item {
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(204, 255, 0, 0.2);
 }
 
 .services__acc-item:first-child {
-  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(204, 255, 0, 0.2);
 }
 
 .services__acc-trigger {
@@ -2005,9 +2015,11 @@ button {
     height: clamp(200px, 72vw, 360px);
   }
 
-  /* Portrait — 25% smaller on mobile to reduce cropping */
+  /* Portrait — smaller on mobile to reduce cropping, pushed down to eliminate bottom gap */
   .hero__portrait-wrapper {
-    width: 994px; /* ~45% smaller than original for less cropping on mobile */
+    width: 845px;
+    margin-top: auto;
+    margin-bottom: 0;
   }
 
   /* Nav adjusts on mobile */
@@ -2027,9 +2039,13 @@ button {
     height: 40px;
   }
 
-  /* Quote — bigger font + force each line to stay on one row */
+  /* Quote — full width, sized so longest line fits in one row */
+  .quote__inner {
+    padding: 0 4px;
+  }
+
   .quote__line-inner {
-    font-size: clamp(1.6rem, 6.2vw, 7.35rem);
+    font-size: clamp(1.5rem, 6.8vw, 7.35rem);
     white-space: nowrap;
   }
 }
@@ -2805,8 +2821,8 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 400px);
-    margin-right: calc(-30vw - 400px);
+    margin-left: calc(-30vw + 370px);
+    margin-right: calc(-30vw - 370px);
     margin-top: -10px;
     margin-bottom: -100px;
     order: 4;

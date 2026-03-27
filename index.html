@@ -114,14 +114,26 @@
     <!-- Marquee — visible through the window during zoom, z-index below interior -->
     <div class="hero__marquee" aria-hidden="true">
       <!-- Row 1 — white text, lime dots, scrolls left -->
-      <div class="hero__marquee-row hero__marquee-row--fwd">
-        <div class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</div>
-        <div class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</div>
+      <div class="hero__marquee-row">
+        <div class="hero__marquee-track hero__marquee-track--fwd">
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:var(--color-accent)">·</span>&nbsp;</span>
+        </div>
       </div>
       <!-- Row 2 — lime text, white dots, scrolls right -->
-      <div class="hero__marquee-row hero__marquee-row--rev">
-        <div class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</div>
-        <div class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</div>
+      <div class="hero__marquee-row">
+        <div class="hero__marquee-track hero__marquee-track--rev">
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+          <span class="hero__marquee-inner hero__marquee-inner--neon">CREATE WITHOUT LIMITS <span class="marquee-dot" style="color:#FFFFFF">·</span>&nbsp;</span>
+        </div>
       </div>
     </div>
 
@@ -365,52 +377,52 @@
 
           <button class="services__row is-active" data-service="0" type="button">
             <span class="services__num">01</span>
-            <span class="services__name">Branding &amp; Identity</span>
+            <span class="services__name">Web Design &amp; Development</span>
           </button>
 
           <button class="services__row" data-service="1" type="button">
             <span class="services__num">02</span>
-            <span class="services__name">Web Design &amp; Development</span>
+            <span class="services__name">Branding &amp; Identity</span>
           </button>
 
           <button class="services__row" data-service="2" type="button">
             <span class="services__num">03</span>
-            <span class="services__name">Graphic Design</span>
+            <span class="services__name">Video, Motion &amp; Photography</span>
           </button>
 
           <button class="services__row" data-service="3" type="button">
             <span class="services__num">04</span>
-            <span class="services__name">Video, Motion &amp; Photography</span>
+            <span class="services__name">Social Media</span>
           </button>
 
           <button class="services__row" data-service="4" type="button">
             <span class="services__num">05</span>
-            <span class="services__name">Social Media</span>
+            <span class="services__name">Graphic Design</span>
           </button>
 
           <button class="services__row" data-service="5" type="button">
             <span class="services__num">06</span>
-            <span class="services__name">Copywriting &amp; Email</span>
+            <span class="services__name">Paid Advertising</span>
           </button>
 
           <button class="services__row" data-service="6" type="button">
             <span class="services__num">07</span>
-            <span class="services__name">Paid Advertising</span>
+            <span class="services__name">Copywriting &amp; Email</span>
           </button>
 
           <button class="services__row" data-service="7" type="button">
             <span class="services__num">08</span>
-            <span class="services__name">SEO &amp; Search</span>
+            <span class="services__name">Strategy &amp; UX</span>
           </button>
 
           <button class="services__row" data-service="8" type="button">
             <span class="services__num">09</span>
-            <span class="services__name">AI &amp; Automation</span>
+            <span class="services__name">SEO &amp; Search</span>
           </button>
 
           <button class="services__row" data-service="9" type="button">
             <span class="services__num">10</span>
-            <span class="services__name">Strategy &amp; UX</span>
+            <span class="services__name">AI &amp; Automation</span>
           </button>
 
         </nav>
@@ -891,16 +903,16 @@
           <div class="contact__field">
             <span class="contact__field-label">WHAT CAN I HELP WITH?</span>
             <div class="contact__pills" id="contact-services">
-              <button type="button" class="contact__pill" aria-pressed="false" data-service="Branding &amp; Identity">Branding &amp; Identity</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Web Design &amp; Development">Web Design &amp; Development</button>
-              <button type="button" class="contact__pill" aria-pressed="false" data-service="Graphic Design">Graphic Design</button>
-              <button type="button" class="contact__pill" aria-pressed="false" data-service="Video &amp; Motion">Video &amp; Motion</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Branding &amp; Identity">Branding &amp; Identity</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Video, Motion &amp; Photography">Video, Motion &amp; Photography</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Social Media">Social Media</button>
-              <button type="button" class="contact__pill" aria-pressed="false" data-service="Copywriting &amp; Email">Copywriting &amp; Email</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Graphic Design">Graphic Design</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Paid Advertising">Paid Advertising</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Copywriting &amp; Email">Copywriting &amp; Email</button>
+              <button type="button" class="contact__pill" aria-pressed="false" data-service="Strategy &amp; UX">Strategy &amp; UX</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="SEO &amp; Search">SEO &amp; Search</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="AI &amp; Automation">AI &amp; Automation</button>
-              <button type="button" class="contact__pill" aria-pressed="false" data-service="Strategy &amp; UX">Strategy &amp; UX</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Multiple Services">Multiple Services</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Other">Other</button>
             </div>

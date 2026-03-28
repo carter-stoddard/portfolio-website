@@ -126,7 +126,7 @@
         <a href="#about" class="menu-overlay__link" data-menu-link>About</a>
         <a href="#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
         <a href="#services" class="menu-overlay__link" data-menu-link>Services</a>
-        <a href="#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="#clients" class="menu-overlay__link" data-menu-link>Clients</a>
         <a href="#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
         <a href="#contact" class="menu-overlay__link" data-menu-link>Contact</a>
       </nav>
@@ -275,7 +275,7 @@
       <!-- CARD 1 — tall portrait, bottom — opening shot -->
       <div class="about__card about__card--tall about__card--end">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">WHERE IT ALL BEGAN.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">WHERE IT ALL BEGAN.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img">
           <img src="assets/images/about/hometown-2019.webp" alt="Carter Stoddard in his hometown, 2019" loading="lazy">
@@ -285,7 +285,7 @@
       <!-- CARD 2 — wide landscape, center -->
       <div class="about__card about__card--wide about__card--mid">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">THE PEOPLE I LEARNED FROM.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">THE PEOPLE I LEARNED FROM.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img">
           <img src="assets/images/about/first-client-2021.webp" alt="Carter Stoddard with his first client team, 2021" loading="lazy">
@@ -294,16 +294,16 @@
 
       <!-- COPY CARD — pull quote, top-aligned -->
       <div class="about__card about__card--copy about__card--top">
-        <blockquote class="about__quote">
-          Life only makes sense in <em class="accent">reverse</em><br>
-          but has to be lived <em class="accent">forwards</em>.
+        <blockquote class="about__quote about__wipe-group">
+          <span class="about__wipe"><span class="about__wipe-inner">Life only makes sense in <em class="accent">reverse</em></span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">but has to be lived <em class="accent">forwards</em>.</span><span class="about__wipe-bar"></span></span>
         </blockquote>
       </div>
 
       <!-- CARD 3 — small square, top -->
       <div class="about__card about__card--sm about__card--top">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">WHERE THE WORK HAPPENS.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">WHERE THE WORK HAPPENS.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img" aria-hidden="true"></div>
       </div>
@@ -311,7 +311,7 @@
       <!-- CARD 4 — portrait, bottom -->
       <div class="about__card about__card--portrait about__card--end">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">THE CRAFT.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">THE CRAFT.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img" aria-hidden="true"></div>
       </div>
@@ -319,7 +319,7 @@
       <!-- CARD 5 — hero/large, center -->
       <div class="about__card about__card--hero about__card--mid">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">OUTSIDE THE OFFICE.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">OUTSIDE THE OFFICE.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img" aria-hidden="true"></div>
       </div>
@@ -327,7 +327,7 @@
       <!-- CARD 6 — small, top-offset -->
       <div class="about__card about__card--sm about__card--offset">
         <div class="about__card-caption about__card-caption--above">
-          <span class="about__caption-label">ALWAYS MOVING FORWARD.</span>
+          <span class="about__caption-label about__wipe"><span class="about__wipe-inner">ALWAYS MOVING FORWARD.</span><span class="about__wipe-bar"></span></span>
         </div>
         <div class="about__card-img">
           <img src="assets/images/about/on-the-move-2025.webp" alt="Carter Stoddard in London, 2025" loading="lazy">
@@ -336,9 +336,12 @@
 
       <!-- CLOSING COPY CARD — center -->
       <div class="about__card about__card--copy about__card--mid about__card--closing">
-        <p class="about__closing">
-          I've spent years building brands that <em class="accent">actually mean something</em> — learning what works, what doesn't, and how to make people stop scrolling.
-        </p>
+        <div class="about__closing about__wipe-group">
+          <span class="about__wipe"><span class="about__wipe-inner">I've spent years building brands that</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner"><em class="accent">actually mean something</em> —</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">learning what works, what doesn't,</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">and how to make people stop scrolling.</span><span class="about__wipe-bar"></span></span>
+        </div>
       </div>
 
     </div>
@@ -482,9 +485,7 @@
       <!-- CTA -->
       <div class="services__cta">
         <p class="services__cta-text">DON'T SEE WHAT YOU NEED?</p>
-        <a href="#contact" class="cta-btn">
-          <span class="cta-btn__arrow">&uarr;</span> LET'S TALK
-        </a>
+        <a href="#contact" class="services__cta-btn">LET'S TALK &rarr;</a>
       </div>
 
     </div>
@@ -582,9 +583,7 @@
 
     <!-- ── Portfolio CTA ── -->
     <div class="clients__cta-wrap container">
-      <a href="portfolio.html" class="cta-btn">
-        <span class="cta-btn__arrow">&uarr;</span> PORTFOLIO
-      </a>
+      <a href="portfolio.html" class="services__cta-btn">PORTFOLIO &rarr;</a>
     </div>
 
   </section>
@@ -860,16 +859,6 @@
   ============================================================ -->
   <section id="contact" aria-label="Contact">
 
-    <!-- ROTATING EARTH — pure CSS globe (night/day/cloud layers) -->
-    <div id="earth-container">
-      <div class="planet-container">
-        <div class="night"></div>
-        <div class="day"></div>
-        <div class="clouds"></div>
-        <div class="inner-shadow"></div>
-      </div>
-    </div>
-
     <div class="contact__inner container">
 
       <!-- ── Header ── -->
@@ -1012,6 +1001,16 @@
   <!-- FOOTER — keep identical across index.html, privacy-policy.html, terms.html -->
   <footer id="footer" aria-label="Footer">
 
+    <!-- ROTATING EARTH — centered behind footer -->
+    <div id="earth-container">
+      <div class="planet-container">
+        <div class="night"></div>
+        <div class="day"></div>
+        <div class="clouds"></div>
+        <div class="inner-shadow"></div>
+      </div>
+    </div>
+
     <!-- ── Large background text — sits behind astronaut ── -->
     <div class="footer__bg-text" aria-hidden="true">
       <span class="footer__bg-line1">CREATE WITHOUT</span>
@@ -1118,7 +1117,7 @@
     document.body.style.overflow = 'hidden';
     siteContent.style.opacity = '0';
     siteContent.style.pointerEvents = 'none';
-    if (nav) { nav.style.opacity = '0'; nav.style.pointerEvents = 'none'; }
+    if (nav) { nav.style.opacity = '1'; nav.style.pointerEvents = ''; nav.style.zIndex = '1001'; }
 
     /* ── Starfield behind the gate ── */
     const gateCanvas = document.createElement('canvas');
@@ -1146,6 +1145,7 @@
       if (val.toUpperCase() === SITE_PASSWORD.toUpperCase()) {
         /* ── Correct ── */
         sessionStorage.setItem('siteAccess', 'true');
+        sessionStorage.setItem('portfolioAccess', 'true');
 
         // Brackets pulse lime
         inputWrap.classList.add('gate__input-wrap--success');

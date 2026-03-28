@@ -210,7 +210,7 @@ const Animations = (() => {
       );
     }
 
-    gsap.to(track, {
+    const scrollTween = gsap.to(track, {
       x: () => -(track.scrollWidth - window.innerWidth),
       ease: 'none',
       force3D: true,
@@ -223,6 +223,59 @@ const Animations = (() => {
         scrub: 3,
         invalidateOnRefresh: true,
       },
+    });
+
+    // Helper — animate a single wipe element
+    function fireWipe(el, delay) {
+      var inner = el.querySelector('.about__wipe-inner');
+      var bar   = el.querySelector('.about__wipe-bar');
+      if (!inner || !bar) return;
+
+      gsap.fromTo(bar,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 0.54, ease: 'power2.inOut', delay: delay }
+      );
+      gsap.to(inner,
+        { clipPath: 'inset(0 0% 0 0)', duration: 0.54, ease: 'power2.inOut', delay: delay }
+      );
+      gsap.to(bar,
+        { scaleX: 0, transformOrigin: 'right center', duration: 0.42, ease: 'power2.inOut', delay: delay + 0.37 }
+      );
+    }
+
+    // Set initial hidden state on all wipe elements
+    track.querySelectorAll('.about__wipe').forEach(function(el) {
+      var inner = el.querySelector('.about__wipe-inner');
+      var bar   = el.querySelector('.about__wipe-bar');
+      if (inner) gsap.set(inner, { clipPath: 'inset(0 100% 0 0)' });
+      if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
+    });
+
+    // Single-line wipes (standalone .about__wipe not inside a group)
+    track.querySelectorAll('.about__wipe:not(.about__wipe-group .about__wipe)').forEach(function(el) {
+      ScrollTrigger.create({
+        trigger: el,
+        containerAnimation: scrollTween,
+        start: 'left 85%',
+        once: true,
+        onEnter: function() { fireWipe(el, 0); },
+      });
+    });
+
+    // Multi-line wipe groups — stagger each line 0.18s
+    track.querySelectorAll('.about__wipe-group').forEach(function(group) {
+      var lines = group.querySelectorAll('.about__wipe');
+      ScrollTrigger.create({
+        trigger: group,
+        containerAnimation: scrollTween,
+        start: 'left 85%',
+        once: true,
+        onEnter: function() {
+          lines.forEach(function(line, i) {
+            fireWipe(line, i * 0.18);
+          });
+        },
+      });
     });
   }
 

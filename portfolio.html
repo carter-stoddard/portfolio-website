@@ -370,7 +370,7 @@
         <a href="index.html#about" class="menu-overlay__link" data-menu-link>About</a>
         <a href="index.html#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
         <a href="index.html#services" class="menu-overlay__link" data-menu-link>Services</a>
-        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Clients</a>
         <a href="index.html#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
         <a href="index.html#contact" class="menu-overlay__link" data-menu-link>Contact</a>
       </nav>
@@ -480,11 +480,15 @@
       initMenu();
 
       /* ── Check session — skip gate if already authenticated ── */
-      if (sessionStorage.getItem('portfolioAccess') === 'true') {
+      if (sessionStorage.getItem('portfolioAccess') === 'true' || sessionStorage.getItem('siteAccess') === 'true') {
         gate.style.display = 'none';
         content.style.display = 'flex';
         return;
       }
+
+      /* ── Show nav above gate so users can navigate away ── */
+      const nav = document.getElementById('nav');
+      if (nav) nav.style.zIndex = '1001';
 
       /* ── Entry animation — GSAP stagger timeline ── */
       const animEls = document.querySelectorAll('[data-gate-anim]');
@@ -522,8 +526,9 @@
         // Brighten input
         gsap.to(input, { borderTopColor: 'rgba(204,255,0,1)', duration: 0.3 });
 
-        // Store session
+        // Store session (both keys so auth works across pages)
         sessionStorage.setItem('portfolioAccess', 'true');
+        sessionStorage.setItem('siteAccess', 'true');
 
         // After delay, fade out gate and show content
         gsap.delayedCall(0.8, () => {

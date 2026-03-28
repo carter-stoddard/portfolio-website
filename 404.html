@@ -222,8 +222,9 @@
     /* ── Floating astronaut ── */
     .four04-astronaut {
       position: absolute;
-      bottom: 10%;
-      left: 8%;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
       width: clamp(120px, 15vw, 220px);
       opacity: 0;
       pointer-events: none;
@@ -259,12 +260,8 @@
       }
 
       .four04-astronaut {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        width: 100px;
-        margin: 24px auto 0;
-        display: block;
+        width: 140px;
+        bottom: 10%;
       }
     }
   </style>
@@ -309,7 +306,7 @@
         <a href="index.html#about" class="menu-overlay__link" data-menu-link>About</a>
         <a href="index.html#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
         <a href="index.html#services" class="menu-overlay__link" data-menu-link>Services</a>
-        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Brands</a>
+        <a href="index.html#clients" class="menu-overlay__link" data-menu-link>Clients</a>
         <a href="index.html#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
         <a href="index.html#contact" class="menu-overlay__link" data-menu-link>Contact</a>
       </nav>
@@ -420,7 +417,7 @@
 
         // Astronaut — fade in after 1.5s delay, then float
         const astronaut = document.getElementById('four04-astronaut');
-        if (astronaut && window.innerWidth > 767) {
+        if (astronaut) {
           gsap.set(astronaut, { opacity: 0 });
 
           gsap.to(astronaut, {

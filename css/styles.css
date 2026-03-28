@@ -1104,13 +1104,37 @@ button {
   min-height: 0;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(204, 255, 0, 0.2);
 }
 .about__card-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* ── Wipe reveal — about section ───────────────────────────── */
+.about__wipe {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.about__wipe-inner {
+  display: block;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+}
+.about__wipe-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  pointer-events: none;
 }
 
 /* ── Captions ──────────────────────────────────────────────── */
@@ -1162,7 +1186,7 @@ button {
 }
 
 .about__card--closing {
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(204, 255, 0, 0.4);
   padding-left: 2rem;
 }
 
@@ -1477,7 +1501,7 @@ button {
 
 /* Active state */
 .services__row.is-active {
-  border-left-color: var(--color-accent);
+  border-left: 3px solid #CCFF00;
 }
 .services__row.is-active .services__name {
   color: var(--color-text);
@@ -1494,55 +1518,15 @@ button {
   position: relative;
   min-height: 280px;
   padding: clamp(1.5rem, 2.5vw, 2rem);
-  border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, 0.04);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  transition: border-color 0.3s ease;
-}
-
-/* Bottom-left corner bracket */
-.services__panel::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-radius: 0 0 0 var(--radius-card);
-  pointer-events: none;
-  transition: border-color 0.3s ease;
-}
-
-/* Bottom-right corner bracket */
-.services__panel::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-radius: 0 0 var(--radius-card) 0;
-  pointer-events: none;
-  transition: border-color 0.3s ease;
+  padding-left: 24px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-left: 2px solid #CCFF00;
 }
 
 /* Hover — brighten all bracket elements + blink */
-.services__panel:hover {
-  border-top-color: rgba(204, 255, 0, 1);
-  animation: statsBlink 0.15s ease-in-out 2;
-}
-
-.services__panel:hover::before,
-.services__panel:hover::after {
-  border-color: rgba(204, 255, 0, 1);
-}
+/* Panel hover removed — no brackets to animate */
 
 .services__panel-inner {
   opacity: 0;
@@ -1645,6 +1629,9 @@ button {
 .services__acc-body-inner {
   position: relative;
   padding: 0 0.5rem 1.25rem 2.5rem;
+  border-left: 2px solid #CCFF00;
+  padding-left: 24px;
+  margin-left: 0.5rem;
 }
 
 /* Active accordion item — corner brackets + top bar */
@@ -1652,7 +1639,7 @@ button {
   position: relative;
 }
 .services__acc-item.is-open .services__acc-trigger {
-  border-left: 2px solid var(--color-accent);
+  border-left: 3px solid #CCFF00;
 }
 
 .services__acc-sub {
@@ -1694,7 +1681,27 @@ button {
   margin: 0;
 }
 
-/* services CTA now uses shared .cta-btn */
+/* Services CTA — solid pill button */
+.services__cta-btn {
+  display: inline-block;
+  padding: 18px 48px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #000000;
+  background: #CCFF00;
+  border: none;
+  border-radius: 99px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.services__cta-btn:hover {
+  background: #b8e600;
+  transform: scale(1.02);
+}
 
 /* ── Responsive ── */
 
@@ -1969,6 +1976,7 @@ button {
 .clients__cta-wrap {
   margin-top: 48px;
   opacity: 0;
+  text-align: center;
 }
 
 /* ============================================================
@@ -2435,7 +2443,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 720px;
+  width: 100%;
 }
 
 .contact__row {
@@ -2540,7 +2548,7 @@ button {
 }
 
 .contact__textarea {
-  min-height: 140px;
+  min-height: 160px;
   resize: vertical;
 }
 
@@ -2703,11 +2711,11 @@ button {
 /* ── Rotating Earth Globe ── */
 #earth-container {
   position: absolute;
-  right: 40px;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
-  width: 560px;
-  height: 560px;
+  transform: translate(-50%, -50%);
+  width: 805px;
+  height: 805px;
   pointer-events: none;
   z-index: 0;
 }
@@ -2718,7 +2726,7 @@ button {
   border-radius: var(--radius-circle);
   overflow: hidden;
   position: relative;
-  box-shadow: 5px -3px 10px 3px rgba(94, 144, 241, 0.3);
+  box-shadow: 0 0 60px 20px rgba(94, 144, 241, 0.15);
 }
 
 #earth-container .night {
@@ -2776,10 +2784,11 @@ button {
   to   { background-position: 200% center; }
 }
 
-/* ── Earth container — hidden on tablet and mobile ── */
+/* ── Earth container — scale down on tablet ── */
 @media (max-width: 1023px) {
   #earth-container {
-    display: none;
+    width: 500px;
+    height: 500px;
   }
 }
 
@@ -2804,7 +2813,8 @@ button {
   }
 
   #earth-container {
-    display: none;
+    width: 400px;
+    height: 400px;
   }
 }
 
@@ -2836,14 +2846,71 @@ footer,
   align-items: center;
   min-height: calc(85vh + 200px);
   padding: clamp(80px, 10vw, 120px) 0 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(10, 20, 60, 0.6) 20%,
-    rgba(15, 30, 90, 0.85) 50%,
-    rgba(5, 15, 50, 0.95) 100%
-  );
+  background: transparent;
   overflow: hidden;
+}
+
+/* ── Footer starfield — CSS star layers with twinkle ── */
+.footer__stars,
+.footer__stars-sm,
+.footer__stars-lg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.footer__stars {
+  background-image:
+    radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 340px 220px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 560px 140px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 780px 320px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 200px 400px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 450px 500px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 680px 60px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 900px 180px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 1100px 90px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 1300px 250px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 50px 550px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 1400px 400px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 1000px 480px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 300px 650px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 850px 600px, rgba(255,255,255,0.5), transparent);
+  background-size: 1500px 700px;
+  animation: footerTwinkle 4s ease-in-out infinite alternate;
+}
+.footer__stars-sm {
+  background-image:
+    radial-gradient(0.5px 0.5px at 80px 160px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(0.5px 0.5px at 260px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(0.5px 0.5px at 420px 280px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(0.5px 0.5px at 600px 380px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(0.5px 0.5px at 740px 120px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(0.5px 0.5px at 950px 300px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(0.5px 0.5px at 1150px 200px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(0.5px 0.5px at 1350px 100px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(0.5px 0.5px at 170px 500px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(0.5px 0.5px at 520px 580px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(0.5px 0.5px at 1050px 550px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(0.5px 0.5px at 1250px 450px, rgba(255,255,255,0.5), transparent);
+  background-size: 1400px 650px;
+  animation: footerTwinkle 6s ease-in-out infinite alternate-reverse;
+}
+.footer__stars-lg {
+  background-image:
+    radial-gradient(1.5px 1.5px at 250px 100px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 700px 250px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 1200px 150px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 400px 450px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 900px 500px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 1100px 380px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 50px 300px, rgba(255,255,255,0.5), transparent);
+  background-size: 1300px 600px;
+  animation: footerTwinkle 5s ease-in-out infinite alternate;
+}
+@keyframes footerTwinkle {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 /* ── Background text — "CREATE WITHOUT" + "LIMITS." behind astronaut ── */
@@ -3116,7 +3183,7 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 330px);
+    margin-left: calc(-30vw + 400px);
     margin-right: calc(-30vw - 370px);
     margin-top: -10px;
     margin-bottom: -100px;

@@ -19,7 +19,7 @@ const Hero = (() => {
     MAX_REVEAL_MOUSE:     1.0,
     MAX_REVEAL_IDLE:      1.0,
     IDLE_TIMEOUT:         1800,
-    IDLE_SPEED:           0.007,
+    IDLE_SPEED:           0.012,
   };
 
   // ----------------------------------------------------------

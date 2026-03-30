@@ -89,27 +89,36 @@ const Animations = (() => {
 
     const isMobilePortal = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-    ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      end: '+=50%',
-      pin: true,
-      scrub: isMobilePortal ? 2.5 : 0.5,
-      animation: tl,
-      // overflow: visible only during active zoom (progress 0–1).
-      // At progress = 1 (hero done), clamp back to hidden so scaled elements
-      // don't bleed into sections below.
-      onUpdate: (self) => {
-        hero.style.overflow = (self.progress > 0 && self.progress < 1) ? 'visible' : 'hidden';
-      },
-      onLeave:      () => { hero.style.overflow = 'hidden'; },
-      onEnterBack:  () => {
-        hero.style.overflow = 'visible';
-        // Force WebGL canvas back to visible — browser may have throttled it off-screen
-        var heroCanvas = document.getElementById('hero-canvas');
-        if (heroCanvas) heroCanvas.style.display = 'block';
-      },
-    });
+    if (isMobilePortal) {
+      // Mobile — no pin, play portal exit once on scroll, no snap-back risk
+      hero.style.overflow = 'visible';
+      ScrollTrigger.create({
+        trigger: hero,
+        start: 'top top',
+        end: '+=40%',
+        scrub: 1,
+        animation: tl,
+        onLeave: () => { hero.style.overflow = 'hidden'; },
+      });
+    } else {
+      ScrollTrigger.create({
+        trigger: hero,
+        start: 'top top',
+        end: '+=50%',
+        pin: true,
+        scrub: 0.5,
+        animation: tl,
+        onUpdate: (self) => {
+          hero.style.overflow = (self.progress > 0 && self.progress < 1) ? 'visible' : 'hidden';
+        },
+        onLeave:     () => { hero.style.overflow = 'hidden'; },
+        onEnterBack: () => {
+          hero.style.overflow = 'visible';
+          var heroCanvas = document.getElementById('hero-canvas');
+          if (heroCanvas) heroCanvas.style.display = 'block';
+        },
+      });
+    }
   }
 
   // ----------------------------------------------------------

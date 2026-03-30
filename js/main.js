@@ -111,11 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Animations.footerReveal();
     Hero.start();
 
-    // Recalculate all ScrollTrigger positions once images/fonts are fully loaded
+    // Recalculate ScrollTrigger positions once images/fonts are fully loaded
     window.addEventListener('load', function() {
-      ScrollTrigger.refresh(true);
-      window.scrollTo(0, 0);
-      if (window.lenis) window.lenis.scrollTo(0, { immediate: true });
+      ScrollTrigger.refresh();
     });
   });
 

@@ -473,7 +473,7 @@ button {
     position: fixed;
     bottom: 24px;
     right: 20px;
-    z-index: 600;
+    z-index: 499;
     height: 36px;
     padding: 0 14px;
     font-family: var(--font-button);
@@ -3366,9 +3366,9 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 365px);
+    margin-left: calc(-30vw + 355px);
     margin-right: calc(-30vw - 370px);
-    margin-top: -10px;
+    margin-top: -20px;
     margin-bottom: -100px;
     order: 4;
     z-index: 2;

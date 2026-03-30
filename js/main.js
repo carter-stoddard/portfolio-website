@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
   Loader.init(() => {
     document.body.classList.add('site-ready');
 
-    // Lenis smooth scroll — desktop only, native scroll on touch/mobile
+    // Lenis smooth scroll — smooth wheel on desktop, native touch on mobile
     const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    if (typeof Lenis !== 'undefined' && !isTouchDevice) {
+    if (typeof Lenis !== 'undefined') {
       window.lenis = new Lenis({
         duration: 1.6,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
+        smoothWheel: !isTouchDevice,
         smoothTouch: false,
         syncTouch: false,
       });
@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Recalculate all ScrollTrigger positions once images/fonts are fully loaded
     window.addEventListener('load', function() {
       ScrollTrigger.refresh(true);
+      window.scrollTo(0, 0);
+      if (window.lenis) window.lenis.scrollTo(0, { immediate: true });
     });
   });
 

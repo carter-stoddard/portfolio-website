@@ -258,7 +258,7 @@ const Animations = (() => {
         start: 'top top',
         end: () => `+=${track.scrollWidth - window.innerWidth}`,
         pin: true,
-        anticipatePin: 1,
+        anticipatePin: isMobileAbout ? 0 : 1,
         scrub: isMobileAbout ? 1 : 3,
         invalidateOnRefresh: true,
       },

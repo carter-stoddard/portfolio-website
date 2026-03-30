@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Loader.init(() => {
     document.body.classList.add('site-ready');
 
-    // Lenis smooth scroll — smooth wheel on desktop, native touch on mobile
+    // Lenis smooth scroll — full proxy on desktop, native scroll on mobile
     const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     if (typeof Lenis !== 'undefined') {
       window.lenis = new Lenis({
@@ -42,24 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
         smoothTouch: false,
         syncTouch: false,
       });
-      // Connect Lenis scroll position to ScrollTrigger
       window.lenis.on('scroll', ScrollTrigger.update);
-      // Drive Lenis from GSAP's ticker for frame-perfect sync
       gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
       gsap.ticker.lagSmoothing(0);
-      // Tell ScrollTrigger to use Lenis's scroller proxy
-      ScrollTrigger.scrollerProxy(document.documentElement, {
-        scrollTop(value) {
-          if (arguments.length) { window.lenis.scrollTo(value, { immediate: true }); }
-          return window.lenis.scroll;
-        },
-        getBoundingClientRect() {
-          return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-        },
-        pinType: document.documentElement.style.transform ? 'transform' : 'fixed',
-      });
-      ScrollTrigger.defaults({ scroller: document.documentElement });
-      // Refresh ScrollTrigger after Lenis is ready
+
+      if (!isTouchDevice) {
+        // Desktop only — proxy lets ScrollTrigger read Lenis scroll position
+        ScrollTrigger.scrollerProxy(document.documentElement, {
+          scrollTop(value) {
+            if (arguments.length) { window.lenis.scrollTo(value, { immediate: true }); }
+            return window.lenis.scroll;
+          },
+          getBoundingClientRect() {
+            return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+          },
+          pinType: document.documentElement.style.transform ? 'transform' : 'fixed',
+        });
+        ScrollTrigger.defaults({ scroller: document.documentElement });
+      }
+
       ScrollTrigger.refresh();
     }
 

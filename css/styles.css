@@ -2923,6 +2923,178 @@ button {
   opacity: 0;
 }
 
+/* Child elements visible by default inside success block — JS animates them in */
+.contact__success .contact__label,
+.contact__success .contact__heading-main,
+.contact__success .contact__heading-accent,
+.contact__success .contact__subtext {
+  opacity: 1;
+}
+
+.contact__success-email {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(204, 255, 0, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.contact__success-email:hover {
+  border-color: var(--color-accent);
+}
+
+/* ============================================================
+   MISSION ACCEPTED MODAL
+   ============================================================ */
+.mission-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.mission-modal.is-open {
+  pointer-events: all;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mission-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.mission-modal__card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(204, 255, 0, 0.25);
+  border-radius: var(--radius-card);
+  padding: clamp(40px, 6vw, 72px) clamp(32px, 6vw, 72px);
+  max-width: 560px;
+  width: 100%;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mission-modal.is-open .mission-modal__card {
+  transform: translateY(0);
+}
+
+/* Close button — X */
+.mission-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+  padding: 0;
+}
+
+.mission-modal__close:hover {
+  border-color: rgba(204, 255, 0, 0.6);
+}
+
+.mission-modal__close span {
+  position: absolute;
+  width: 14px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+}
+
+.mission-modal__close span:first-child { transform: rotate(45deg); }
+.mission-modal__close span:last-child  { transform: rotate(-45deg); }
+
+.mission-modal__close:hover span {
+  background: var(--color-accent);
+}
+
+/* Label */
+.mission-modal__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 20px;
+}
+
+.mission-modal__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Heading */
+.mission-modal__heading {
+  margin: 0 0 20px;
+  line-height: 1.1;
+}
+
+.mission-modal__heading-main {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.mission-modal__heading-accent {
+  display: block;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--color-accent);
+}
+
+/* Body */
+.mission-modal__body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.mission-modal__email {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(204, 255, 0, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.mission-modal__email:hover {
+  border-color: var(--color-accent);
+}
+
 /* ── Rotating Earth Globe ── */
 #earth-container {
   position: absolute;
@@ -3392,17 +3564,16 @@ footer,
     font-size: 16px;
   }
 
-  /* Astronaut — centered bottom on mobile, using margin only (GSAP overrides transform) */
+  /* Astronaut — absolute bottom on mobile, clips cleanly at footer edge */
   .footer__astronaut {
     display: block !important;
-    position: static !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 355px);
-    margin-right: calc(-30vw - 370px);
-    margin-top: -20px;
-    margin-bottom: -100px;
-    order: 4;
+    margin: 0;
     z-index: 2;
   }
 

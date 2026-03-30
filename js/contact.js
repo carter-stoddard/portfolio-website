@@ -17,7 +17,40 @@ const SUPABASE_TABLE = 'contact_submissions';
   var submitBtn = document.getElementById('contact-submit');
   var submitError = document.getElementById('contact-submit-error');
   var successBlock = document.getElementById('contact-success');
+  var modal = document.getElementById('mission-modal');
+  var modalClose = document.getElementById('mission-modal-close');
   if (!form) return;
+
+  // ----------------------------------------------------------
+  // Modal open / close
+  // ----------------------------------------------------------
+  function openModal() {
+    if (!modal) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (modalClose) modalClose.focus();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    // Close on backdrop click
+    modal.querySelector('.mission-modal__backdrop').addEventListener('click', closeModal);
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+  }
 
   // ----------------------------------------------------------
   // Service pill toggling
@@ -173,30 +206,19 @@ const SUPABASE_TABLE = 'contact_submissions';
   });
 
   // ----------------------------------------------------------
-  // Success state
+  // Success state — opens modal
   // ----------------------------------------------------------
   function showSuccess() {
-    if (typeof gsap !== 'undefined') {
-      gsap.to(form, {
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-        onComplete: function() {
-          form.style.display = 'none';
-          successBlock.style.display = 'block';
-          gsap.fromTo(successBlock,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-          );
-          // Pulse status dot to full lime
-          var dots = document.querySelectorAll('.contact__status-dot--success');
-          dots.forEach(function(d) { d.style.opacity = '1'; d.style.animation = 'none'; });
-        },
-      });
-    } else {
-      form.style.display = 'none';
-      successBlock.style.display = 'block';
-    }
+    // Reset + re-enable the button so the form is usable if modal is closed
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'LAUNCH';
+    form.reset();
+    // Deselect any service pills
+    form.querySelectorAll('.contact__pill.is-selected').forEach(function(p) {
+      p.classList.remove('is-selected');
+      p.setAttribute('aria-pressed', 'false');
+    });
+    openModal();
   }
 
 })();

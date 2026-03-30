@@ -976,12 +976,12 @@
 
       <!-- ── Success state — hidden by default ── -->
       <div class="contact__success" id="contact-success" style="display:none;">
-        <span class="contact__label">TRANSMISSION SENT <span class="contact__status-dot contact__status-dot--success" aria-hidden="true"></span></span>
+        <span class="contact__label">TRANSMISSION RECEIVED <span class="contact__status-dot contact__status-dot--success" aria-hidden="true"></span></span>
         <h2 class="contact__heading">
-          <span class="contact__heading-main">Transmission</span>
-          <span class="contact__heading-accent">received.</span>
+          <span class="contact__heading-main">MISSION</span>
+          <span class="contact__heading-accent">Accepted.</span>
         </h2>
-        <p class="contact__subtext" style="margin-top:16px;">I'll be in touch soon.</p>
+        <p class="contact__subtext" style="margin-top:16px;">I'll review your brief and get back to you within 48 hours.<br>In the meantime, reach me directly at <a href="mailto:contact@carterstoddard.com" class="contact__success-email">contact@carterstoddard.com</a>.</p>
       </div>
 
     </div>
@@ -1219,6 +1219,22 @@
   <script type="module" src="js/quote-models.js"></script>
   <script type="module" src="js/marquee-moon.js"></script>
   <script type="module" src="js/about-shuttle.js"></script>
+
+  <!-- ── Mission Accepted Modal ── -->
+  <div id="mission-modal" class="mission-modal" role="dialog" aria-modal="true" aria-labelledby="mission-modal-heading" aria-hidden="true">
+    <div class="mission-modal__backdrop"></div>
+    <div class="mission-modal__card">
+      <button class="mission-modal__close" id="mission-modal-close" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <span class="mission-modal__label">TRANSMISSION RECEIVED <span class="mission-modal__dot" aria-hidden="true"></span></span>
+      <h2 class="mission-modal__heading" id="mission-modal-heading">
+        <span class="mission-modal__heading-main">MISSION</span>
+        <span class="mission-modal__heading-accent">Accepted.</span>
+      </h2>
+      <p class="mission-modal__body">I'll review your brief and get back to you within 48 hours.<br>In the meantime, reach me directly at<br><a href="mailto:contact@carterstoddard.com" class="mission-modal__email">contact@carterstoddard.com</a></p>
+    </div>
+  </div>
 
 </body>
 </html>

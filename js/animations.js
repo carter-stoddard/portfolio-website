@@ -249,8 +249,11 @@ const Animations = (() => {
       if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
     });
 
-    // Mobile — native CSS horizontal scroll, no GSAP pin, no crash risk
+    // Mobile — sticky scroll (CSS sticky + scroll listener, no GSAP pin = no crash)
+    // Section gets tall enough to scroll through all cards, sticky wrapper keeps
+    // content in viewport, and scroll progress drives track.scrollLeft.
     if (isMobileAbout) {
+      // Wipe animations fire on enter
       ScrollTrigger.create({
         trigger: section,
         start: 'top 65%',
@@ -261,6 +264,30 @@ const Animations = (() => {
           });
         },
       });
+
+      // Wrap all section children in a sticky container
+      var sticky = document.createElement('div');
+      sticky.style.cssText = 'position:sticky;top:0;height:100vh;overflow:hidden;width:100%;display:flex;flex-direction:column;justify-content:center;';
+      while (section.firstChild) sticky.appendChild(section.firstChild);
+      section.appendChild(sticky);
+
+      // Track: JS drives scrollLeft, no native scroll
+      track.style.overflowX = 'hidden';
+
+      function setAboutHeight() {
+        var scrollDist = track.scrollWidth - window.innerWidth;
+        section.style.height = (scrollDist + window.innerHeight) + 'px';
+      }
+      setAboutHeight();
+      window.addEventListener('resize', setAboutHeight, { passive: true });
+
+      window.addEventListener('scroll', function() {
+        var scrollDist = track.scrollWidth - window.innerWidth;
+        if (scrollDist <= 0) return;
+        var progress = Math.max(0, Math.min(1, -section.getBoundingClientRect().top / scrollDist));
+        track.scrollLeft = progress * scrollDist;
+      }, { passive: true });
+
       return;
     }
 

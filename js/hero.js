@@ -542,7 +542,7 @@ const Hero = (() => {
   // preload() — call immediately on page load, before loader finishes.
   // Kicks off texture loading in parallel so images are ready instantly.
   function preload() {
-    if (typeof THREE === 'undefined') return;
+    if (isMobileHero || typeof THREE === 'undefined') return;
     const baseImg  = document.querySelector('.hero__layer--base');
     const astroImg = document.querySelector('.hero__layer--astronaut');
     if (!baseImg || !astroImg) return;
@@ -556,6 +556,13 @@ const Hero = (() => {
 
   // start() — call after loader completes. Textures already loading/loaded.
   function start() {
+    if (isMobileHero) {
+      // No WebGL on mobile — too heavy, causes layer detachment on pinch.
+      // Hide canvas, show portrait directly.
+      const canvas = document.getElementById('hero-canvas');
+      if (canvas) canvas.style.display = 'none';
+      return;
+    }
     if (!_texturesPromise) preload();
     _texturesPromise
       .then(([base, astro]) => init(base, astro))

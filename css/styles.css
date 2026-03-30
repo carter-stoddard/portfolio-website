@@ -96,6 +96,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
   background-color: #000000;
+  touch-action: manipulation;
 }
 
 body {
@@ -106,6 +107,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 img {
@@ -2501,19 +2503,34 @@ button {
   /* About — native horizontal scroll on mobile, no GSAP pin */
   #about {
     height: auto;
-    overflow: hidden;
+    overflow: visible;
   }
 
   #about .about__track {
+    width: 100vw;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
     padding-bottom: 24px;
+    height: 70vw;
+    min-height: 280px;
+    max-height: 420px;
+    align-items: center;
   }
 
   #about .about__card {
     scroll-snap-align: start;
+    width: 72vw;
+    min-width: 220px;
+    max-width: 320px;
+    flex-shrink: 0;
+  }
+
+  #about .about__card-img {
+    height: 52vw;
+    min-height: 180px;
+    max-height: 300px;
   }
 
   /* Nav adjusts on mobile */

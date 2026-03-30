@@ -459,6 +459,60 @@ button {
 
 
 /* ============================================================
+   HERO LOCK BUTTON — mobile only, fixed bottom-right
+   ============================================================ */
+.hero-lock-btn {
+  display: none; /* hidden on desktop */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hero-lock-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 600;
+    height: 36px;
+    padding: 0 14px;
+    font-family: var(--font-button);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 100px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    /* Only show when hero is in view */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero-lock-btn.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hero-lock-btn.is-locked {
+    background: #CCFF00;
+    border-color: #CCFF00;
+    color: #000;
+  }
+
+  .hero-lock-btn__icon--unlocked { display: flex; }
+  .hero-lock-btn__icon--locked   { display: none; }
+
+  .hero-lock-btn.is-locked .hero-lock-btn__icon--unlocked { display: none; }
+  .hero-lock-btn.is-locked .hero-lock-btn__icon--locked   { display: flex; }
+}
+
+/* ============================================================
    NAVIGATION
    ============================================================ */
 /* ── Nav bar — two rounded-rect buttons ── */

@@ -396,7 +396,7 @@ const Hero = (() => {
     });
     wrapper.addEventListener('mouseleave', () => { mouse.moved = false; });
     wrapper.addEventListener('touchmove', e => {
-      e.preventDefault();
+      if (window.heroLocked) e.preventDefault();
       const r = wrapper.getBoundingClientRect();
       const t = e.touches[0];
       mouse.px = mouse.x; mouse.py = mouse.y;

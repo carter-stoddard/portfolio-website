@@ -67,6 +67,39 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
 
     MenuOverlay.init();
+
+    // Hero lock button — mobile only
+    window.heroLocked = false;
+    const lockBtn = document.getElementById('hero-lock-btn');
+    const heroSection = document.getElementById('hero');
+    if (lockBtn && heroSection) {
+      // Show button only while hero is in viewport
+      const heroObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          lockBtn.classList.toggle('is-visible', entry.isIntersecting);
+          // Auto-unlock when hero scrolls out of view
+          if (!entry.isIntersecting && window.heroLocked) {
+            window.heroLocked = false;
+            lockBtn.classList.remove('is-locked');
+            lockBtn.setAttribute('aria-pressed', 'false');
+            lockBtn.querySelector('.hero-lock-btn__label').textContent = 'LOCK';
+          }
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(heroSection);
+
+      lockBtn.addEventListener('click', function() {
+        window.heroLocked = !window.heroLocked;
+        lockBtn.classList.toggle('is-locked', window.heroLocked);
+        lockBtn.setAttribute('aria-pressed', String(window.heroLocked));
+        lockBtn.querySelector('.hero-lock-btn__label').textContent = window.heroLocked ? 'LOCKED' : 'LOCK';
+        // When locking, prevent Lenis from scrolling
+        if (window.lenis) {
+          window.heroLocked ? window.lenis.stop() : window.lenis.start();
+        }
+      });
+    }
+
     Animations.heroEntrance();
     Animations.quoteReveal();
     Animations.aboutScroll();

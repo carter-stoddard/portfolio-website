@@ -240,20 +240,6 @@ const Animations = (() => {
       if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
     });
 
-    // Mobile — skip horizontal pin, fire all wipes when section enters view
-    if (isMobileAbout) {
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top 65%',
-        once: true,
-        onEnter: function() {
-          var allWipes = track.querySelectorAll('.about__wipe');
-          allWipes.forEach(function(el, i) { fireWipe(el, i * 0.08); });
-        },
-      });
-      return;
-    }
-
     const scrollTween = gsap.to(track, {
       x: () => -(track.scrollWidth - window.innerWidth),
       ease: 'none',
@@ -264,7 +250,7 @@ const Animations = (() => {
         end: () => `+=${track.scrollWidth - window.innerWidth}`,
         pin: true,
         anticipatePin: 1,
-        scrub: 3,
+        scrub: isMobileAbout ? 1 : 3,
         invalidateOnRefresh: true,
       },
     });

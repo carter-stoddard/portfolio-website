@@ -94,6 +94,8 @@ html {
   scroll-behavior: auto; /* Lenis handles smooth scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  background-color: #000000;
 }
 
 body {
@@ -103,6 +105,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 img {
@@ -2031,18 +2034,18 @@ button {
 
 /* Real logo images — swap in for .clients__patch-placeholder */
 .clients__patch-logo {
-  max-width: 100px;
-  max-height: 40px;
-  width: auto;
+  width: 90%;
+  max-height: 160px;
   height: auto;
   object-fit: contain;
-  opacity: 0.6;
+  opacity: 0.9;
+  mix-blend-mode: lighten;
   transition: opacity 0.3s ease;
 }
 
 .clients__patch--sm .clients__patch-logo {
-  max-width: 60px;
-  max-height: 28px;
+  max-width: 85%;
+  max-height: 120px;
 }
 
 /* ── Bottom labels ── */

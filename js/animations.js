@@ -87,12 +87,14 @@ const Animations = (() => {
       }, 0);
     }
 
+    const isMobilePortal = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
     ScrollTrigger.create({
       trigger: hero,
       start: 'top top',
       end: '+=50%',
       pin: true,
-      scrub: 0.5,
+      scrub: isMobilePortal ? 2.5 : 0.5,
       animation: tl,
       // overflow: visible only during active zoom (progress 0–1).
       // At progress = 1 (hero done), clamp back to hidden so scaled elements
@@ -210,20 +212,7 @@ const Animations = (() => {
       );
     }
 
-    const scrollTween = gsap.to(track, {
-      x: () => -(track.scrollWidth - window.innerWidth),
-      ease: 'none',
-      force3D: true,
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${track.scrollWidth - window.innerWidth}`,
-        pin: true,
-        anticipatePin: 1,
-        scrub: 3,
-        invalidateOnRefresh: true,
-      },
-    });
+    const isMobileAbout = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
     // Helper — animate a single wipe element
     function fireWipe(el, delay) {
@@ -249,6 +238,35 @@ const Animations = (() => {
       var bar   = el.querySelector('.about__wipe-bar');
       if (inner) gsap.set(inner, { clipPath: 'inset(0 100% 0 0)' });
       if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
+    });
+
+    // Mobile — skip horizontal pin, fire all wipes when section enters view
+    if (isMobileAbout) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 65%',
+        once: true,
+        onEnter: function() {
+          var allWipes = track.querySelectorAll('.about__wipe');
+          allWipes.forEach(function(el, i) { fireWipe(el, i * 0.08); });
+        },
+      });
+      return;
+    }
+
+    const scrollTween = gsap.to(track, {
+      x: () => -(track.scrollWidth - window.innerWidth),
+      ease: 'none',
+      force3D: true,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${track.scrollWidth - window.innerWidth}`,
+        pin: true,
+        anticipatePin: 1,
+        scrub: 3,
+        invalidateOnRefresh: true,
+      },
     });
 
     // Single-line wipes (standalone .about__wipe not inside a group)

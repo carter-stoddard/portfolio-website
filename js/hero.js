@@ -8,10 +8,12 @@ const Hero = (() => {
   // ----------------------------------------------------------
   // Config
   // ----------------------------------------------------------
+  const isMobileHero = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
   const CFG = {
-    SIM_RES:              128,
-    DYE_RES:              512,
-    PRESSURE_ITER:         25,
+    SIM_RES:              isMobileHero ? 64  : 128,
+    DYE_RES:              isMobileHero ? 256 : 512,
+    PRESSURE_ITER:        isMobileHero ? 12  : 25,
     VELOCITY_DISSIPATION: 0.98,
     DENSITY_DISSIPATION:  0.975,
     SPLAT_RADIUS:         0.0018,

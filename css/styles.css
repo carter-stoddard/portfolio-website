@@ -2466,6 +2466,15 @@ button {
     font-size: clamp(1.5rem, 6.8vw, 7.35rem);
     white-space: nowrap;
   }
+
+  /* Strip will-change on mobile to reduce GPU layer pressure */
+  .quote__line-inner,
+  .quote__wipe-bar,
+  .about__wipe-inner,
+  .about__wipe-bar,
+  .about__track {
+    will-change: auto;
+  }
 }
 
 

@@ -1118,12 +1118,18 @@ const MenuOverlay = (() => {
     // ── Nav link click — scroll to section + close ──
     links.forEach(function(link) {
       link.addEventListener('click', function(e) {
-        e.preventDefault();
         var target = link.getAttribute('href');
 
+        // Cross-page link (e.g. index.html#about) — let browser navigate normally
+        if (!target || !target.startsWith('#')) {
+          close();
+          return;
+        }
+
+        e.preventDefault();
         close();
 
-        // Use Lenis if available, otherwise fallback
+        // Same-page anchor — use Lenis if available, otherwise fallback
         setTimeout(function() {
           if (window.lenis) {
             window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });

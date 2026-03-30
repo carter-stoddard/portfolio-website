@@ -448,8 +448,10 @@
 
           if (isOpen) {
             overlay.style.visibility = 'visible';
+            overlay.classList.add('is-open');
             gsap.to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.out' });
           } else {
+            overlay.classList.remove('is-open');
             gsap.to(overlay, {
               opacity: 0,
               duration: 0.3,
@@ -465,6 +467,7 @@
             isOpen = false;
             menuBtn.classList.remove('is-open');
             menuBtn.setAttribute('aria-expanded', 'false');
+            overlay.classList.remove('is-open');
             gsap.to(overlay, {
               opacity: 0,
               duration: 0.3,
@@ -480,6 +483,7 @@
             isOpen = false;
             menuBtn.classList.remove('is-open');
             menuBtn.setAttribute('aria-expanded', 'false');
+            overlay.classList.remove('is-open');
             gsap.to(overlay, {
               opacity: 0,
               duration: 0.3,

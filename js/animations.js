@@ -249,6 +249,21 @@ const Animations = (() => {
       if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
     });
 
+    // Mobile — native CSS horizontal scroll, no GSAP pin, no crash risk
+    if (isMobileAbout) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 65%',
+        once: true,
+        onEnter: function() {
+          track.querySelectorAll('.about__wipe').forEach(function(el, i) {
+            fireWipe(el, i * 0.08);
+          });
+        },
+      });
+      return;
+    }
+
     const scrollTween = gsap.to(track, {
       x: () => -(track.scrollWidth - window.innerWidth),
       ease: 'none',
@@ -258,8 +273,8 @@ const Animations = (() => {
         start: 'top top',
         end: () => `+=${track.scrollWidth - window.innerWidth}`,
         pin: true,
-        anticipatePin: isMobileAbout ? 0 : 1,
-        scrub: isMobileAbout ? 1 : 3,
+        anticipatePin: 1,
+        scrub: 3,
         invalidateOnRefresh: true,
       },
     });

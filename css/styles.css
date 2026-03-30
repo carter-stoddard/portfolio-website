@@ -2487,11 +2487,30 @@ button {
     height: clamp(200px, 72vw, 360px);
   }
 
-  /* Portrait — smaller on mobile to reduce cropping, pushed down to eliminate bottom gap */
+  /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */
   .hero__portrait-wrapper {
     width: 845px;
-    margin-top: auto;
+    align-self: flex-end;
+    margin-top: 0;
     margin-bottom: 0;
+  }
+
+  /* About — native horizontal scroll on mobile, no GSAP pin */
+  #about {
+    height: auto;
+    overflow: hidden;
+  }
+
+  #about .about__track {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding-bottom: 24px;
+  }
+
+  #about .about__card {
+    scroll-snap-align: start;
   }
 
   /* Nav adjusts on mobile */

@@ -281,12 +281,22 @@ const Animations = (() => {
       setAboutHeight();
       window.addEventListener('resize', setAboutHeight, { passive: true });
 
+      // Lerp target — RAF loop smooths it like GSAP scrub
+      var targetLeft = 0;
+      var currentLeft = 0;
+
       window.addEventListener('scroll', function() {
         var scrollDist = track.scrollWidth - window.innerWidth;
         if (scrollDist <= 0) return;
         var progress = Math.max(0, Math.min(1, -section.getBoundingClientRect().top / scrollDist));
-        track.scrollLeft = progress * scrollDist;
+        targetLeft = progress * scrollDist;
       }, { passive: true });
+
+      (function rafLoop() {
+        currentLeft += (targetLeft - currentLeft) * 0.12;
+        track.scrollLeft = currentLeft;
+        requestAnimationFrame(rafLoop);
+      })();
 
       return;
     }

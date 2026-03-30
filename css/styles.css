@@ -496,7 +496,7 @@ button {
   z-index: 501;
 }
 
-/* ── Portfolio button (lime rounded rectangle) ── */
+/* ── Portfolio button (mission control status indicator) ── */
 .nav__portfolio-btn {
   display: inline-flex;
   align-items: center;
@@ -507,32 +507,48 @@ button {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-bg);
-  background: var(--color-accent);
-  padding: 0 24px;
-  border: none;
+  color: #CCFF00;
+  background: transparent;
+  padding: 0 20px;
+  border: 1px solid #CCFF00;
   border-radius: var(--radius-button);
-  transition: opacity 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   cursor: pointer;
   text-decoration: none;
 }
 
 .nav__portfolio-btn:hover {
-  opacity: 0.85;
+  background: #CCFF00;
+  color: #000;
 }
 
-.nav__rocket {
-  width: 14px;
-  height: 14px;
+/* ── Status dot ── */
+.nav__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #CCFF00;
   flex-shrink: 0;
-  transition: transform 0.25s ease;
+  animation: status-pulse 2s ease-in-out infinite;
 }
 
-.nav__portfolio-btn:hover .nav__rocket {
-  transform: translateY(-3px);
+.nav__portfolio-btn:hover .nav__status-dot {
+  background: #000;
+  animation: none;
 }
 
-/* ── Hamburger button (transparent, bordered rounded rectangle) ── */
+@keyframes status-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(204, 255, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.35);
+    box-shadow: 0 0 5px 2px rgba(204, 255, 0, 0.35);
+  }
+}
+
+/* ── Hamburger button (reticle) ── */
 .nav__menu-btn {
   display: inline-flex;
   align-items: center;
@@ -540,56 +556,64 @@ button {
   width: 48px;
   height: 48px;
   padding: 0;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border: none;
   border-radius: var(--radius-button);
   background: transparent;
   cursor: pointer;
-  transition: border-color 0.2s ease;
 }
 
-.nav__menu-btn:hover {
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
-.nav__menu-lines {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+/* ── Targeting reticle ── */
+.nav__reticle {
+  position: relative;
+  width: 22px;
+  height: 22px;
   pointer-events: none;
 }
 
-.nav__menu-lines span {
-  display: block;
-  width: 16px;
-  height: 1.5px;
-  background: #fff;
-  border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+.nav__reticle-tl,
+.nav__reticle-tr,
+.nav__reticle-bl,
+.nav__reticle-br {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  transition: transform 0.2s ease;
 }
+
+.nav__reticle-tl {
+  top: 0; left: 0;
+  border-top: 1.5px solid #fff;
+  border-left: 1.5px solid #fff;
+}
+
+.nav__reticle-tr {
+  top: 0; right: 0;
+  border-top: 1.5px solid #fff;
+  border-right: 1.5px solid #fff;
+}
+
+.nav__reticle-bl {
+  bottom: 0; left: 0;
+  border-bottom: 1.5px solid #fff;
+  border-left: 1.5px solid #fff;
+}
+
+.nav__reticle-br {
+  bottom: 0; right: 0;
+  border-bottom: 1.5px solid #fff;
+  border-right: 1.5px solid #fff;
+}
+
+/* ── Hover: brackets tighten inward ── */
+.nav__menu-btn:hover .nav__reticle-tl { transform: translate(2px, 2px); }
+.nav__menu-btn:hover .nav__reticle-tr { transform: translate(-2px, 2px); }
+.nav__menu-btn:hover .nav__reticle-bl { transform: translate(2px, -2px); }
+.nav__menu-btn:hover .nav__reticle-br { transform: translate(-2px, -2px); }
 
 /* ── Menu open state ── */
 .nav__menu-btn.is-open {
   position: relative;
   z-index: 501;
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.nav__menu-btn.is-open .nav__menu-lines span {
-  background: var(--color-bg);
-}
-
-.nav__menu-btn.is-open .nav__menu-lines span:first-child {
-  transform: translateY(5.5px) rotate(45deg);
-}
-
-.nav__menu-btn.is-open .nav__menu-lines span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav__menu-btn.is-open .nav__menu-lines span:last-child {
-  transform: translateY(-5.5px) rotate(-45deg);
 }
 
 /* ── Fullscreen menu overlay ── */
@@ -872,6 +896,13 @@ button {
   z-index: 5;
   pointer-events: none;
   background: url('../assets/images/Interior-Shuttle-Background.webp') center center / cover no-repeat;
+}
+
+@media (max-width: 767px) {
+  .hero__interior {
+    inset: -120px;
+  }
+}
   /* Window area is transparent in the PNG — marquee and starfield show through naturally */
 }
 
@@ -947,10 +978,82 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  position: relative;
   /* No overflow hidden — text must enter from fully off-screen bottom */
 }
 
+/* ── Marquee Moon 3D ─────────────────────────────────────── */
+.marquee-moon {
+  position: absolute;
+  top: 2%;
+  left: 4%;
+  width: clamp(200px, 18vw, 340px);
+  height: clamp(200px, 18vw, 340px);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
+}
+@media (max-width: 768px) {
+  .marquee-moon {
+    top: 12%;
+    left: 2%;
+    width: 180px;
+    height: 180px;
+  }
+}
+
+.quote__model {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.quote__model--tl {
+  top: 2%;
+  left: -2%;
+  width: clamp(320px, 32vw, 560px);
+  height: clamp(320px, 32vw, 560px);
+}
+
+.quote__model--tr {
+  top: -2%;
+  right: -4%;
+  width: clamp(300px, 30vw, 520px);
+  height: clamp(300px, 30vw, 520px);
+}
+
+.quote__model--br {
+  bottom: -2%;
+  right: -2%;
+  width: clamp(300px, 30vw, 520px);
+  height: clamp(300px, 30vw, 520px);
+}
+
+@media (max-width: 768px) {
+  .quote__model--tl {
+    top: 8%;
+    left: 10%;
+    width: 150px;
+    height: 150px;
+  }
+  .quote__model--tr {
+    top: 5%;
+    right: 5%;
+    width: 120px;
+    height: 120px;
+  }
+  .quote__model--br {
+    bottom: 8%;
+    right: 8%;
+    width: 140px;
+    height: 140px;
+  }
+}
+
 .quote__inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1600px;
   padding: 0 var(--space-lg);
@@ -1009,11 +1112,32 @@ button {
    SECTION 04 — WHO I AM (horizontal scroll collage)
    ============================================================ */
 #about {
+  position: relative;
   padding: 0;
   height: 100vh;
   overflow: hidden; /* clips the track while it scrolls horizontally */
   display: flex;
   flex-direction: column;
+}
+
+/* ── About Shuttle 3D ─────────────────────────────────────── */
+.about-shuttle {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  width: 400px;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+@media (max-width: 768px) {
+  .about-shuttle {
+    bottom: 8%;
+    left: 2%;
+    width: 220px;
+    height: 160px;
+  }
 }
 
 /* ── Section header ── */
@@ -2196,9 +2320,9 @@ button {
 .test__card {
   position: relative;
   flex-shrink: 0;
-  min-width: 320px;
-  width: 320px;
-  padding: 24px;
+  min-width: 380px;
+  width: 380px;
+  padding: 28px;
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
   border-top: 1.5px solid rgba(204, 255, 0, 0.6);
@@ -2255,10 +2379,6 @@ button {
   color: var(--color-text);
   line-height: 1.6;
   margin: 0 0 1.25rem 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* ── Testimonials Responsive ── */
@@ -2327,7 +2447,7 @@ button {
   }
 
   .nav__portfolio-btn {
-    padding: 8px 16px;
+    padding: 0 14px;
     font-size: 11px;
     height: 40px;
   }
@@ -3183,7 +3303,7 @@ footer,
     position: static !important;
     width: 160vw;
     max-width: none;
-    margin-left: calc(-30vw + 400px);
+    margin-left: calc(-30vw + 380px);
     margin-right: calc(-30vw - 370px);
     margin-top: -10px;
     margin-bottom: -100px;

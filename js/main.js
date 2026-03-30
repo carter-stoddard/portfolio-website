@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
   Loader.init(() => {
     document.body.classList.add('site-ready');
 
-    // Lenis smooth scroll — synced with GSAP ticker + ScrollTrigger
-    if (typeof Lenis !== 'undefined') {
+    // Lenis smooth scroll — desktop only, native scroll on touch/mobile
+    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (typeof Lenis !== 'undefined' && !isTouchDevice) {
       window.lenis = new Lenis({
         duration: 1.6,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        smoothTouch: true,
-        syncTouch: true,
-        syncTouchLerp: 0.04,
+        smoothTouch: false,
+        syncTouch: false,
       });
       // Connect Lenis scroll position to ScrollTrigger
       window.lenis.on('scroll', ScrollTrigger.update);

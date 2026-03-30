@@ -946,6 +946,8 @@ const MenuOverlay = (() => {
       return overlay.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])');
     }
 
+    const reticle = btn.querySelector('.nav__reticle');
+
     // ── Open ──
     function open() {
       if (isOpen) return;
@@ -959,6 +961,15 @@ const MenuOverlay = (() => {
       overlay.classList.add('is-open');
       if (nav) nav.classList.add('nav--menu-open');
       document.body.style.overflow = 'hidden';
+
+      // Reticle: rotate 45° + close brackets inward
+      if (reticle) {
+        gsap.to(reticle, { rotation: 45, duration: 0.35, ease: 'power2.inOut', transformOrigin: '50% 50%' });
+        gsap.to(reticle.querySelector('.nav__reticle-tl'), { x: 3, y: 3, duration: 0.35, ease: 'power2.inOut' });
+        gsap.to(reticle.querySelector('.nav__reticle-tr'), { x: -3, y: 3, duration: 0.35, ease: 'power2.inOut' });
+        gsap.to(reticle.querySelector('.nav__reticle-bl'), { x: 3, y: -3, duration: 0.35, ease: 'power2.inOut' });
+        gsap.to(reticle.querySelector('.nav__reticle-br'), { x: -3, y: -3, duration: 0.35, ease: 'power2.inOut' });
+      }
 
       openTl = gsap.timeline();
 
@@ -998,6 +1009,12 @@ const MenuOverlay = (() => {
       btn.classList.remove('is-open');
       btn.setAttribute('aria-expanded', 'false');
       if (nav) nav.classList.remove('nav--menu-open');
+
+      // Reticle: return to neutral
+      if (reticle) {
+        gsap.to(reticle, { rotation: 0, duration: 0.3, ease: 'power2.inOut', transformOrigin: '50% 50%' });
+        gsap.to(reticle.querySelectorAll('span'), { x: 0, y: 0, duration: 0.3, ease: 'power2.inOut' });
+      }
 
       closeTl = gsap.timeline({
         onComplete: function() {

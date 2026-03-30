@@ -97,19 +97,15 @@
   ============================================================ -->
   <nav id="nav" aria-label="Main navigation">
     <a href="portfolio.html" class="nav__portfolio-btn">
-      <svg class="nav__rocket" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7 1C7 1 9.5 3 9.5 7C9.5 9 8.5 10.5 7 12C5.5 10.5 4.5 9 4.5 7C4.5 3 7 1 7 1Z" fill="currentColor"/>
-        <path d="M5 9.5C4 10 2.5 10 2 11.5C3.5 11 4 10 5 9.5Z" fill="currentColor"/>
-        <path d="M9 9.5C10 10 11.5 10 12 11.5C10.5 11 10 10 9 9.5Z" fill="currentColor"/>
-        <circle cx="7" cy="7" r="1.5" fill="var(--color-accent)"/>
-      </svg>
+      <span class="nav__status-dot"></span>
       PORTFOLIO
     </a>
     <button class="nav__menu-btn" aria-label="Open menu" aria-expanded="false">
-      <span class="nav__menu-lines">
-        <span></span>
-        <span></span>
-        <span></span>
+      <span class="nav__reticle">
+        <span class="nav__reticle-tl"></span>
+        <span class="nav__reticle-tr"></span>
+        <span class="nav__reticle-bl"></span>
+        <span class="nav__reticle-br"></span>
       </span>
     </button>
 
@@ -155,6 +151,9 @@
   ============================================================ -->
   <section id="hero" aria-label="Hero">
     <h1 class="sr-only">Carter Stoddard — Full-Stack Creative</h1>
+
+    <!-- 3D Moon — top-left of marquee area -->
+    <canvas id="marquee-moon" class="marquee-moon" aria-hidden="true"></canvas>
 
     <!-- Marquee — visible through the window during zoom, z-index below interior -->
     <div class="hero__marquee" aria-hidden="true">
@@ -240,6 +239,9 @@
        Triggered once on scroll, staggered 150ms per line.
   ============================================================ -->
   <section id="quote" aria-label="Quote">
+    <canvas id="quote-model-tl" class="quote__model quote__model--tl" aria-hidden="true"></canvas>
+    <canvas id="quote-model-tr" class="quote__model quote__model--tr" aria-hidden="true"></canvas>
+    <canvas id="quote-model-br" class="quote__model quote__model--br" aria-hidden="true"></canvas>
     <h2 class="sr-only">What I Do</h2>
     <div class="quote__inner">
       <p class="quote__text" aria-label="Most brands never leave the ground. I help build the ones that break orbit and reach outer space.">
@@ -263,6 +265,9 @@
        TO ADD/REMOVE CARDS: duplicate or delete any .about__card block.
   ============================================================ -->
   <section id="about" aria-label="About Carter Stoddard">
+    <!-- 3D Shuttle — flies across during horizontal scroll -->
+    <canvas id="about-shuttle" class="about-shuttle" aria-hidden="true"></canvas>
+
     <div class="about__header container">
       <span class="about__label">ABOUT ME</span>
       <h2 class="about__heading">
@@ -636,16 +641,15 @@
       <div class="test__row-wrap">
         <div class="test__row">
 
-          <!-- CARD 01 — SWAP: quote, name, title, company, headshot src -->
+          <!-- CARD 01 — Jawad Bisbis -->
           <div class="test__card">
             <span class="test__transmission">INCOMING TRANSMISSION</span>
-            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <p class="test__card-quote">"Worked with Carter on multiple AI, digital, creative, design and social marketing projects. He's smart, scrappy, fast and gets things right without too much direction. He's super creative, entrepreneurial and ingenious. I would highly recommend him for a variety of marketing projects from social content to digital, web, design and creative development."</p>
             <div class="test__person">
-              <!-- Download headshot from LinkedIn and save to /assets/images/testimonials/firstname-lastname.jpg -->
-              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="First Last headshot" loading="lazy" />
+              <img class="test__avatar" src="assets/images/testimonials/jawad-bisbis.jpg" alt="Jawad Bisbis headshot" loading="lazy" onerror="this.src='assets/images/testimonials/placeholder.jpg'" />
               <div class="test__person-info">
-                <span class="test__person-name">First Last</span>
-                <span class="test__person-title">Director, Company Name</span>
+                <span class="test__person-name">Jawad Bisbis</span>
+                <span class="test__person-title">CMO, Steak 'n Shake</span>
               </div>
             </div>
           </div>
@@ -750,12 +754,12 @@
           <!-- ── DUPLICATE SET for seamless infinite loop ── -->
           <div class="test__card" aria-hidden="true">
             <span class="test__transmission">INCOMING TRANSMISSION</span>
-            <p class="test__card-quote">"Placeholder testimonial text. Replace with real client feedback when ready. Keep to 3-4 lines maximum."</p>
+            <p class="test__card-quote">"Worked with Carter on multiple AI, digital, creative, design and social marketing projects. He's smart, scrappy, fast and gets things right without too much direction. He's super creative, entrepreneurial and ingenious. I would highly recommend him for a variety of marketing projects from social content to digital, web, design and creative development."</p>
             <div class="test__person">
-              <img class="test__avatar" src="assets/images/testimonials/placeholder.jpg" alt="" loading="lazy" />
+              <img class="test__avatar" src="assets/images/testimonials/jawad-bisbis.jpg" alt="" loading="lazy" onerror="this.src='assets/images/testimonials/placeholder.jpg'" />
               <div class="test__person-info">
-                <span class="test__person-name">First Last</span>
-                <span class="test__person-title">Director, Company Name</span>
+                <span class="test__person-name">Jawad Bisbis</span>
+                <span class="test__person-title">CMO, Steak 'n Shake</span>
               </div>
             </div>
           </div>
@@ -1073,7 +1077,17 @@
        Load order: GSAP → Lenis → modules → main
   ============================================================ -->
 
-  <!-- Three.js -->
+  <!-- Three.js importmap (used by quote-models.js module for GLTFLoader) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- Three.js (global THREE for hero/fluid sim) -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" integrity="sha384-5UGTcMIxVUKFeJH0zOS3lqMAZNBG+fCXJbi3UglUq6ABO4MQJu6rxNa+MPP+qtwq" crossorigin="anonymous"></script>
 
   <!-- GSAP + ScrollTrigger -->
@@ -1210,6 +1224,9 @@
   <script src="js/animations.js"></script>
   <script src="js/contact.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/quote-models.js"></script>
+  <script type="module" src="js/marquee-moon.js"></script>
+  <script type="module" src="js/about-shuttle.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,6 @@ function init() {
 
   // Wait for GSAP + ScrollTrigger
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    console.warn('about-shuttle: GSAP not ready, retrying...');
     setTimeout(init, 500);
     return;
   }
@@ -53,20 +52,10 @@ function init() {
 
   let shuttleModel = null;
 
-  // Debug: add a test cube to verify renderer works
-  const testGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-  const testMat = new THREE.MeshStandardMaterial({ color: 0xCCFF00 });
-  const testCube = new THREE.Mesh(testGeo, testMat);
-  scene.add(testCube);
-  console.log('about-shuttle: test cube added, canvas size:', w, h);
-
   const loader = new GLTFLoader();
   loader.load(
     'assets/models/space_shuttle.glb',
     (gltf) => {
-      console.log('about-shuttle: GLB loaded successfully');
-      scene.remove(testCube); // remove test cube
-
       const model = gltf.scene;
 
       // Centre and normalise
@@ -78,7 +67,6 @@ function init() {
       const size = new THREE.Vector3();
       box.getSize(size);
       const maxDim = Math.max(size.x, size.y, size.z);
-      console.log('about-shuttle: model size', size.x, size.y, size.z, 'maxDim', maxDim);
       model.scale.setScalar(2.0 / maxDim);
 
       // Tilt shuttle so it faces right (flying direction)
@@ -91,9 +79,7 @@ function init() {
       // Set up ScrollTrigger animation on the canvas element
       setupScrollAnimation();
     },
-    (progress) => {
-      console.log('about-shuttle: loading...', Math.round((progress.loaded / progress.total) * 100) + '%');
-    },
+    undefined,
     (err) => console.warn('about-shuttle: failed to load', err)
   );
 

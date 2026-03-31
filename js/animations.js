@@ -144,7 +144,7 @@ const Animations = (() => {
     // Trigger when section scrolls into view
     ScrollTrigger.create({
       trigger: section,
-      start: 'top 70%',
+      start: 'top 75%',
       once: true,
       onEnter: function() {
         // Domino: true wipe across each line, staggered
@@ -195,7 +195,7 @@ const Animations = (() => {
     var headerTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',
+        start: 'top 75%',
         once: true,
       },
     });
@@ -256,7 +256,7 @@ const Animations = (() => {
       // Wipe animations fire on enter
       ScrollTrigger.create({
         trigger: section,
-        start: 'top 65%',
+        start: 'top 75%',
         once: true,
         onEnter: function() {
           track.querySelectorAll('.about__wipe').forEach(function(el, i) {
@@ -363,7 +363,7 @@ const Animations = (() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',
+        start: 'top 75%',
         once: true,
       },
     });
@@ -799,7 +799,7 @@ const Animations = (() => {
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',
+        start: 'top 75%',
         once: true,
       },
     });
@@ -848,7 +848,7 @@ const Animations = (() => {
     if (rowWrap) {
       ScrollTrigger.create({
         trigger: rowWrap,
-        start: 'top 85%',
+        start: 'top 75%',
         once: true,
         onEnter: function() {
           gsap.fromTo(rowWrap,

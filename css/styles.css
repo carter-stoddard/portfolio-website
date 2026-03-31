@@ -3542,6 +3542,7 @@ footer,
   .footer__bg-text {
     position: relative;
     margin-bottom: 0;
+    margin-top: 50px;
     order: 1;
   }
 
@@ -3618,13 +3619,15 @@ footer,
     z-index: 2;
   }
 
-  /* Bottom bar — copyright/legal at the very bottom */
+  /* Bottom bar — pinned to the very bottom of the footer, on top of astronaut */
   .footer__bottom {
-    position: relative;
-    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
     padding: 20px 20px 28px;
-    margin-top: 0;
-    order: 5;
+    text-align: center;
   }
 
   .footer__copyright-bar {

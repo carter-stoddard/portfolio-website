@@ -579,9 +579,13 @@ const Hero = (() => {
   function start() {
     if (isMobileHero) {
       // No WebGL on mobile — too heavy, causes layer detachment on pinch.
-      // Hide canvas, show portrait directly.
+      // Hide canvas, show portrait layers directly since the canvas won't render them.
       const canvas = document.getElementById('hero-canvas');
       if (canvas) canvas.style.display = 'none';
+      const base  = document.querySelector('.hero__layer--base');
+      const astro = document.querySelector('.hero__layer--astronaut');
+      if (base)  base.style.opacity  = '1';
+      if (astro) astro.style.opacity = '1';
       return;
     }
     if (!_texturesPromise) preload();

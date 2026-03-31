@@ -79,6 +79,16 @@
 
     const wrapper = document.createElement('div');
     wrapper.innerHTML = FOOTER_HTML;
-    document.body.appendChild(wrapper.firstElementChild);
+    const footer = wrapper.firstElementChild;
+    document.body.appendChild(footer);
+
+    // footerReveal already ran before injection — make elements visible directly
+    const toShow = footer.querySelectorAll('.footer__bg-text, .footer__astronaut, .footer__columns, .footer__copyright-bar');
+    toShow.forEach(function(el) { el.style.opacity = '1'; });
+
+    // Call footerReveal again now that the footer exists (if Animations is loaded)
+    if (typeof Animations !== 'undefined' && typeof Animations.footerReveal === 'function') {
+      Animations.footerReveal();
+    }
   });
 })();

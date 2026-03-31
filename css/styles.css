@@ -97,6 +97,11 @@ html {
   overscroll-behavior: none;
   background-color: #000000;
   touch-action: manipulation;
+  /* Extend background into iOS safe areas — eliminates black bars */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 body {
@@ -3609,7 +3614,7 @@ footer,
     position: absolute !important;
     bottom: 0 !important;
     left: 50% !important;
-    transform: translateX(calc(-50% - 10px)) !important;
+    transform: translateX(calc(-50% - 8px)) !important;
     width: 160vw;
     max-width: none;
     margin: 0;

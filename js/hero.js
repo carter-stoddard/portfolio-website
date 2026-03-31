@@ -268,13 +268,19 @@ const Hero = (() => {
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting && !contextLost) {
-            // Ensure loop is running — cancel stale raf first to avoid duplicates
+            // Resume loop and burst-fill density so astronaut reappears immediately.
             cancelAnimationFrame(raf);
-            lastTime = performance.now();
+            lastTime     = performance.now();
+            lastMoveTime = 0;
             raf = requestAnimationFrame(loop);
+            // Small delay so the loop is running before we write to FBOs
+            setTimeout(burstReveal, 40);
+          } else {
+            // Pause sim at 50% visibility — preserves density much longer than 5%
+            cancelAnimationFrame(raf);
           }
         });
-      }, { threshold: 0.05 });
+      }, { threshold: 0.5 });
       io.observe(heroSection);
     }
 
@@ -428,6 +434,21 @@ const Hero = (() => {
     splatMat.uniforms.radius.value = CFG.SPLAT_RADIUS * 2.5;
     renderTo(splatMat, densityFBO.write);
     densityFBO.swap();
+  }
+
+  // ----------------------------------------------------------
+  // Burst reveal — fires a ring of splats to re-fill density on scroll-back
+  // ----------------------------------------------------------
+  function burstReveal() {
+    const count = 12;
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2;
+      const ix = 0.5 + Math.cos(angle) * 0.28;
+      const iy = 0.5 + Math.sin(angle) * 0.22;
+      const dx = Math.cos(angle + Math.PI / 2) * 3.0;
+      const dy = Math.sin(angle + Math.PI / 2) * 3.0;
+      splat(ix, iy, dx, dy, 1.6);
+    }
   }
 
   // ----------------------------------------------------------

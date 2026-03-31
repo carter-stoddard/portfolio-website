@@ -953,7 +953,7 @@ const Animations = (() => {
         if (astronaut) {
           tl.fromTo(astronaut,
             { opacity: 0, yPercent: 5 },
-            { opacity: 1, yPercent: 0, duration: 0.8, ease: 'power2.out', clearProps: 'transform' },
+            { opacity: 1, yPercent: 0, duration: 0.8, ease: 'power2.out', clearProps: 'yPercent' },
             '-=0.5'
           );
         }

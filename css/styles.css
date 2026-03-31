@@ -1276,10 +1276,22 @@ button {
 
 /* ── Width / size variants ─────────────────────────────────── */
 .about__card--tall    { width: clamp(160px, 16vw, 260px); }
+.about__card--portrait3x4 { width: clamp(180px, 20vw, 280px); }
+.about__card--portrait3x4 .about__card-img {
+  flex: none;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
 .about__card--wide    { width: clamp(280px, 32vw, 440px); }
-.about__card--portrait{ width: clamp(180px, 20vw, 300px); }
-.about__card--hero    { width: clamp(340px, 40vw, 540px); }
+.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: -4rem; align-self: flex-end; }
+.about__card--hero    { width: clamp(300px, 36vw, 480px); }
 .about__card--sm      { width: clamp(130px, 13vw, 190px); }
+.about__card--sm.about__card--top { width: clamp(240px, 28vw, 380px); }
+.about__card--sm.about__card--top .about__card-img {
+  flex: none;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
 .about__card--copy    { width: clamp(240px, 26vw, 360px); justify-content: center; }
 
 /* ── Placeholder image box ─────────────────────────────────── */
@@ -1294,6 +1306,15 @@ button {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.about__card-img--placeholder {
+  background: #3a3a3a;
+  min-height: 200px;
+}
+.about__card--hero .about__card-img {
+  flex: none;
+  aspect-ratio: 4 / 3;
+  width: 100%;
 }
 
 /* ── Wipe reveal — about section ───────────────────────────── */
@@ -2684,6 +2705,12 @@ button {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
   margin-bottom: 8px;
+}
+.contact__field-label-sub {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* ── Field box — corner bracket treatment ── */

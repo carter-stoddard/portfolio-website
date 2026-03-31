@@ -177,32 +177,28 @@ const SUPABASE_TABLE = 'contact_submissions';
       );
     }
 
-    // Supabase REST API insert
-    try {
-      var response = await fetch(SUPABASE_URL + '/rest/v1/' + SUPABASE_TABLE, {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal',
-        },
-        body: JSON.stringify(data),
-      });
+    // Show confirmation immediately — don't make user wait on network
+    showSuccess();
 
+    // Supabase REST API insert (best-effort, runs in background)
+    fetch(SUPABASE_URL + '/rest/v1/' + SUPABASE_TABLE, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify(data),
+    }).then(function(response) {
       if (!response.ok) {
-        var errBody = await response.json().catch(function() { return {}; });
-        throw new Error(errBody.message || 'Submission failed');
+        return response.json().catch(function() { return {}; }).then(function(errBody) {
+          console.warn('[contact] Supabase insert failed:', errBody.message || response.status);
+        });
       }
-
-      showSuccess();
-    } catch (err) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'LAUNCH';
-      if (submitError) {
-        submitError.textContent = 'Something went wrong. Try reaching me directly at contact@carterstoddard.com.';
-      }
-    }
+    }).catch(function(err) {
+      console.warn('[contact] Supabase insert error:', err);
+    });
   });
 
   // ----------------------------------------------------------

@@ -3530,7 +3530,8 @@ footer,
   #footer {
     min-height: auto;
     padding-top: clamp(60px, 10vw, 100px);
-    padding-bottom: 0;
+    /* Reserve space at the bottom for the absolute-positioned astronaut (160vw wide) */
+    padding-bottom: 130vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -3617,12 +3618,12 @@ footer,
     z-index: 2;
   }
 
-  /* Bottom bar — overlaid on top of astronaut image at the very bottom */
+  /* Bottom bar — copyright/legal at the very bottom */
   .footer__bottom {
     position: relative;
     z-index: 3;
     padding: 20px 20px 28px;
-    margin-top: -80px;
+    margin-top: 0;
     order: 5;
   }
 

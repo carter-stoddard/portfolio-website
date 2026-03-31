@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (starCanvas) Starfield.init(starCanvas);
 
   // 3. Start loading hero textures NOW — runs in parallel with loader animation
-  Hero.preload();
+  if (typeof Hero !== 'undefined') Hero.preload();
 
   // 4. Run loader → on complete, hero renders + Lenis starts
   Loader.init(() => {
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Animations.testimonialsReveal();
     Animations.contactReveal();
     Animations.footerReveal();
-    Hero.start();
+    if (typeof Hero !== 'undefined') Hero.start();
 
     // Recalculate ScrollTrigger positions once images/fonts are fully loaded
     window.addEventListener('load', function() {

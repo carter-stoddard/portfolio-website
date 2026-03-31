@@ -22,6 +22,12 @@ const SUPABASE_TABLE = 'contact_submissions';
   if (!form) return;
 
   // ----------------------------------------------------------
+  // Bot protection — honeypot + timing
+  // ----------------------------------------------------------
+  var formLoadTime = Date.now();
+  var MIN_FILL_MS = 3000; // under 3s = almost certainly a bot
+
+  // ----------------------------------------------------------
   // Modal open / close
   // ----------------------------------------------------------
   function openModal() {
@@ -149,6 +155,14 @@ const SUPABASE_TABLE = 'contact_submissions';
   // ----------------------------------------------------------
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Bot check — honeypot
+    var honeypot = document.getElementById('contact-website');
+    if (honeypot && honeypot.value) return; // bot filled the hidden field
+
+    // Bot check — timing (filled out too fast)
+    if (Date.now() - formLoadTime < MIN_FILL_MS) return;
+
     if (!validate()) return;
 
     // Gather values

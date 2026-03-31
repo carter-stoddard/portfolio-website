@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/favicon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicons/favicon-192x192.png" />
+
   <!-- Primary Meta -->
   <title>Carter Stoddard — Full-Stack Creative</title>
   <meta name="description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
@@ -11,6 +17,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Carter Stoddard" />
   <meta property="og:url"         content="https://carterstoddard.com/" />
   <meta property="og:title"       content="Carter Stoddard — Full-Stack Creative" />
   <meta property="og:description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
@@ -28,6 +35,18 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Structured data — tells Google to show "Carter Stoddard" as the site name -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Carter Stoddard",
+    "url": "https://carterstoddard.com",
+    "jobTitle": "Full-Stack Creative",
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
 
@@ -873,6 +892,12 @@
 
       <!-- ── Form ── -->
       <form id="contact-form" class="contact__form" novalidate>
+
+        <!-- Honeypot — hidden from real users, bots will fill it -->
+        <div class="contact__honeypot" aria-hidden="true">
+          <label for="contact-website">Website</label>
+          <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
 
         <!-- Row 1 — First Name + Last Name -->
         <div class="contact__row contact__row--split">

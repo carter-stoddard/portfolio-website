@@ -2674,6 +2674,18 @@ button {
   opacity: 0;
 }
 
+/* ── Honeypot — visually hidden, not display:none (bots check for that) ── */
+.contact__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  tabindex: -1;
+}
+
 /* ── Form layout ── */
 .contact__form {
   display: flex;
@@ -3597,7 +3609,7 @@ footer,
     position: absolute !important;
     bottom: 0 !important;
     left: 50% !important;
-    transform: translateX(calc(-50% - 15px)) !important;
+    transform: translateX(calc(-50% - 10px)) !important;
     width: 160vw;
     max-width: none;
     margin: 0;
@@ -3809,5 +3821,22 @@ footer,
 
   .legal__section h2 {
     font-size: clamp(16px, 4vw, 22px);
+  }
+}
+
+/* ── Mobile heading alignment fix ─────────────────────────────
+   Accent spans have margin-left to space them from the main word
+   on desktop (same line). On mobile they wrap to a new line and
+   that margin becomes unwanted indentation — zero it out.
+────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .gate__heading-accent,
+  .about__heading-accent,
+  .stats__heading-accent,
+  .services__heading-accent,
+  .clients__heading-accent,
+  .test__heading-accent,
+  .contact__heading-accent {
+    margin-left: 0;
   }
 }

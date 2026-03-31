@@ -443,9 +443,11 @@
   ═══════════════════════════════════════════════════════════ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" integrity="sha384-tKsJDT6PlUI0pSBt9/sBKJluKgA19/a6mBrDsZaXotLB4ZYfMGM6xt6/WgGpYhTm" crossorigin="anonymous"></script>
 
   <!-- Starfield only — no loader, hero, or animations needed on this page -->
   <script src="js/starfield.js"></script>
+  <script src="js/footer.js"></script>
 
   <script>
     /* ============================================================
@@ -463,6 +465,20 @@
       const submitBtn   = document.getElementById('gate-submit');
       const feedback    = document.getElementById('gate-feedback');
       const inputWrap   = input.closest('.gate__input-wrap');
+
+      /* ── Lenis smooth scroll ── */
+      if (typeof Lenis !== 'undefined') {
+        const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+        window.lenis = new Lenis({
+          duration: 1.6,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: !isTouchDevice,
+          smoothTouch: false,
+          syncTouch: false,
+        });
+        gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
 
       /* ── Init starfield ── */
       const starCanvas = document.getElementById('starfield-canvas');

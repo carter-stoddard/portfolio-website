@@ -48,17 +48,43 @@ const Starfield = (() => {
 
   function buildStars() {
     stars = [];
-    const area = W * H;
-    const count = Math.round(area * STAR_DENSITY);
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x:       Math.random() * W,
-        y:       Math.random() * H,
-        r:       STAR_MIN_R + Math.random() * (STAR_MAX_R - STAR_MIN_R),
-        alpha:   Math.random(),
-        delta:   (Math.random() - 0.5) * TWINKLE_SPEED * 2, // twinkle direction
-        phase:   Math.random() * Math.PI * 2,
-      });
+
+    // Use higher density on mobile to avoid bald spots on small canvases
+    const isMobile = W < 768;
+    const density  = isMobile ? 0.00042 : STAR_DENSITY;
+    const count    = Math.max(Math.round(W * H * density), isMobile ? 120 : 80);
+
+    if (isMobile) {
+      // Jittered grid — divide canvas into cells, one star per cell.
+      // Guarantees even spatial distribution with no empty patches.
+      const cols = Math.ceil(Math.sqrt(count * (W / H)));
+      const rows = Math.ceil(count / cols);
+      const cellW = W / cols;
+      const cellH = H / rows;
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          stars.push({
+            x:     col * cellW + Math.random() * cellW,
+            y:     row * cellH + Math.random() * cellH,
+            r:     STAR_MIN_R + Math.random() * (STAR_MAX_R - STAR_MIN_R),
+            alpha: Math.random(),
+            delta: (Math.random() - 0.5) * TWINKLE_SPEED * 2,
+            phase: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+    } else {
+      // Desktop — pure random is fine at higher counts
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x:     Math.random() * W,
+          y:     Math.random() * H,
+          r:     STAR_MIN_R + Math.random() * (STAR_MAX_R - STAR_MIN_R),
+          alpha: Math.random(),
+          delta: (Math.random() - 0.5) * TWINKLE_SPEED * 2,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
     }
   }
 

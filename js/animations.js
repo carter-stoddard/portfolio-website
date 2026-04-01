@@ -47,15 +47,20 @@ const Animations = (() => {
     const astronaut = document.querySelector('.hero__astronaut-float');
     if (!hero || !interior || !frame || !portrait) return;
 
+    const isMobilePortal = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     const tl = gsap.timeline({ defaults: { ease: 'none' } });
 
-    // Helmet crossfade — first 2% of scroll: fluid sim → astronaut layer.
-    // In the timeline so GSAP owns it and reverses cleanly when scrolling back up.
-    tl.to('#hero-canvas',            { opacity: 0, duration: 0.02 }, 0)
-      .to('.hero__layer--astronaut', { opacity: 1, duration: 0.02 }, 0)
+    // Helmet crossfade — desktop only. On mobile, canvas is hidden and
+    // astronaut layer is set to opacity:1 by Hero.start(). If we add this
+    // tween on mobile, GSAP snapshots opacity:0 from CSS and holds it at
+    // scroll progress 0, overriding the JS-set opacity:1.
+    if (!isMobilePortal) {
+      tl.to('#hero-canvas',            { opacity: 0, duration: 0.02 }, 0)
+        .to('.hero__layer--astronaut', { opacity: 1, duration: 0.02 }, 0);
+    }
 
     // Interior zooms in
-    .to(interior, { scale: 6.5, duration: 1 }, 0)
+    tl.to(interior, { scale: 6.5, duration: 1 }, 0)
 
     // Portrait exits right via scale
     .to(portrait, { scale: 14, transformOrigin: '20% 50%', duration: 1 }, 0)
@@ -86,8 +91,6 @@ const Animations = (() => {
         ease: 'none',
       }, 0);
     }
-
-    const isMobilePortal = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
     if (isMobilePortal) {
       // Mobile — no pin, play portal exit once on scroll, no snap-back risk

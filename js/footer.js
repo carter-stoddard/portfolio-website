@@ -28,7 +28,7 @@
     <a href="/#contact" class="footer__mobile-cta">START A PROJECT &nbsp;→</a>
 
     <!-- ── Center astronaut — sits in front of text ── -->
-    <img class="footer__astronaut" src="/assets/images/portrait-astronaut-desktop.png" alt="" aria-hidden="true" loading="lazy" />
+    <img class="footer__astronaut" src="/assets/images/portrait-astronaut-desktop.webp" alt="" aria-hidden="true" loading="lazy" />
 
     <!-- ── Footer columns — sections left, connect right ── -->
     <div class="footer__columns">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -22,16 +22,26 @@
   <meta property="og:title"       content="Carter Stoddard — Full-Stack Creative" />
   <meta property="og:description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
 
+  <!-- Open Graph Image -->
+  <meta property="og:image"        content="https://carterstoddard.com/assets/images/og-share.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Carter Stoddard — Full-Stack Creative" />
   <meta name="twitter:description" content="Carter Stoddard is a full-stack creative specializing in branding, marketing, and creative direction." />
+  <meta name="twitter:image"       content="https://carterstoddard.com/assets/images/og-share.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700;1,900&family=Permanent+Marker&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@1,700;1,900&family=Permanent+Marker&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Preload hero portraits (above the fold) -->
+  <link rel="preload" as="image" type="image/webp" href="assets/images/portrait-base-desktop.webp" />
+  <link rel="preload" as="image" type="image/webp" href="assets/images/portrait-astronaut-desktop.webp" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -68,10 +78,10 @@
       </div>
 
       <!-- Heading -->
-      <h1 class="gate__heading">
+      <h2 class="gate__heading">
         <span class="gate__heading-name">CARTER</span>
         <span class="gate__heading-accent">Stoddard.</span>
-      </h1>
+      </h2>
 
       <!-- Subheading -->
       <p class="gate__sub">Full-Stack Creative</p>
@@ -253,7 +263,7 @@
       ════════════════════════════════════════════════════ -->
       <img
         class="hero__layer hero__layer--base"
-        src="assets/images/portrait-base-desktop.png"
+        src="assets/images/portrait-base-desktop.webp"
         alt="Carter Stoddard"
         draggable="false"
       />
@@ -265,7 +275,7 @@
       ════════════════════════════════════════════════════ -->
       <img
         class="hero__layer hero__layer--astronaut"
-        src="assets/images/portrait-astronaut-desktop.png"
+        src="assets/images/portrait-astronaut-desktop.webp"
         alt=""
         aria-hidden="true"
         draggable="false"
@@ -580,27 +590,27 @@
 
       <!-- PATCH 01 — large -->
       <div class="clients__patch clients__patch--lg">
-        <img src="assets/images/Bonduelle-Logo.png" alt="Bonduelle" class="clients__patch-logo" />
+        <img src="assets/images/Bonduelle-Logo.png" alt="Bonduelle" class="clients__patch-logo" loading="lazy" />
       </div>
 
       <!-- PATCH 02 — small -->
       <div class="clients__patch clients__patch--sm">
-        <img src="assets/images/Steak-n-Shake-Logo.png" alt="Steak 'n Shake" class="clients__patch-logo" />
+        <img src="assets/images/Steak-n-Shake-Logo.png" alt="Steak 'n Shake" class="clients__patch-logo" loading="lazy" />
       </div>
 
       <!-- PATCH 03 — small -->
       <div class="clients__patch clients__patch--sm">
-        <img src="assets/images/FujiSan-Logo.png" alt="FujiSan" class="clients__patch-logo clients__patch-logo--sm" />
+        <img src="assets/images/FujiSan-Logo.png" alt="FujiSan" class="clients__patch-logo clients__patch-logo--sm" loading="lazy" />
       </div>
 
       <!-- PATCH 04 — large -->
       <div class="clients__patch clients__patch--lg">
-        <img src="assets/images/AquaVibes-Logo.png" alt="AquaVibes" class="clients__patch-logo" />
+        <img src="assets/images/AquaVibes-Logo.png" alt="AquaVibes" class="clients__patch-logo" loading="lazy" />
       </div>
 
       <!-- PATCH 05 — large -->
       <div class="clients__patch clients__patch--lg">
-        <img src="assets/images/US-ShopTools-Logo.png" alt="US ShopTools" class="clients__patch-logo clients__patch-logo--sm" />
+        <img src="assets/images/US-ShopTools-Logo.png" alt="US ShopTools" class="clients__patch-logo clients__patch-logo--sm" loading="lazy" />
       </div>
 
       <!-- PATCH 06 — small -->
@@ -1063,7 +1073,7 @@
     <a href="#contact" class="footer__mobile-cta">START A PROJECT &nbsp;→</a>
 
     <!-- ── Center astronaut — sits in front of text ── -->
-    <img class="footer__astronaut" src="assets/images/portrait-astronaut-desktop.png" alt="" aria-hidden="true" loading="lazy" />
+    <img class="footer__astronaut" src="assets/images/portrait-astronaut-desktop.webp" alt="" aria-hidden="true" loading="lazy" />
 
     <!-- ── Footer columns — sections left, connect right ── -->
     <div class="footer__columns">

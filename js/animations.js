@@ -508,44 +508,44 @@ const Animations = (() => {
     // ── Service data — placeholder subcategories ──
     const serviceData = [
       {
-        desc: 'Websites that don\'t just look good — they convert, perform, and scale.',
-        subs: ['Custom HTML, CSS & JavaScript development', 'GSAP & scroll-driven animation websites', 'Responsive mobile-first design', 'Landing pages optimized for conversion', 'E-commerce & Shopify builds', 'Headless CMS integration (Sanity, Contentful)', 'Website audits, redesigns & performance optimization', 'Vercel & GitHub deployment and hosting setup'],
+        desc: 'Websites and digital products that work as hard as you do.',
+        subs: ['Custom-coded websites built to convert and perform', 'Animated, scroll-driven experiences that stop people mid-scroll', 'Mobile-first design that looks sharp on every screen', 'Landing pages designed to turn visitors into leads', 'Online stores built to sell', 'Web apps and custom digital tools built for your business', 'Ongoing maintenance and support after launch'],
       },
       {
-        desc: 'Building identities that command attention and hold meaning.',
-        subs: ['Logo design & brand mark development', 'Full visual identity systems', 'Brand strategy & positioning', 'Typography & color system design', 'Brand guidelines & style guides', 'Naming & messaging frameworks', 'Brand collateral design', 'Rebranding & brand refresh'],
+        desc: 'A brand that looks the part and means something.',
+        subs: ['Logo design and full visual identity', 'Color, typography, and brand guidelines', 'Brand naming and positioning', 'Brand voice and messaging', 'Brand refreshes for businesses ready to level up', 'Everything you need to show up consistently everywhere'],
       },
       {
-        desc: 'Visual content that stops the scroll and tells the story.',
-        subs: ['Brand & product photography', 'Short-form video content for social', 'Motion graphics & animated explainers', 'GSAP & CSS web animations', 'Reels, TikToks & YouTube content', 'Video editing & post-production', 'On-location and studio shoots', 'Content repurposing & format adaptation'],
+        desc: 'Less manual work. More revenue. Running while you sleep.',
+        subs: ['Automated lead capture and follow-up sequences', 'AI-powered email and SMS workflows', 'CRM setup and database management', 'Automated phone and voicemail campaigns', 'Chatbots and AI assistants for your website', 'Custom AI tools built for your specific business'],
       },
       {
-        desc: 'Consistent, strategic content that builds presence and drives growth.',
-        subs: ['Social media strategy & content planning', 'Instagram, TikTok & LinkedIn management', 'Content calendar creation & scheduling', 'Community engagement & growth tactics', 'Profile optimization & branding', 'Analytics reporting & performance tracking', 'Paid + organic content integration', 'Trend-driven content ideation'],
+        desc: 'Content that builds an audience and keeps them coming back.',
+        subs: ['Platform strategy for Instagram, TikTok, LinkedIn, and more', 'Content creation \u2014 graphics, video, captions, everything', 'Full account management and scheduling', 'Community engagement and growth', 'Influencer and partnership outreach', 'Monthly reporting and performance tracking'],
       },
       {
-        desc: 'Design that communicates clearly and looks impossible to ignore.',
-        subs: ['Marketing & advertising creative', 'Social media graphics & templates', 'Presentation & pitch deck design', 'Print design — flyers, brochures, banners', 'Packaging & label design', 'Infographic & data visualization', 'Event & experiential design assets', 'Digital ad creative (static & animated)'],
+        desc: 'Content people actually watch \u2014 and share.',
+        subs: ['Short-form video for Reels, TikTok, and YouTube Shorts', 'Brand films and sizzle reels', 'Product videos that drive sales', 'Testimonial video production', 'Product and lifestyle photography', 'Motion graphics and animated content', 'On-location shoots anywhere in Southern California'],
       },
       {
-        desc: 'Media buying and creative strategy that turns spend into returns.',
-        subs: ['Meta (Facebook & Instagram) ad campaigns', 'Google Search & Display advertising', 'TikTok paid media strategy', 'Ad creative development & testing', 'Audience targeting & retargeting setup', 'Campaign structure & funnel strategy', 'A/B testing & performance optimization', 'Monthly reporting & budget management'],
+        desc: 'Get found \u2014 on Google and every AI platform people search on.',
+        subs: ['On-page and technical SEO', 'Local SEO and Google Business optimization', 'Content written to rank and convert', 'Link building and off-page authority', 'Review management strategy', 'Optimization for AI platforms like ChatGPT and Perplexity', 'Site audits and keyword strategy'],
       },
       {
-        desc: 'Words that sell, retain, and build trust at every touchpoint.',
-        subs: ['Website & landing page copywriting', 'Email marketing campaigns & sequences', 'Brand voice development & tone guides', 'Sales page & funnel copy', 'Product descriptions & category copy', 'Newsletter strategy & writing', 'Ad copy & campaign messaging', 'SMS marketing copy'],
+        desc: 'Everything that makes your brand look good everywhere.',
+        subs: ['Business cards, flyers, menus, and brochures', 'Social media graphics and branded templates', 'Pitch decks and presentations', 'Product packaging and labels', 'Signage and storefront design', 'Ad creative for every platform and format'],
       },
       {
-        desc: 'Research-driven decisions and interfaces people actually enjoy using.',
-        subs: ['Brand & go-to-market strategy', 'UX research & user journey mapping', 'Wireframing & prototyping', 'Information architecture', 'Conversion rate optimization (CRO)', 'Competitive analysis & positioning', 'Customer persona development', 'Product strategy & roadmap consulting'],
+        desc: 'The thinking behind everything that makes it work.',
+        subs: ['Brand strategy and market positioning', 'Competitive analysis and audience research', 'Go-to-market planning for launches and campaigns', 'Campaign concepting and big-picture creative', 'Content strategy and messaging frameworks', 'Consulting for brands that need a clear direction'],
       },
       {
-        desc: 'Long-term visibility that compounds over time and drives qualified traffic.',
-        subs: ['Technical SEO audits & fixes', 'On-page optimization & keyword strategy', 'Content strategy for organic growth', 'Local SEO & Google Business optimization', 'Link building & authority development', 'SEO copywriting & meta optimization', 'Core Web Vitals & site speed optimization', 'Monthly ranking reports & tracking'],
+        desc: 'Direct lines to your customers that actually convert.',
+        subs: ['Email campaign design and copywriting', 'SMS marketing setup and management', 'Automated drip sequences and follow-ups', 'Newsletter strategy and management', 'List building and audience segmentation', 'Performance tracking and optimization'],
       },
       {
-        desc: 'Leveraging the latest AI tools to move faster, work smarter, and scale without headcount.',
-        subs: ['AI-powered content creation workflows', 'Marketing automation setup & integration', 'Chatbot & conversational AI builds', 'Prompt engineering & AI tool training', 'CRM automation & lead nurturing flows', 'AI image & video generation for brands', 'Tool stack consulting & implementation', 'Custom GPT & AI assistant development'],
+        desc: 'Ad spend that works \u2014 not just spends.',
+        subs: ['Meta ads \u2014 Facebook and Instagram', 'Google Search and Display campaigns', 'TikTok and LinkedIn ads', 'Retargeting campaigns for warm audiences', 'Landing page strategy tied to every campaign', 'Ad creative production included', 'Full campaign management and reporting'],
       },
     ];
 
@@ -553,9 +553,9 @@ const Animations = (() => {
     const accordion = section.querySelector('.services__accordion');
     if (accordion) {
       const categoryNames = [
-        'Web Design & Development', 'Branding & Identity', 'Video, Motion & Photography',
-        'Social Media', 'Graphic Design', 'Paid Advertising',
-        'Copywriting & Email', 'Strategy & UX', 'SEO & Search', 'AI & Automation',
+        'Web Design, Development & Apps', 'Branding & Identity', 'AI & Automation',
+        'Social Media Content & Management', 'Video, Motion & Photography', 'AI Search & SEO',
+        'Print & Digital Graphic Design', 'Strategy & Creative Direction', 'Email & SMS Marketing', 'Paid Advertising',
       ];
       categoryNames.forEach((name, i) => {
         const num = String(i + 1).padStart(2, '0');

@@ -210,7 +210,7 @@ const Animations = (() => {
     var headerTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
       },
     });
@@ -271,7 +271,7 @@ const Animations = (() => {
       // Wipe animations fire on enter
       ScrollTrigger.create({
         trigger: section,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
         onEnter: function() {
           track.querySelectorAll('.about__wipe').forEach(function(el, i) {
@@ -331,6 +331,21 @@ const Animations = (() => {
       },
     });
 
+    // Card images — fade up as they scroll into view horizontally
+    var cards = track.querySelectorAll('.about__card');
+    cards.forEach(function(card) {
+      gsap.set(card, { opacity: 0, y: 30 });
+      ScrollTrigger.create({
+        trigger: card,
+        containerAnimation: scrollTween,
+        start: 'left 90%',
+        once: true,
+        onEnter: function() {
+          gsap.to(card, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+        },
+      });
+    });
+
     // Single-line wipes (standalone .about__wipe not inside a group)
     track.querySelectorAll('.about__wipe:not(.about__wipe-group .about__wipe)').forEach(function(el) {
       ScrollTrigger.create({
@@ -378,7 +393,7 @@ const Animations = (() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
       },
     });
@@ -405,11 +420,14 @@ const Animations = (() => {
       );
     }
 
-    // Cells fade up — all at once, no stagger
+    // Hide cells initially
+    gsap.set(cells, { opacity: 0, y: 20 });
+
+    // Cells fade up — staggered
     tl.fromTo(cells,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-      '-=0.8'
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1 },
+      '-=0.3'
     );
 
     // 2b. Glow pulse — panel power-on effect, all at once
@@ -681,7 +699,7 @@ const Animations = (() => {
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
       },
     });
@@ -808,13 +826,12 @@ const Animations = (() => {
     var headAccent = section.querySelector('.test__heading-accent');
     var featured = section.querySelector('.test__featured');
     var quoteLines = section.querySelectorAll('.test__quote-line');
-    var cards = section.querySelectorAll('.test__card');
 
     // Header entrance
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
       },
     });
@@ -863,7 +880,7 @@ const Animations = (() => {
     if (rowWrap) {
       ScrollTrigger.create({
         trigger: rowWrap,
-        start: 'top 75%',
+        start: 'top 85%',
         once: true,
         onEnter: function() {
           gsap.fromTo(rowWrap,
@@ -890,9 +907,12 @@ const Animations = (() => {
     var subtext = section.querySelector('.contact__subtext');
     var rows = section.querySelectorAll('.contact__row, .contact__submit');
 
+    // Contact form elements
+    var pills = section.querySelectorAll('.contact__pill');
+
     ScrollTrigger.create({
       trigger: section,
-      start: 'top 75%',
+      start: 'top 85%',
       once: true,
       onEnter: function() {
         var tl = gsap.timeline();
@@ -907,7 +927,7 @@ const Animations = (() => {
           tl.fromTo(headMain,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '+=0.15'
+            '-=0.35'
           );
         }
         if (headAccent) {
@@ -921,14 +941,21 @@ const Animations = (() => {
           tl.fromTo(subtext,
             { opacity: 0, y: 14 },
             { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-            '+=0.1'
+            '-=0.2'
+          );
+        }
+        if (pills.length) {
+          tl.fromTo(pills,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.04 },
+            '-=0.2'
           );
         }
         if (rows.length) {
           tl.fromTo(rows,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.06 },
-            '-=0.1'
+            '-=0.2'
           );
         }
       },

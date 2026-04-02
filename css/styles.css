@@ -2568,6 +2568,7 @@ button {
     height: 100vh;
     overflow-x: hidden; /* JS drives scrollLeft */
     align-items: center;
+    gap: 2.5rem;
   }
 
   /* Nav adjusts on mobile */

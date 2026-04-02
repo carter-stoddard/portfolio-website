@@ -3565,7 +3565,7 @@ footer,
   .footer__bg-text {
     position: relative;
     margin-bottom: 0;
-    margin-top: 75px;
+    margin-top: 95px;
     order: 1;
   }
 
@@ -3635,7 +3635,7 @@ footer,
     position: absolute !important;
     bottom: 0 !important;
     left: 50% !important;
-    transform: translateX(calc(-50% - 8px)) !important;
+    transform: translateX(calc(-50% - 3px)) !important;
     width: 160vw;
     max-width: none;
     margin: 0;

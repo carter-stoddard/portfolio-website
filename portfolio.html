@@ -400,50 +400,9 @@
 
 
   <!-- ============================================================
-       PASSWORD GATE
+       PORTFOLIO CONTENT
   ============================================================ -->
-  <div id="password-gate" class="gate">
-    <div class="gate__vignette" aria-hidden="true"></div>
-    <div class="gate__glow" aria-hidden="true"></div>
-
-    <div class="gate__content">
-      <div class="gate__label" data-gate-anim>
-        <span class="gate__label-line"></span>
-        CLASSIFIED ACCESS
-        <span class="gate__label-line"></span>
-        <span class="gate__label-dot"></span>
-      </div>
-
-      <h2 class="gate__heading" data-gate-anim>MISSION <em>Control.</em></h2>
-
-      <p class="gate__subtext" data-gate-anim>Enter your access code to view classified missions.</p>
-
-      <div class="gate__input-wrap" data-gate-anim>
-        <input
-          type="password"
-          id="gate-input"
-          class="gate__input"
-          placeholder="ENTER ACCESS CODE"
-          autocomplete="off"
-          spellcheck="false"
-        />
-      </div>
-
-      <button id="gate-submit" class="gate__submit" data-gate-anim>REQUEST CLEARANCE</button>
-
-      <div class="gate__feedback" id="gate-feedback" aria-live="polite"></div>
-
-      <p class="gate__request" data-gate-anim>
-        Don't have a code? <a href="/#contact">Request Access</a>
-      </p>
-    </div>
-  </div>
-
-
-  <!-- ============================================================
-       PORTFOLIO CONTENT (shown after access granted)
-  ============================================================ -->
-  <main id="portfolio-content" style="display:none;">
+  <main id="portfolio-content">
     <span class="portfolio__label">MISSION GRID</span>
     <h1 class="portfolio__heading">Coming <em>soon.</em></h1>
     <p class="portfolio__text">The mission grid is being assembled. Check back shortly.</p>
@@ -462,22 +421,7 @@
   <script src="js/footer.js"></script>
 
   <script>
-    /* ============================================================
-       PORTFOLIO PASSWORD GATE
-       Standalone logic for portfolio.html
-    ============================================================ */
-
-    // PORTFOLIO PASSWORD — change this value to update the password
-    const PORTFOLIO_PASSWORD = 'TAKEOFF!';
-
     (() => {
-      const gate        = document.getElementById('password-gate');
-      const content     = document.getElementById('portfolio-content');
-      const input       = document.getElementById('gate-input');
-      const submitBtn   = document.getElementById('gate-submit');
-      const feedback    = document.getElementById('gate-feedback');
-      const inputWrap   = input.closest('.gate__input-wrap');
-
       /* ── Lenis smooth scroll ── */
       if (typeof Lenis !== 'undefined') {
         const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -498,112 +442,8 @@
         Starfield.init(starCanvas);
       }
 
-      /* ── Init hamburger menu (minimal version for this page) ── */
-      initMenu();
-
-      /* ── Check session — skip gate if already authenticated ── */
-      if (sessionStorage.getItem('portfolioAccess') === 'true' || sessionStorage.getItem('siteAccess') === 'true') {
-        gate.style.display = 'none';
-        content.style.display = 'flex';
-        return;
-      }
-
-      /* ── Show nav above gate so users can navigate away ── */
-      const nav = document.getElementById('nav');
-      if (nav) nav.style.zIndex = '1001';
-
-      /* ── Entry animation — GSAP stagger timeline ── */
-      const animEls = document.querySelectorAll('[data-gate-anim]');
-      gsap.set(animEls, { opacity: 0, y: 30 });
-
-      const entryTl = gsap.timeline({ delay: 0.3 });
-      entryTl.to(animEls[0], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
-             .to(animEls[1], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35')
-             .to(animEls[2], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
-             .to(animEls[3], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
-             .to(animEls[4], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
-             .to(animEls[5], { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4');
-
-      /* ── Submit handlers ── */
-      submitBtn.addEventListener('click', attemptAccess);
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') attemptAccess();
-      });
-
-      function attemptAccess() {
-        const value = input.value.trim();
-
-        if (value.toUpperCase() === PORTFOLIO_PASSWORD) {
-          onSuccess();
-        } else {
-          onFailure();
-        }
-      }
-
-      function onSuccess() {
-        // Show success message
-        feedback.className = 'gate__feedback gate__feedback--success';
-        feedback.textContent = 'ACCESS GRANTED';
-
-        // Brighten input
-        gsap.to(input, { borderTopColor: 'rgba(204,255,0,1)', duration: 0.3 });
-
-        // Store session (both keys so auth works across pages)
-        sessionStorage.setItem('portfolioAccess', 'true');
-        sessionStorage.setItem('siteAccess', 'true');
-
-        // After delay, fade out gate and show content
-        gsap.delayedCall(0.8, () => {
-          gsap.to(gate, {
-            opacity: 0,
-            duration: 0.6,
-            ease: 'power2.inOut',
-            onComplete: () => {
-              gate.style.display = 'none';
-              content.style.display = 'flex';
-              gsap.fromTo(content, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' });
-            }
-          });
-        });
-      }
-
-      function onFailure() {
-        // Shake input
-        gsap.to(inputWrap, {
-          x: 8,
-          duration: 0.08,
-          repeat: 7,
-          yoyo: true,
-          ease: 'power2.inOut',
-          onComplete: () => { gsap.set(inputWrap, { x: 0 }); }
-        });
-
-        // Flash brackets red
-        inputWrap.classList.add('is-error');
-        gsap.delayedCall(0.6, () => { inputWrap.classList.remove('is-error'); });
-
-        // Show error message
-        feedback.className = 'gate__feedback gate__feedback--error';
-        feedback.textContent = 'INVALID ACCESS CODE. TRY AGAIN.';
-
-        // Fade out error after 2s
-        gsap.to(feedback, {
-          opacity: 0,
-          delay: 2,
-          duration: 0.4,
-          onComplete: () => {
-            feedback.textContent = '';
-            gsap.set(feedback, { opacity: 1 });
-          }
-        });
-
-        // Clear and refocus
-        input.value = '';
-        input.focus();
-      }
-
-      /* ── Hamburger menu (self-contained for portfolio page) ── */
-      function initMenu() {
+      /* ── Hamburger menu ── */
+      (function initMenu() {
         const menuBtn = document.querySelector('.nav__menu-btn');
         const overlay = document.getElementById('menu-overlay');
         const links   = overlay.querySelectorAll('[data-menu-link]');
@@ -663,7 +503,7 @@
         // Set initial state
         overlay.style.opacity = '0';
         overlay.style.visibility = 'hidden';
-      }
+      })();
 
     })();
   </script>

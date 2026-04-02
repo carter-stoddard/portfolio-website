@@ -59,6 +59,18 @@ const Animations = (() => {
         .to('.hero__layer--astronaut', { opacity: 1, duration: 0.02 }, 0);
     }
 
+    // Scroll prompt — fade out immediately on scroll.
+    // The CSS entrance animation uses 'forwards' fill which overrides GSAP,
+    // so listen for it to end, then hand opacity control to GSAP.
+    const scrollPrompt = document.querySelector('.hero__scroll-prompt');
+    if (scrollPrompt) {
+      scrollPrompt.addEventListener('animationend', function() {
+        scrollPrompt.style.animation = 'none';
+        scrollPrompt.style.opacity = '1';
+      }, { once: true });
+      tl.to(scrollPrompt, { opacity: 0, duration: 0.05 }, 0);
+    }
+
     // Interior zooms in
     tl.to(interior, { scale: 6.5, duration: 1 }, 0)
 

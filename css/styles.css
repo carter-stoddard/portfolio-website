@@ -470,52 +470,7 @@ button {
   display: none; /* hidden on desktop */
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .hero-lock-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    position: fixed;
-    bottom: 24px;
-    right: 20px;
-    z-index: 499;
-    height: 36px;
-    padding: 0 14px;
-    font-family: var(--font-button);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 100px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    /* Only show when hero is in view */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .hero-lock-btn.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .hero-lock-btn.is-locked {
-    background: #CCFF00;
-    border-color: #CCFF00;
-    color: #000;
-  }
-
-  .hero-lock-btn__icon--unlocked { display: flex; }
-  .hero-lock-btn__icon--locked   { display: none; }
-
-  .hero-lock-btn.is-locked .hero-lock-btn__icon--unlocked { display: none; }
-  .hero-lock-btn.is-locked .hero-lock-btn__icon--locked   { display: flex; }
-}
+/* Lock button — removed on mobile, kept hidden on desktop */
 
 /* ============================================================
    NAVIGATION
@@ -1004,6 +959,65 @@ button {
   display: block;
 }
 
+/* ── Scroll prompt — bottom center of hero, neon accent ── */
+.hero__scroll-prompt {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: scroll-prompt-in 1s var(--ease-out) 2.5s forwards;
+}
+
+.hero__scroll-prompt-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, transparent, var(--color-accent));
+  animation: scroll-line-pulse 2.4s ease-in-out infinite;
+}
+
+.hero__scroll-prompt-text {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(204, 255, 0, 0.5), 0 0 20px rgba(204, 255, 0, 0.2);
+  animation: scroll-text-glow 2.4s ease-in-out infinite;
+}
+
+.hero__scroll-prompt-chevron {
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 4px rgba(204, 255, 0, 0.6));
+  animation: scroll-chevron-bob 2s ease-in-out infinite;
+}
+
+@keyframes scroll-prompt-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes scroll-line-pulse {
+  0%, 100% { opacity: 0.4; height: 32px; }
+  50%      { opacity: 1;   height: 40px; }
+}
+
+@keyframes scroll-text-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(204, 255, 0, 0.3), 0 0 20px rgba(204, 255, 0, 0.1); }
+  50%      { text-shadow: 0 0 12px rgba(204, 255, 0, 0.7), 0 0 30px rgba(204, 255, 0, 0.3), 0 0 50px rgba(204, 255, 0, 0.1); }
+}
+
+@keyframes scroll-chevron-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%      { transform: translateY(5px); opacity: 1; }
+}
+
 
 /* ── Section spacer — breathing room between pinned sections ── */
 .section-spacer {
@@ -1274,7 +1288,7 @@ button {
 .about__card--top    { align-self: flex-start; }
 .about__card--mid    { align-self: center; }
 .about__card--end    { align-self: flex-end; }
-.about__card--offset { align-self: flex-start; margin-top: 14vh; }
+.about__card--offset { align-self: flex-start; margin-top: 4vh; }
 
 /* ── Width / size variants ─────────────────────────────────── */
 .about__card--tall    { width: clamp(160px, 16vw, 260px); }
@@ -1287,14 +1301,14 @@ button {
 .about__card--wide    { width: clamp(280px, 32vw, 440px); }
 .about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: -4rem; align-self: flex-end; }
 .about__card--hero    { width: clamp(300px, 36vw, 480px); }
-.about__card--sm      { width: clamp(130px, 13vw, 190px); }
+.about__card--sm      { width: clamp(160px, 17vw, 240px); }
 .about__card--sm.about__card--top { width: clamp(240px, 28vw, 380px); }
 .about__card--sm.about__card--top .about__card-img {
   flex: none;
   aspect-ratio: 4 / 3;
   width: 100%;
 }
-.about__card--copy    { width: clamp(240px, 26vw, 360px); justify-content: center; }
+.about__card--copy    { width: clamp(240px, 26vw, 360px); justify-content: center; border-left: 1px solid rgba(204, 255, 0, 0.4); padding-left: 2rem; }
 
 /* ── Placeholder image box ─────────────────────────────────── */
 .about__card-img {
@@ -1392,8 +1406,7 @@ button {
 }
 
 .about__card--closing {
-  border-left: 1px solid rgba(204, 255, 0, 0.4);
-  padding-left: 2rem;
+  /* border-left inherited from about__card--copy */
 }
 
 
@@ -3647,7 +3660,7 @@ footer,
   .footer__legal {
     justify-content: center;
     order: -1;
-    padding-top: 20px;
+    padding-top: 27px;
   }
 
   .footer__copyright {

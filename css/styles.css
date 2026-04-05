@@ -1322,7 +1322,7 @@ button {
   width: 100%;
 }
 .about__card--wide    { width: clamp(280px, 32vw, 440px); }
-.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: -4rem; align-self: flex-end; }
+.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: calc(-4rem + 50px); align-self: flex-end; }
 .about__card--hero    { width: clamp(255px, 30.6vw, 408px); }
 .about__card--sm      { width: clamp(184px, 19.5vw, 276px); }
 .about__card--sm.about__card--top { width: clamp(240px, 28vw, 380px); }
@@ -2594,6 +2594,10 @@ button {
     gap: 2.5rem;
   }
 
+  .about__card--portrait {
+    margin-left: 50px;
+  }
+
   /* Nav adjusts on mobile */
   #nav {
     padding: 14px 16px;
@@ -3589,7 +3593,7 @@ footer,
   .footer__bg-text {
     position: relative;
     margin-bottom: 0;
-    margin-top: 95px;
+    margin-top: 130px;
     order: 1;
   }
 
@@ -3693,7 +3697,7 @@ footer,
   .footer__legal {
     justify-content: center;
     order: -1;
-    padding-top: 27px;
+    padding-top: 47px;
   }
 
   .footer__copyright {

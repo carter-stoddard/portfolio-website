@@ -101,6 +101,82 @@
   top: 0;
 }
 
+/* ── Glass Button Base ──
+   Frosted glass CTA style — used across all primary buttons.
+   Apply .glass-btn class or use these properties directly. */
+
+.glass-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 44px;
+  font-family: var(--font-button);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(135deg, rgba(204, 255, 0, 0.95) 0%, rgba(180, 230, 0, 0.85) 100%);
+  border: 1px solid rgba(204, 255, 0, 0.6);
+  border-radius: 99px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow:
+    0 0 20px rgba(204, 255, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Glass sheen — animated highlight */
+.glass-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.glass-btn:hover::before {
+  left: 120%;
+}
+
+.glass-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 4px 30px rgba(204, 255, 0, 0.25),
+    0 0 40px rgba(204, 255, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.glass-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 0 10px rgba(204, 255, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.glass-btn:disabled::before {
+  display: none;
+}
+
 /* ── Scroll progress bar ── */
 .scroll-progress {
   position: fixed;
@@ -1324,7 +1400,7 @@ button {
 .about__card--top    { align-self: flex-start; }
 .about__card--mid    { align-self: center; }
 .about__card--end    { align-self: flex-end; }
-.about__card--offset { align-self: flex-start; margin-top: 4vh; }
+.about__card--offset { align-self: flex-start; margin-top: 0; }
 
 /* ── Width / size variants ─────────────────────────────────── */
 .about__card--tall    { width: clamp(192px, 19.2vw, 312px); }
@@ -1335,9 +1411,9 @@ button {
   width: 100%;
 }
 .about__card--wide    { width: clamp(280px, 32vw, 440px); }
-.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: calc(-4rem + 50px); align-self: flex-end; }
-.about__card--hero    { width: clamp(255px, 30.6vw, 408px); }
-.about__card--sm      { width: clamp(184px, 19.5vw, 276px); }
+.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: calc(-4rem + 100px); align-self: flex-end; }
+.about__card--hero    { width: clamp(192px, 19.2vw, 312px); align-self: flex-end; margin-bottom: 2vh; }
+.about__card--sm      { width: clamp(192px, 19.2vw, 312px); }
 .about__card--sm.about__card--top { width: clamp(240px, 28vw, 380px); }
 .about__card--sm.about__card--top .about__card-img {
   flex: none;
@@ -1365,7 +1441,6 @@ button {
 }
 .about__card--hero .about__card-img {
   flex: none;
-  aspect-ratio: 4 / 3;
   width: 100%;
 }
 
@@ -1946,29 +2021,11 @@ button {
   margin: 0;
 }
 
-/* Services CTA — solid pill button */
+/* Services CTA — glass pill button */
 .services__cta-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 18px 48px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #000000;
-  background: #CCFF00;
-  border: none;
-  border-radius: var(--radius-button);
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
 }
-.services__cta-btn:hover {
-  background: #b8e600;
-  transform: scale(1.02);
-}
+
 
 /* ── Responsive ── */
 
@@ -2511,6 +2568,13 @@ button {
   transform: perspective(800px) rotateY(-2deg) rotateX(1deg) translateY(-4px);
 }
 
+.test__card-stars {
+  color: var(--color-accent);
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
 /* Bottom-left corner bracket */
 .test__card::before {
   content: '';
@@ -2635,7 +2699,7 @@ button {
   }
 
   .about__card--portrait {
-    margin-left: 50px;
+    margin-left: 100px;
   }
 
   /* Nav adjusts on mobile */
@@ -2993,40 +3057,11 @@ button {
 
 /* ── Submit button ── */
 .contact__submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
   height: 44px;
-  font-family: var(--font-button);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-bg);
-  background: var(--color-accent);
-  border: none;
-  border-radius: var(--radius-button);
   padding: 0 48px;
   margin-top: 32px;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 0;
-}
-
-.contact__submit:hover {
-  opacity: 0.85;
-  transform: scale(1.02);
-}
-
-.contact__submit:active {
-  transform: scale(0.97);
-}
-
-.contact__submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
 }
 
 .contact__submit-icon {
@@ -3127,6 +3162,154 @@ button {
 /* ============================================================
    MISSION ACCEPTED MODAL
    ============================================================ */
+/* ── Testimonial Popup Modal ── */
+.test-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.test-modal.is-open {
+  pointer-events: all;
+  opacity: 1;
+  visibility: visible;
+}
+
+.test-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.test-modal__card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(204, 255, 0, 0.25);
+  border-top: 2px solid rgba(204, 255, 0, 0.6);
+  border-radius: var(--radius-card);
+  padding: clamp(40px, 6vw, 64px) clamp(32px, 5vw, 56px);
+  max-width: 580px;
+  width: 100%;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.test-modal.is-open .test-modal__card {
+  transform: translateY(0);
+}
+
+.test-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+  padding: 0;
+}
+
+.test-modal__close:hover {
+  border-color: rgba(204, 255, 0, 0.6);
+}
+
+.test-modal__close span {
+  position: absolute;
+  width: 14px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.test-modal__close span:first-child { transform: rotate(45deg); }
+.test-modal__close span:last-child  { transform: rotate(-45deg); }
+
+.test-modal__label {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.test-modal__stars {
+  color: var(--color-accent);
+  font-size: 16px;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+
+.test-modal__quote {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+
+.test-modal__person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.test-modal__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(204, 255, 0, 0.3);
+}
+
+.test-modal__name {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.test-modal__title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.test-modal__company {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Clickable cursor on carousel cards */
+.test__row .test__card {
+  cursor: pointer;
+}
+
 .mission-modal {
   position: fixed;
   inset: 0;
@@ -3529,29 +3712,7 @@ footer,
 
 /* ── CTA button — sits in the copyright bar, centered ── */
 .footer__cta-btn {
-  display: inline-block;
   padding: 14px 40px;
-  font-family: var(--font-button);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-bg);
-  background: var(--color-accent);
-  border: none;
-  border-radius: var(--radius-button);
-  text-decoration: none;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.footer__cta-btn:hover {
-  opacity: 0.85;
-  transform: scale(1.02);
-}
-
-.footer__cta-btn:active {
-  transform: scale(0.97);
 }
 
 /* ── Footer columns — pages left, connect right ── */
@@ -3689,22 +3850,12 @@ footer,
   }
 
   .footer__mobile-cta {
-    display: inline-block;
+    display: inline-flex;
     position: relative;
     z-index: 3;
     order: 2;
     margin-top: 32px;
     padding: 16px 44px;
-    font-family: var(--font-button);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--color-bg);
-    background: var(--color-accent);
-    border-radius: var(--radius-button);
-    text-decoration: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
   .footer__mobile-cta:hover {

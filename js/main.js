@@ -152,7 +152,69 @@ document.addEventListener('DOMContentLoaded', () => {
     initCursorGlow('.clients__patch');
     initCursorGlow('.stats__cell');
 
-    // 3. Nav link scroll highlight flash
+    // 3. Testimonial card popup modal
+    (function() {
+      var modal = document.getElementById('test-modal');
+      var closeBtn = document.getElementById('test-modal-close');
+      var backdrop = modal ? modal.querySelector('.test-modal__backdrop') : null;
+      var quoteEl = document.getElementById('test-modal-quote');
+      var avatarEl = document.getElementById('test-modal-avatar');
+      var nameEl = document.getElementById('test-modal-name');
+      var titleEl = document.getElementById('test-modal-title');
+      var companyEl = document.getElementById('test-modal-company');
+      if (!modal) return;
+
+      function openTestModal(card) {
+        var quote = card.querySelector('.test__card-quote');
+        var avatar = card.querySelector('.test__avatar');
+        var name = card.querySelector('.test__person-name');
+        var title = card.querySelector('.test__person-title');
+        var company = card.querySelector('.test__person-company');
+
+        if (quoteEl) quoteEl.textContent = quote ? quote.textContent : '';
+        if (avatarEl && avatar) { avatarEl.src = avatar.src; avatarEl.alt = avatar.alt; }
+        if (nameEl) nameEl.textContent = name ? name.textContent : '';
+        if (titleEl) titleEl.textContent = title ? title.textContent : '';
+        if (companyEl) companyEl.textContent = company ? company.textContent : '';
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeTestModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      // Inject 5 stars into every carousel card
+      document.querySelectorAll('.test__row .test__card').forEach(function(card) {
+        var quote = card.querySelector('.test__card-quote');
+        if (quote && !card.querySelector('.test__card-stars')) {
+          var stars = document.createElement('div');
+          stars.className = 'test__card-stars';
+          stars.setAttribute('aria-label', '5 out of 5 stars');
+          stars.textContent = '★★★★★';
+          card.insertBefore(stars, quote);
+        }
+      });
+
+      // All carousel cards (inside .test__row), including duplicates for infinite loop
+      var rowCards = document.querySelectorAll('.test__row .test__card');
+      rowCards.forEach(function(card) {
+        card.addEventListener('click', function() { openTestModal(card); });
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeTestModal);
+      if (backdrop) backdrop.addEventListener('click', closeTestModal);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeTestModal();
+      });
+    })();
+
+    // 4. Nav link scroll highlight flash
     document.querySelectorAll('[data-menu-link], .footer__col-link[href^="#"], .footer__col-link[href^="/#"]').forEach(function(link) {
       link.addEventListener('click', function() {
         var href = link.getAttribute('href').replace('/', '');

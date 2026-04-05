@@ -25,7 +25,7 @@
     </div>
 
     <!-- ── Mobile CTA — only visible on mobile, below heading ── -->
-    <a href="/#contact" class="footer__mobile-cta">START A PROJECT &nbsp;→</a>
+    <a href="/#contact" class="glass-btn footer__mobile-cta">START A PROJECT &nbsp;→</a>
 
     <!-- ── Center astronaut — sits in front of text ── -->
     <img class="footer__astronaut" src="/assets/images/portrait-astronaut-desktop.webp" alt="" aria-hidden="true" loading="lazy" />
@@ -61,7 +61,7 @@
     <div class="footer__bottom">
       <div class="footer__copyright-bar">
         <span class="footer__copyright">&copy; 2026 Carter Stoddard LLC. All rights reserved.</span>
-        <a href="/#contact" class="footer__cta-btn">LAUNCH PROJECT</a>
+        <a href="/#contact" class="glass-btn footer__cta-btn">LAUNCH PROJECT</a>
         <div class="footer__legal">
           <a href="/privacy-policy.html" class="footer__legal-link">Privacy Policy</a>
           <a href="/terms.html"          class="footer__legal-link">Terms</a>

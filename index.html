@@ -338,7 +338,9 @@
         <div class="about__card-caption about__card-caption--above">
           <span class="about__caption-label about__wipe"><span class="about__wipe-inner">THE CRAFT</span><span class="about__wipe-bar"></span></span>
         </div>
-        <div class="about__card-img about__card-img--placeholder" aria-hidden="true"></div>
+        <div class="about__card-img">
+          <img src="assets/images/about/the-craft.webp" alt="The craft — Carter Stoddard's creative work" loading="lazy">
+        </div>
       </div>
 
       <!-- QUOTE 2 — near "The Craft" -->
@@ -373,7 +375,9 @@
         <div class="about__card-caption about__card-caption--above">
           <span class="about__caption-label about__wipe"><span class="about__wipe-inner">OUTSIDE THE OFFICE</span><span class="about__wipe-bar"></span></span>
         </div>
-        <div class="about__card-img about__card-img--placeholder" aria-hidden="true"></div>
+        <div class="about__card-img">
+          <img src="assets/images/about/outside-the-office.webp" alt="Carter Stoddard outside the office" loading="lazy">
+        </div>
       </div>
 
       <!-- CARD 6 — Always Moving Forward — London -->
@@ -536,7 +540,7 @@
       <!-- CTA -->
       <div class="services__cta">
         <p class="services__cta-text">DON'T SEE WHAT YOU NEED?</p>
-        <a href="#contact" class="services__cta-btn">LET'S TALK</a>
+        <a href="#contact" class="glass-btn services__cta-btn">LET'S TALK</a>
       </div>
 
     </div>
@@ -610,7 +614,7 @@
 
     <!-- ── Portfolio CTA ── -->
     <div class="clients__cta-wrap container">
-      <!-- <a href="portfolio.html" class="services__cta-btn">PORTFOLIO</a> -->
+      <!-- <a href="portfolio.html" class="glass-btn services__cta-btn">PORTFOLIO</a> -->
     </div>
 
   </section>
@@ -640,6 +644,7 @@
       <!-- ── Featured testimonial — incoming transmission ── -->
       <div class="test__featured">
         <span class="test__transmission">INCOMING TRANSMISSION</span>
+        <div class="test__card-stars" aria-label="5 out of 5 stars">★★★★★</div>
 
         <!-- SWAP: Replace placeholder quote with real testimonial -->
         <blockquote class="test__featured-quote">
@@ -1009,7 +1014,7 @@
         </div>
 
         <!-- Submit -->
-        <button type="submit" class="contact__submit" id="contact-submit">
+        <button type="submit" class="glass-btn contact__submit" id="contact-submit">
           LAUNCH
         </button>
 
@@ -1058,7 +1063,7 @@
     </div>
 
     <!-- ── Mobile CTA — only visible on mobile, below heading ── -->
-    <a href="#contact" class="footer__mobile-cta">START A PROJECT &nbsp;→</a>
+    <a href="#contact" class="glass-btn footer__mobile-cta">START A PROJECT &nbsp;→</a>
 
     <!-- ── Center astronaut — sits in front of text ── -->
     <img class="footer__astronaut" src="assets/images/portrait-astronaut-desktop.webp" alt="" aria-hidden="true" loading="lazy" />
@@ -1095,7 +1100,7 @@
     <div class="footer__bottom">
       <div class="footer__copyright-bar">
         <span class="footer__copyright">&copy; 2026 Carter Stoddard LLC. All rights reserved.</span>
-        <a href="#contact" class="footer__cta-btn">LAUNCH PROJECT</a>
+        <a href="#contact" class="glass-btn footer__cta-btn">LAUNCH PROJECT</a>
         <div class="footer__legal">
           <a href="privacy-policy.html" class="footer__legal-link">Privacy Policy</a>
           <a href="terms.html" class="footer__legal-link">Terms</a>
@@ -1147,6 +1152,27 @@
   <script type="module" src="js/quote-models.js"></script>
   <script type="module" src="js/marquee-moon.js"></script>
   <script type="module" src="js/about-shuttle.js"></script>
+
+  <!-- ── Testimonial Popup Modal ── -->
+  <div id="test-modal" class="test-modal" role="dialog" aria-modal="true" aria-label="Testimonial" aria-hidden="true">
+    <div class="test-modal__backdrop"></div>
+    <div class="test-modal__card">
+      <button class="test-modal__close" id="test-modal-close" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <span class="test-modal__label">INCOMING TRANSMISSION</span>
+      <div class="test-modal__stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="test-modal__quote" id="test-modal-quote"></p>
+      <div class="test-modal__person">
+        <img class="test-modal__avatar" id="test-modal-avatar" src="" alt="" />
+        <div class="test-modal__person-info">
+          <span class="test-modal__name" id="test-modal-name"></span>
+          <span class="test-modal__title" id="test-modal-title"></span>
+          <span class="test-modal__company" id="test-modal-company"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ── Mission Accepted Modal ── -->
   <div id="mission-modal" class="mission-modal" role="dialog" aria-modal="true" aria-labelledby="mission-modal-heading" aria-hidden="true">

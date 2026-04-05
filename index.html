@@ -59,6 +59,7 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- All site content -->
   <div id="site-content">
@@ -101,11 +102,11 @@
 
     <div class="menu-overlay__content">
       <!-- Left column — navigation links -->
-      <nav class="menu-overlay__nav" aria-label="Main navigation">
+      <nav class="menu-overlay__nav" aria-label="Site sections">
         <a href="#about" class="menu-overlay__link" data-menu-link>About</a>
         <a href="#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
         <a href="#services" class="menu-overlay__link" data-menu-link>Services</a>
-        <a href="#clients" class="menu-overlay__link" data-menu-link>Clients</a>
+        <a href="#clients" class="menu-overlay__link" data-menu-link>Partnerships</a>
         <a href="#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
         <a href="#contact" class="menu-overlay__link" data-menu-link>Contact</a>
       </nav>
@@ -144,7 +145,7 @@
     <span class="hero-lock-btn__label">LOCK</span>
   </button>
 
-  <main>
+  <main id="main-content">
 
   <!-- ============================================================
        SECTION 01 — HERO
@@ -546,7 +547,7 @@
   <section id="clients" aria-label="Clients">
 
     <div class="clients__header container">
-      <span class="clients__label">CLIENTS</span>
+      <span class="clients__label">PARTNERSHIPS</span>
       <h2 class="clients__heading">
         <span class="clients__heading-main">BRANDS</span>
         <span class="clients__heading-accent">I've worked with</span>
@@ -559,39 +560,39 @@
          Checkerboard pattern: lg, sm, sm, lg, lg, sm, sm, lg ... -->
     <div class="clients__grid container">
 
-      <!-- PATCH 01 — large -->
+      <!-- PATCH 01 — large — Google -->
       <div class="clients__patch clients__patch--lg">
+        <img src="assets/images/Google-Logo.png" alt="Google" class="clients__patch-logo" loading="lazy" style="transform: scale(0.95);" />
+      </div>
+
+      <!-- PATCH 02 — small — Bonduelle -->
+      <div class="clients__patch clients__patch--sm">
         <img src="assets/images/Bonduelle-Logo.png" alt="Bonduelle" class="clients__patch-logo" loading="lazy" />
       </div>
 
-      <!-- PATCH 02 — small -->
+      <!-- PATCH 03 — small — Steak 'n Shake -->
       <div class="clients__patch clients__patch--sm">
         <img src="assets/images/Steak-n-Shake-Logo.png" alt="Steak 'n Shake" class="clients__patch-logo" loading="lazy" />
       </div>
 
-      <!-- PATCH 03 — small -->
-      <div class="clients__patch clients__patch--sm">
+      <!-- PATCH 04 — large — FujiSan -->
+      <div class="clients__patch clients__patch--lg">
         <img src="assets/images/FujiSan-Logo.png" alt="FujiSan" class="clients__patch-logo clients__patch-logo--sm" loading="lazy" />
       </div>
 
-      <!-- PATCH 04 — large -->
+      <!-- PATCH 05 — large — AquaVibes -->
       <div class="clients__patch clients__patch--lg">
-        <img src="assets/images/AquaVibes-Logo.png" alt="AquaVibes" class="clients__patch-logo" loading="lazy" />
+        <img src="assets/images/AquaVibes-Logo.png" alt="AquaVibes" class="clients__patch-logo" loading="lazy" style="transform: scale(1.15);" />
       </div>
 
-      <!-- PATCH 05 — large -->
-      <div class="clients__patch clients__patch--lg">
+      <!-- PATCH 06 — small — US ShopTools -->
+      <div class="clients__patch clients__patch--sm">
         <img src="assets/images/US-ShopTools-Logo.png" alt="US ShopTools" class="clients__patch-logo clients__patch-logo--sm" loading="lazy" />
       </div>
 
-      <!-- PATCH 06 — small -->
+      <!-- PATCH 07 — small — Titan Ridge -->
       <div class="clients__patch clients__patch--sm">
-        <div class="clients__patch-placeholder" aria-hidden="true"></div>
-      </div>
-
-      <!-- PATCH 07 — small -->
-      <div class="clients__patch clients__patch--sm">
-        <div class="clients__patch-placeholder" aria-hidden="true"></div>
+        <img src="assets/images/Titan-Ridge-Logo.png" alt="Titan Ridge" class="clients__patch-logo" loading="lazy" style="transform: scale(1.25);" />
       </div>
 
       <!-- PATCH 08 — large -->
@@ -1059,7 +1060,7 @@
           <a href="#about" class="footer__col-link">ABOUT</a>
           <a href="#stats" class="footer__col-link">NUMBERS</a>
           <a href="#services" class="footer__col-link">SERVICES</a>
-          <a href="#clients" class="footer__col-link">CLIENTS</a>
+          <a href="#clients" class="footer__col-link">PARTNERSHIPS</a>
           <a href="#testimonials" class="footer__col-link">TESTIMONIALS</a>
           <a href="#contact" class="footer__col-link">CONTACT</a>
         </div>

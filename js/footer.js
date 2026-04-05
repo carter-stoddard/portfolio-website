@@ -9,7 +9,7 @@
   <footer id="footer" aria-label="Footer">
 
     <!-- ROTATING EARTH — centered behind footer -->
-    <div id="earth-container">
+    <div id="earth-container" aria-hidden="true">
       <div class="planet-container">
         <div class="night"></div>
         <div class="day"></div>
@@ -40,7 +40,7 @@
           <a href="/#about"        class="footer__col-link">ABOUT</a>
           <a href="/#stats"        class="footer__col-link">NUMBERS</a>
           <a href="/#services"     class="footer__col-link">SERVICES</a>
-          <a href="/#clients"      class="footer__col-link">CLIENTS</a>
+          <a href="/#clients"      class="footer__col-link">PARTNERSHIPS</a>
           <a href="/#testimonials" class="footer__col-link">TESTIMONIALS</a>
           <a href="/#contact"      class="footer__col-link">CONTACT</a>
         </div>

@@ -20,6 +20,9 @@ const Starfield = (() => {
   let offsetX = 0, offsetY = 0;   // smoothed current offset
 
   function init(canvasEl) {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     canvas = canvasEl;
     ctx    = canvas.getContext('2d');
     resize();

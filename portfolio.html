@@ -344,6 +344,7 @@
   </style>
 </head>
 <body>
+  <a href="#portfolio-content" class="skip-link">Skip to content</a>
 
   <!-- ============================================================
        NAVIGATION
@@ -372,11 +373,11 @@
 
     <div class="menu-overlay__content">
       <!-- Left column — navigation links -->
-      <nav class="menu-overlay__nav" aria-label="Main navigation">
+      <nav class="menu-overlay__nav" aria-label="Site sections">
         <a href="/#about" class="menu-overlay__link" data-menu-link>About</a>
         <a href="/#stats" class="menu-overlay__link" data-menu-link>Numbers</a>
         <a href="/#services" class="menu-overlay__link" data-menu-link>Services</a>
-        <a href="/#clients" class="menu-overlay__link" data-menu-link>Clients</a>
+        <a href="/#clients" class="menu-overlay__link" data-menu-link>Partnerships</a>
         <a href="/#testimonials" class="menu-overlay__link" data-menu-link>Testimonials</a>
         <a href="/#contact" class="menu-overlay__link" data-menu-link>Contact</a>
       </nav>
@@ -485,7 +486,7 @@
           });
         });
 
-        // Close on Escape
+        // Close on Escape + focus trap
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape' && isOpen) {
             isOpen = false;
@@ -497,6 +498,20 @@
               ease: 'power2.in',
               onComplete: () => { overlay.style.visibility = 'hidden'; }
             });
+            menuBtn.focus();
+          }
+          // Focus trap
+          if (e.key === 'Tab' && isOpen) {
+            const focusable = overlay.querySelectorAll('a[href], button');
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
           }
         });
 

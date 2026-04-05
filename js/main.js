@@ -8,11 +8,7 @@ window.addEventListener('beforeunload', function() {
   window.scrollTo(0, 0);
 });
 
-// Block pinch-to-zoom on mobile — user-scalable=no is ignored by modern iOS Safari,
-// so we prevent multi-touch at the JS level as well.
-document.addEventListener('touchstart', function(e) {
-  if (e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+// Note: pinch-to-zoom is no longer blocked for accessibility (WCAG 1.4.4)
 
 document.addEventListener('DOMContentLoaded', () => {
 

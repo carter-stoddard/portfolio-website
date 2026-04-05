@@ -210,7 +210,7 @@ const Animations = (() => {
     var headerTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 85%',
+        start: 'top 75%',
         once: true,
       },
     });
@@ -271,7 +271,7 @@ const Animations = (() => {
       // Wipe animations fire on enter
       ScrollTrigger.create({
         trigger: section,
-        start: 'top 85%',
+        start: 'top 75%',
         once: true,
         onEnter: function() {
           track.querySelectorAll('.about__wipe').forEach(function(el, i) {
@@ -331,17 +331,24 @@ const Animations = (() => {
       },
     });
 
-    // Card images — fade up as they scroll into view horizontally
+    // Card images — staggered reveal as each card enters during horizontal scroll
     var cards = track.querySelectorAll('.about__card');
+    var revealIndex = 0;
     cards.forEach(function(card) {
       gsap.set(card, { opacity: 0, y: 30 });
       ScrollTrigger.create({
         trigger: card,
         containerAnimation: scrollTween,
-        start: 'left 90%',
+        start: 'left 120%',
         once: true,
         onEnter: function() {
-          gsap.to(card, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+          gsap.to(card, {
+            opacity: 1, y: 0,
+            duration: 0.7,
+            delay: revealIndex * 0.1,
+            ease: 'power2.out',
+          });
+          revealIndex++;
         },
       });
     });
@@ -390,44 +397,39 @@ const Animations = (() => {
     const statsHeadMain = section.querySelector('.stats__heading-main');
     const statsHeadAccent = section.querySelector('.stats__heading-accent');
 
+    // Set everything hidden initially
+    var statsHeaderEls = [statsLabel, statsHeadMain, statsHeadAccent].filter(Boolean);
+    gsap.set(statsHeaderEls, { opacity: 0, y: 14 });
+    gsap.set(cells, { opacity: 0, y: 20 });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 85%',
+        start: 'top 75%',
         once: true,
       },
     });
 
-    // 0. Header entrance — label then heading
+    // Header + cells with absolute timing
     if (statsLabel) {
-      tl.fromTo(statsLabel,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      tl.to(statsLabel,
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0
       );
     }
     if (statsHeadMain) {
-      tl.fromTo(statsHeadMain,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.35'
+      tl.to(statsHeadMain,
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1
       );
     }
     if (statsHeadAccent) {
-      tl.fromTo(statsHeadAccent,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.45'
+      tl.to(statsHeadAccent,
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15
       );
     }
 
-    // Hide cells initially
-    gsap.set(cells, { opacity: 0, y: 20 });
-
-    // Cells fade up — staggered
-    tl.fromTo(cells,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1 },
-      '-=0.3'
+    // Cells fade up — staggered, starting shortly after header
+    tl.to(cells,
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1 }, 0.25
     );
 
     // 2b. Glow pulse — panel power-on effect, all at once
@@ -696,55 +698,30 @@ const Animations = (() => {
     var cta = section.querySelector('.services__cta');
     var panel = section.querySelector('.services__panel');
 
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 85%',
-        once: true,
+    // Set everything hidden initially
+    var svcHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    gsap.set(svcHeaderEls, { opacity: 0, y: 14 });
+    gsap.set(rows, { opacity: 0, x: -20 });
+    if (panel) gsap.set(panel, { opacity: 0, y: 10 });
+    if (cta) gsap.set(cta, { opacity: 0, y: 14 });
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        var tl = gsap.timeline();
+
+        if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+        if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
+        if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+
+        tl.to(rows, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.06 }, 0.25);
+
+        if (panel) tl.to(panel, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.3);
+        if (cta) tl.to(cta, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.35);
       },
     });
-
-    // Label fades up
-    tl.fromTo(label,
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-    );
-
-    // Heading staggers up
-    tl.fromTo(headMain,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-      '-=0.2'
-    );
-    tl.fromTo(headAccent,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-      '-=0.45'
-    );
-
-    // Left column rows slide in
-    tl.fromTo(rows,
-      { opacity: 0, x: -20 },
-      { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.06 },
-      '-=0.3'
-    );
-
-    // Right panel fades in after rows
-    if (panel) {
-      tl.fromTo(panel,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-      );
-    }
-
-    // CTA fades up last
-    if (cta) {
-      tl.fromTo(cta,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        '-=0.2'
-      );
-    }
   }
 
   // ----------------------------------------------------------
@@ -761,6 +738,13 @@ const Animations = (() => {
     var headAccent = section.querySelector('.clients__heading-accent');
     var patches = section.querySelectorAll('.clients__patch');
 
+    // Set everything hidden initially
+    var clientHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    gsap.set(clientHeaderEls, { opacity: 0, y: 14 });
+    if (patches.length) gsap.set(patches, { opacity: 0, y: 30 });
+    var ctaWrap = section.querySelector('.clients__cta-wrap');
+    if (ctaWrap) gsap.set(ctaWrap, { opacity: 0, y: 20 });
+
     ScrollTrigger.create({
       trigger: section,
       start: 'top 75%',
@@ -768,45 +752,15 @@ const Animations = (() => {
       onEnter: function() {
         var tl = gsap.timeline();
 
-        // Header entrance — label then heading staggered
-        if (label) {
-          tl.fromTo(label,
-            { opacity: 0, y: 14 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-          );
-        }
-        if (headMain) {
-          tl.fromTo(headMain,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '-=0.35'
-          );
-        }
-        if (headAccent) {
-          tl.fromTo(headAccent,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '-=0.45'
-          );
-        }
+        if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+        if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
+        if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
 
-        // Patches fade up staggered
         if (patches.length) {
-          tl.fromTo(patches,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.07 },
-            '-=0.2'
-          );
+          tl.to(patches, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.07 }, 0.25);
         }
-
-        // CTA button fade in after patches
-        var ctaWrap = section.querySelector('.clients__cta-wrap');
         if (ctaWrap) {
-          tl.fromTo(ctaWrap,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-            '-=0.1'
-          );
+          tl.to(ctaWrap, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.35);
         }
       },
     });
@@ -826,70 +780,35 @@ const Animations = (() => {
     var headAccent = section.querySelector('.test__heading-accent');
     var featured = section.querySelector('.test__featured');
     var quoteLines = section.querySelectorAll('.test__quote-line');
+    var rowWrap = section.querySelector('.test__row-wrap');
 
-    // Header entrance
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 85%',
-        once: true,
+    // Set everything hidden initially
+    var testHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    gsap.set(testHeaderEls, { opacity: 0, y: 14 });
+    if (featured) gsap.set(featured, { opacity: 0, y: 16 });
+    if (quoteLines.length) gsap.set(quoteLines, { opacity: 0, y: 20 });
+    if (rowWrap) gsap.set(rowWrap, { opacity: 0, y: 20 });
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        var tl = gsap.timeline();
+
+        if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+        if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
+        if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+
+        if (featured) tl.to(featured, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.2);
+
+        if (quoteLines.length) {
+          tl.to(quoteLines, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12 }, 0.25);
+        }
+
+        if (rowWrap) tl.to(rowWrap, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
       },
     });
-
-    if (label) {
-      tl.fromTo(label,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-      );
-    }
-    if (headMain) {
-      tl.fromTo(headMain,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.35'
-      );
-    }
-    if (headAccent) {
-      tl.fromTo(headAccent,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.45'
-      );
-    }
-
-    // Featured testimonial fade in
-    if (featured) {
-      tl.fromTo(featured,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.2'
-      );
-    }
-
-    // Quote lines reveal — staggered 0.12s per line
-    if (quoteLines.length) {
-      tl.fromTo(quoteLines,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12 },
-        '-=0.3'
-      );
-    }
-
-    // Card row entrance — fade in when carousel scrolls into view
-    var rowWrap = section.querySelector('.test__row-wrap');
-    if (rowWrap) {
-      ScrollTrigger.create({
-        trigger: rowWrap,
-        start: 'top 85%',
-        once: true,
-        onEnter: function() {
-          gsap.fromTo(rowWrap,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-          );
-        },
-      });
-    }
   }
 
   // ----------------------------------------------------------
@@ -910,52 +829,49 @@ const Animations = (() => {
     // Contact form elements
     var pills = section.querySelectorAll('.contact__pill');
 
+    // Set everything hidden initially
+    var allElements = [label, headMain, headAccent, subtext].filter(Boolean);
+    gsap.set(allElements, { opacity: 0, y: 14 });
+    if (pills.length) gsap.set(pills, { opacity: 0, y: 10 });
+    if (rows.length) gsap.set(rows, { opacity: 0, y: 20 });
+
     ScrollTrigger.create({
       trigger: section,
-      start: 'top 85%',
+      start: 'top 75%',
       once: true,
       onEnter: function() {
         var tl = gsap.timeline();
 
+        // Header elements — tight overlap so they feel simultaneous
         if (label) {
-          tl.fromTo(label,
-            { opacity: 0, y: 14 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+          tl.to(label,
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0
           );
         }
         if (headMain) {
-          tl.fromTo(headMain,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '-=0.35'
+          tl.to(headMain,
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1
           );
         }
         if (headAccent) {
-          tl.fromTo(headAccent,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '-=0.45'
+          tl.to(headAccent,
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15
           );
         }
         if (subtext) {
-          tl.fromTo(subtext,
-            { opacity: 0, y: 14 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-            '-=0.2'
+          tl.to(subtext,
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.2
           );
         }
+        // Pills and form rows start almost immediately with the header
         if (pills.length) {
-          tl.fromTo(pills,
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.04 },
-            '-=0.2'
+          tl.to(pills,
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.04 }, 0.25
           );
         }
         if (rows.length) {
-          tl.fromTo(rows,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.06 },
-            '-=0.2'
+          tl.to(rows,
+            { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.06 }, 0.3
           );
         }
       },
@@ -976,6 +892,12 @@ const Animations = (() => {
     var columns = footer.querySelector('.footer__columns');
     var copyrightBar = footer.querySelector('.footer__copyright-bar');
 
+    // Set everything hidden initially
+    if (bgText) gsap.set(bgText, { opacity: 0, y: 40 });
+    if (astronaut) gsap.set(astronaut, { opacity: 0, yPercent: 5 });
+    if (columns) gsap.set(columns, { opacity: 0, y: 24 });
+    if (copyrightBar) gsap.set(copyrightBar, { opacity: 0 });
+
     ScrollTrigger.create({
       trigger: footer,
       start: 'top 75%',
@@ -983,40 +905,10 @@ const Animations = (() => {
       onEnter: function() {
         var tl = gsap.timeline();
 
-        // Background text fades up
-        if (bgText) {
-          tl.fromTo(bgText,
-            { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
-          );
-        }
-
-        // Astronaut rises up — preserve CSS left/transform positioning
-        if (astronaut) {
-          tl.fromTo(astronaut,
-            { opacity: 0, yPercent: 5 },
-            { opacity: 1, yPercent: 0, duration: 0.8, ease: 'power2.out', clearProps: 'yPercent' },
-            '-=0.5'
-          );
-        }
-
-        // Columns fade up
-        if (columns) {
-          tl.fromTo(columns,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-            '-=0.3'
-          );
-        }
-
-        // Copyright
-        if (copyrightBar) {
-          tl.fromTo(copyrightBar,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.5, ease: 'power2.out' },
-            '-=0.3'
-          );
-        }
+        if (bgText) tl.to(bgText, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0);
+        if (astronaut) tl.to(astronaut, { opacity: 1, yPercent: 0, duration: 0.8, ease: 'power2.out', clearProps: 'yPercent' }, 0.1);
+        if (columns) tl.to(columns, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.2);
+        if (copyrightBar) tl.to(copyrightBar, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
       },
     });
   }

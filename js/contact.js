@@ -181,7 +181,7 @@ const SUPABASE_TABLE = 'contact_submissions';
 
     // Button loading state
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+    submitBtn.innerHTML = '<span class="contact__submit-dots">LAUNCHING<span>.</span><span>.</span><span>.</span></span>';
 
     // Submit click scale pulse
     if (typeof gsap !== 'undefined') {
@@ -228,7 +228,92 @@ const SUPABASE_TABLE = 'contact_submissions';
       p.classList.remove('is-selected');
       p.setAttribute('aria-pressed', 'false');
     });
+    // Clear all success messages
+    form.querySelectorAll('.contact__success').forEach(function(el) {
+      el.classList.remove('is-visible');
+      el.textContent = '';
+    });
     openModal();
+  }
+
+  // ----------------------------------------------------------
+  // Field success — green checkmark + positive message on blur
+  // ----------------------------------------------------------
+  var emailRegexSuccess = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function showFieldSuccess(input) {
+    var field = input.closest('.contact__field');
+    if (!field) return;
+    var successEl = field.querySelector('.contact__success');
+    var errorEl = field.querySelector('.contact__error');
+    if (!successEl) return;
+
+    var val = input.value.trim();
+    var isValid = false;
+
+    if (input.type === 'email') {
+      isValid = emailRegexSuccess.test(val);
+    } else if (input.tagName === 'TEXTAREA') {
+      isValid = val.length > 0;
+    } else {
+      isValid = val.length > 0;
+    }
+
+    if (isValid) {
+      // Hide error if showing
+      if (errorEl) errorEl.textContent = '';
+
+      // Personalize first name message
+      var msg = input.dataset.success || 'Got it';
+      if (input.id === 'contact-first-name' && val) {
+        msg = 'Nice to meet you, ' + val + '!';
+      }
+
+      successEl.textContent = msg;
+      successEl.classList.add('is-visible');
+
+      // Animate in
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(successEl,
+          { opacity: 0, y: 4 },
+          { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+        );
+      }
+    } else {
+      successEl.classList.remove('is-visible');
+      successEl.textContent = '';
+    }
+  }
+
+  // Listen for blur on all form inputs/textareas
+  form.querySelectorAll('.contact__input').forEach(function(input) {
+    input.addEventListener('blur', function() {
+      showFieldSuccess(input);
+    });
+  });
+
+  // Listen for pill selections — show success when at least one is selected
+  if (pillContainer) {
+    pillContainer.addEventListener('click', function() {
+      var selected = pillContainer.querySelectorAll('.contact__pill.is-selected');
+      var field = pillContainer.closest('.contact__field');
+      var successEl = field ? field.querySelector('.contact__success') : null;
+      if (!successEl) return;
+
+      if (selected.length > 0) {
+        successEl.textContent = 'Great choices';
+        successEl.classList.add('is-visible');
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(successEl,
+            { opacity: 0, y: 4 },
+            { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+          );
+        }
+      } else {
+        successEl.classList.remove('is-visible');
+        successEl.textContent = '';
+      }
+    });
   }
 
 })();

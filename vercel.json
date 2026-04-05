@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
+    { "src": "/portfolio(.html)?", "dest": "/", "status": 302 },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/404.html", "status": 404 }
   ],

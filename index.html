@@ -61,6 +61,9 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
 
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
   <!-- All site content -->
   <div id="site-content">
 
@@ -80,10 +83,11 @@
        Top-right. No logo for now.
   ============================================================ -->
   <nav id="nav" aria-label="Main navigation">
-    <a href="portfolio.html" class="nav__portfolio-btn">
+    <!-- Portfolio nav hidden while page is under construction -->
+    <!-- <a href="portfolio.html" class="nav__portfolio-btn">
       <span class="nav__status-dot"></span>
       PORTFOLIO
-    </a>
+    </a> -->
     <button class="nav__menu-btn" aria-label="Open menu" aria-expanded="false">
       <span class="nav__reticle">
         <span class="nav__reticle-tl"></span>
@@ -340,9 +344,9 @@
       <!-- QUOTE 2 — near "The Craft" -->
       <div class="about__card about__card--copy about__card--top">
         <blockquote class="about__quote about__wipe-group">
-          <span class="about__wipe"><span class="about__wipe-inner">How you do <em class="accent">one</em> thing</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner">is how you do</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner"><em class="accent">everything</em>.</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">How you do <em class="accent">one</em></span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">thing is how you</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">do <em class="accent">everything</em>.</span><span class="about__wipe-bar"></span></span>
         </blockquote>
       </div>
 
@@ -357,9 +361,10 @@
       <!-- QUOTE 3 — reflective midpoint near desk photo -->
       <div class="about__card about__card--copy about__card--mid">
         <blockquote class="about__quote about__wipe-group">
-          <span class="about__wipe"><span class="about__wipe-inner">Life only makes sense</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner">in <em class="accent">reverse</em> — but has to</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner">be lived <em class="accent">forwards</em>.</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">Life only makes</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">sense in <em class="accent">reverse</em> —</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">but has to be</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">lived <em class="accent">forwards</em>.</span><span class="about__wipe-bar"></span></span>
         </blockquote>
       </div>
 
@@ -384,9 +389,9 @@
       <!-- QUOTE 4 — closing quote near London photo -->
       <div class="about__card about__card--copy about__card--mid about__card--closing">
         <blockquote class="about__quote about__wipe-group">
-          <span class="about__wipe"><span class="about__wipe-inner">The sky was never the</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner"><em class="accent">limit</em>. It was just</span><span class="about__wipe-bar"></span></span>
-          <span class="about__wipe"><span class="about__wipe-inner">the beginning.</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">The sky was never</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">the <em class="accent">limit</em>. It was</span><span class="about__wipe-bar"></span></span>
+          <span class="about__wipe"><span class="about__wipe-inner">just the beginning.</span><span class="about__wipe-bar"></span></span>
         </blockquote>
       </div>
 
@@ -605,7 +610,7 @@
 
     <!-- ── Portfolio CTA ── -->
     <div class="clients__cta-wrap container">
-      <a href="portfolio.html" class="services__cta-btn">PORTFOLIO</a>
+      <!-- <a href="portfolio.html" class="services__cta-btn">PORTFOLIO</a> -->
     </div>
 
   </section>
@@ -909,15 +914,17 @@
           <div class="contact__field">
             <label class="contact__field-label" for="contact-first-name">FIRST NAME</label>
             <div class="contact__field-box">
-              <input type="text" id="contact-first-name" name="first_name" class="contact__input" placeholder="First name" required />
+              <input type="text" id="contact-first-name" name="first_name" class="contact__input" placeholder="First name" required data-success="Nice to meet you!" />
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
           <div class="contact__field">
             <label class="contact__field-label" for="contact-last-name">LAST NAME</label>
             <div class="contact__field-box">
-              <input type="text" id="contact-last-name" name="last_name" class="contact__input" placeholder="Last name" required />
+              <input type="text" id="contact-last-name" name="last_name" class="contact__input" placeholder="Last name" required data-success="Got it" />
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
         </div>
@@ -927,8 +934,9 @@
           <div class="contact__field">
             <label class="contact__field-label" for="contact-email">EMAIL</label>
             <div class="contact__field-box">
-              <input type="email" id="contact-email" name="email" class="contact__input" placeholder="your@email.com" required />
+              <input type="email" id="contact-email" name="email" class="contact__input" placeholder="your@email.com" required data-success="We'll keep this safe" />
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
         </div>
@@ -938,8 +946,9 @@
           <div class="contact__field">
             <label class="contact__field-label" for="contact-company">COMPANY</label>
             <div class="contact__field-box">
-              <input type="text" id="contact-company" name="company" class="contact__input" placeholder="Company name" required />
+              <input type="text" id="contact-company" name="company" class="contact__input" placeholder="Company name" required data-success="Love the brand" />
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
         </div>
@@ -949,8 +958,9 @@
           <div class="contact__field">
             <label class="contact__field-label" for="contact-role">YOUR ROLE</label>
             <div class="contact__field-box">
-              <input type="text" id="contact-role" name="role" class="contact__input" placeholder="Your role or title" required />
+              <input type="text" id="contact-role" name="role" class="contact__input" placeholder="Your role or title" required data-success="Noted" />
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
         </div>
@@ -972,6 +982,7 @@
               <button type="button" class="contact__pill" aria-pressed="false" data-service="AI &amp; Automation">AI &amp; Automation</button>
               <button type="button" class="contact__pill" aria-pressed="false" data-service="Other">Other</button>
             </div>
+            <span class="contact__success" aria-live="polite"></span>
             <span class="contact__error" aria-live="polite"></span>
           </div>
         </div>
@@ -981,8 +992,9 @@
           <div class="contact__field">
             <label class="contact__field-label" for="contact-message">ANYTHING ELSE?</label>
             <div class="contact__field-box">
-              <textarea id="contact-message" name="message" class="contact__input contact__textarea" placeholder="Tell me about your project, timeline, or anything worth knowing."></textarea>
+              <textarea id="contact-message" name="message" class="contact__input contact__textarea" placeholder="Tell me about your project, timeline, or anything worth knowing." data-success="Can't wait to read this"></textarea>
             </div>
+            <span class="contact__success" aria-live="polite"></span>
           </div>
         </div>
 

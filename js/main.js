@@ -118,6 +118,57 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', function() {
       ScrollTrigger.refresh();
     });
+
+    // ── Premium UX Enhancements ──
+
+    // 1. Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) {
+      window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = progress + '%';
+      }, { passive: true });
+    }
+
+    // 2. Cursor glow on partnership patches + stats cells
+    function initCursorGlow(selector) {
+      document.querySelectorAll(selector).forEach(function(el) {
+        // Ensure relative positioning
+        if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+        var glow = document.createElement('div');
+        glow.className = selector.includes('clients') ? 'clients__glow' : 'stats__glow';
+        el.appendChild(glow);
+
+        el.addEventListener('mousemove', function(e) {
+          var rect = el.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          glow.style.background = 'radial-gradient(circle 120px at ' + x + 'px ' + y + 'px, rgba(204,255,0,0.08), transparent 70%)';
+        });
+      });
+    }
+    initCursorGlow('.clients__patch');
+    initCursorGlow('.stats__cell');
+
+    // 3. Nav link scroll highlight flash
+    document.querySelectorAll('[data-menu-link], .footer__col-link[href^="#"], .footer__col-link[href^="/#"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var href = link.getAttribute('href').replace('/', '');
+        var target = document.querySelector(href);
+        if (target) {
+          // Brief lime flash on arrival
+          setTimeout(function() {
+            gsap.fromTo(target,
+              { boxShadow: 'inset 0 0 60px rgba(204,255,0,0.06)' },
+              { boxShadow: 'inset 0 0 0px rgba(204,255,0,0)', duration: 1.2, ease: 'power2.out' }
+            );
+          }, 800);
+        }
+      });
+    });
+
   });
 
 });

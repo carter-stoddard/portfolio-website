@@ -3764,7 +3764,7 @@ footer,
   /* Bottom bar — pinned to the very bottom of the footer, on top of astronaut */
   .footer__bottom {
     position: absolute;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     right: 0;
     z-index: 4;
@@ -3788,12 +3788,10 @@ footer,
   .footer__legal {
     justify-content: center;
     order: -1;
-    padding-top: 77px;
   }
 
   .footer__copyright {
     order: 1;
-    padding-top: 25px;
   }
 }
 

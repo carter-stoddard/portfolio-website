@@ -587,16 +587,16 @@ const Hero = (() => {
       if (base)  base.style.opacity  = '1';
       if (astro) astro.style.opacity = '0';
 
-      // Looping crossfade — helmet on/off every few seconds
+      // Looping crossfade — helmet on/off every 2 seconds
       if (astro && typeof gsap !== 'undefined') {
         gsap.to(astro, {
           opacity: 1,
-          duration: 1.2,
+          duration: 0.8,
           ease: 'power2.inOut',
-          delay: 3,
+          delay: 2,
           yoyo: true,
           repeat: -1,
-          repeatDelay: 3,
+          repeatDelay: 2,
         });
       }
       return;

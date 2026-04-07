@@ -2676,12 +2676,16 @@ button {
     height: clamp(200px, 72vw, 360px);
   }
 
+  .hero__scroll-prompt {
+    bottom: 16px;
+  }
+
   /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */
   .hero__portrait-wrapper {
-    width: 845px;
+    width: 700px;
     align-self: flex-end;
     margin-top: 0;
-    margin-bottom: -50px;
+    margin-bottom: -30px;
   }
 
   /* About — sticky scroll on mobile (JS drives scrollLeft via RAF lerp) */

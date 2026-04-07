@@ -585,7 +585,20 @@ const Hero = (() => {
       const base  = document.querySelector('.hero__layer--base');
       const astro = document.querySelector('.hero__layer--astronaut');
       if (base)  base.style.opacity  = '1';
-      if (astro) astro.style.opacity = '1';
+      if (astro) astro.style.opacity = '0';
+
+      // Looping crossfade — helmet on/off every few seconds
+      if (astro && typeof gsap !== 'undefined') {
+        gsap.to(astro, {
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power2.inOut',
+          delay: 3,
+          yoyo: true,
+          repeat: -1,
+          repeatDelay: 3,
+        });
+      }
       return;
     }
     if (!_texturesPromise) preload();

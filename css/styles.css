@@ -2680,8 +2680,8 @@ button {
   .hero__portrait-wrapper {
     width: 845px;
     align-self: flex-end;
-    margin-top: 50px;
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: -50px;
   }
 
   /* About — sticky scroll on mobile (JS drives scrollLeft via RAF lerp) */

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#CCFF00" id="theme-color" />
+  <meta name="theme-color" content="#000000" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -71,6 +71,7 @@
        SECTION 00 — LOADER (fixed overlay, outside site-content)
   ============================================================ -->
   <div id="loader" role="status" aria-label="Loading">
+    <canvas id="loader-starfield" class="loader__starfield" aria-hidden="true"></canvas>
     <div class="loader__progress-wrap">
       <div class="loader__progress-bar" id="loader-progress"></div>
     </div>
@@ -83,7 +84,7 @@
         font-family="'Permanent Marker', cursive"
         font-size="52"
         fill="none"
-        stroke="#000"
+        stroke="#CCFF00"
         stroke-width="1.5"
       >Carter Stoddard</text>
     </svg>

@@ -28,6 +28,12 @@ const Loader = (() => {
     // Show loader
     el.style.display = 'flex';
 
+    // Init starfield on loader canvas
+    var loaderStarfield = document.getElementById('loader-starfield');
+    if (loaderStarfield && typeof Starfield !== 'undefined') {
+      Starfield.init(loaderStarfield);
+    }
+
     // Measure path length
     var pathLength = textEl.getTotalLength ? textEl.getTotalLength() : 2000;
     textEl.style.strokeDasharray = pathLength;
@@ -59,7 +65,7 @@ const Loader = (() => {
 
     // Phase 2: Fill in the text
     tl.to(textEl, {
-      fill: '#000',
+      fill: '#CCFF00',
       duration: 0.4,
       ease: 'power2.out',
     }, '-=0.2');
@@ -85,9 +91,8 @@ const Loader = (() => {
   }
 
   function hideLoader(el) {
-    // Swap theme-color to black so Safari's status bar matches the site
-    var themeColor = document.getElementById('theme-color');
-    if (themeColor) themeColor.setAttribute('content', '#000000');
+    // Destroy loader starfield so main starfield can init clean
+    if (typeof Starfield !== 'undefined') Starfield.destroy();
 
     el.classList.add('hidden');
 

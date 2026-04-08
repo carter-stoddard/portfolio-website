@@ -103,7 +103,7 @@ const Starfield = (() => {
     for (const s of stars) {
       // Twinkle
       s.phase += s.delta;
-      s.alpha = Math.min(1, 0.2 + 0.5 * (0.5 + 0.5 * Math.sin(s.phase)));
+      s.alpha = Math.min(1, 0.3 + 0.55 * (0.5 + 0.5 * Math.sin(s.phase)));
 
       // Larger stars shift more for depth layering
       const depth = s.r / STAR_MAX_R;

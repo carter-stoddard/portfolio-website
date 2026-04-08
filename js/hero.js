@@ -591,12 +591,12 @@ const Hero = (() => {
       if (astro && typeof gsap !== 'undefined') {
         gsap.to(astro, {
           opacity: 1,
-          duration: 0.5,
+          duration: 0.6,
           ease: 'power2.inOut',
-          delay: 1,
+          delay: 1.5,
           yoyo: true,
           repeat: -1,
-          repeatDelay: 1,
+          repeatDelay: 1.5,
         });
       }
       return;

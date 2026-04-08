@@ -208,7 +208,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
   background-color: #000000;
-  touch-action: manipulation;
+  touch-action: pan-x pan-y;
 }
 
 body {
@@ -219,7 +219,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   overscroll-behavior: none;
-  touch-action: manipulation;
+  touch-action: pan-x pan-y;
 }
 
 img {
@@ -2677,7 +2677,7 @@ button {
   }
 
   .hero__scroll-prompt {
-    bottom: 16px;
+    bottom: 14px;
   }
 
   /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */
@@ -3919,11 +3919,11 @@ footer,
   /* Bottom bar — pinned to the very bottom of the footer, on top of astronaut */
   .footer__bottom {
     position: absolute;
-    bottom: 50px;
+    bottom: 5px;
     left: 0;
     right: 0;
     z-index: 4;
-    padding: 20px 20px 28px;
+    padding: 10px 20px;
     text-align: center;
   }
 

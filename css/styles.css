@@ -909,7 +909,7 @@ button {
   position: relative;
   width: 100%;
   height: 100vh;
-  height: 100dvh; /* iOS 15.4+ — actual visible viewport, fixes Safari crop */
+  height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
   min-height: 600px;
   display: flex;
   align-items: center;
@@ -921,9 +921,10 @@ button {
 /* Full-page starfield — fixed behind everything site-wide */
 #starfield-canvas {
   position: fixed;
-  inset: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
   z-index: 0;
 }
 

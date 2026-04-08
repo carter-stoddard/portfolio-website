@@ -3909,7 +3909,7 @@ footer,
     position: absolute !important;
     bottom: 0 !important;
     left: 50% !important;
-    transform: translateX(calc(-50% - 3px)) !important;
+    transform: translateX(calc(-50% + 0px)) !important;
     width: 160vw;
     max-width: none;
     margin: 0;
@@ -3919,18 +3919,18 @@ footer,
   /* Bottom bar — pinned to the very bottom of the footer, on top of astronaut */
   .footer__bottom {
     position: absolute;
-    bottom: 5px;
+    bottom: 2px;
     left: 0;
     right: 0;
     z-index: 4;
-    padding: 10px 20px;
+    padding: 0 20px;
     text-align: center;
   }
 
   .footer__copyright-bar {
     grid-template-columns: 1fr;
     justify-items: center;
-    gap: 12px;
+    gap: 4px;
     text-align: center;
   }
 
@@ -3943,10 +3943,15 @@ footer,
   .footer__legal {
     justify-content: center;
     order: -1;
+    margin-bottom: 2px;
   }
 
   .footer__copyright {
     order: 1;
+  }
+
+  #footer #earth-container {
+    transform: translate(-50%, calc(-50% + 20px));
   }
 }
 

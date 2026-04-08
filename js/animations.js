@@ -68,7 +68,7 @@ const Animations = (() => {
         scrollPrompt.style.animation = 'none';
         scrollPrompt.style.opacity = '1';
       }, { once: true });
-      tl.to(scrollPrompt, { opacity: 0, duration: 0.05 }, 0);
+      tl.to(scrollPrompt, { opacity: 0, duration: 0.15 }, 0);
     }
 
     // Interior zooms in

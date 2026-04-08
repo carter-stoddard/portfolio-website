@@ -538,10 +538,10 @@ button {
    ============================================================ */
 #loader {
   position: fixed;
-  top: -50px;
-  left: -50px;
-  right: -50px;
-  bottom: -50px;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100lvh;
   z-index: var(--z-loader);
   background: var(--color-accent);
   display: flex;
@@ -939,8 +939,7 @@ button {
   position: relative;
   width: 100%;
   height: 100vh;
-  height: 100dvh;
-  height: -webkit-fill-available;
+  height: 100lvh;
   min-height: 600px;
   display: flex;
   align-items: center;
@@ -952,10 +951,10 @@ button {
 /* Full-page starfield — fixed behind everything site-wide */
 #starfield-canvas {
   position: fixed;
-  top: -50px;
-  left: -50px;
-  width: calc(100% + 100px);
-  height: calc(100% + 100px);
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100lvh;
   z-index: 0;
 }
 

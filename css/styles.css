@@ -2682,10 +2682,10 @@ button {
 
   /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */
   .hero__portrait-wrapper {
-    width: 700px;
+    width: 800px;
     align-self: flex-end;
     margin-top: 0;
-    margin-bottom: -30px;
+    margin-bottom: -35px;
   }
 
   /* About — sticky scroll on mobile (JS drives scrollLeft via RAF lerp) */

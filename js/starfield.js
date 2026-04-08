@@ -54,8 +54,8 @@ const Starfield = (() => {
 
     // Use higher density on mobile to avoid bald spots on small canvases
     const isMobile = W < 768;
-    const density  = isMobile ? 0.00042 : STAR_DENSITY;
-    const count    = Math.max(Math.round(W * H * density), isMobile ? 120 : 80);
+    const density  = isMobile ? 0.00012 : STAR_DENSITY;
+    const count    = Math.max(Math.round(W * H * density), isMobile ? 50 : 80);
 
     if (isMobile) {
       // Jittered grid — divide canvas into cells, one star per cell.

@@ -105,14 +105,18 @@ const Animations = (() => {
     }
 
     if (isMobilePortal) {
-      // Mobile — no pin, play portal exit once on scroll, no snap-back risk
+      // Mobile — pin hero and scroll deeper into the marquee zoom
       hero.style.overflow = 'visible';
       ScrollTrigger.create({
         trigger: hero,
         start: 'top top',
-        end: '+=40%',
-        scrub: 1,
+        end: '+=100%',
+        pin: true,
+        scrub: 1.5,
         animation: tl,
+        onUpdate: (self) => {
+          hero.style.overflow = (self.progress > 0 && self.progress < 1) ? 'visible' : 'hidden';
+        },
         onLeave: () => { hero.style.overflow = 'hidden'; },
       });
     } else {

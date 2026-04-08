@@ -3981,7 +3981,7 @@ footer,
   .footer__bg-text {
     position: relative;
     margin-bottom: 0;
-    margin-top: 280px;
+    margin-top: 430px;
     order: 1;
   }
 
@@ -4014,7 +4014,7 @@ footer,
     gap: 40px;
     padding: 0 20px;
     text-align: center;
-    margin-top: 233px;
+    margin-top: 283px;
     order: 3;
   }
 
@@ -4087,7 +4087,7 @@ footer,
   }
 
   #footer #earth-container {
-    transform: translate(-50%, calc(-50% + 75px));
+    transform: translate(-50%, calc(-50% + 125px));
   }
 }
 

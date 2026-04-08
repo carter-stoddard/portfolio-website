@@ -964,7 +964,7 @@ button {
 .hero__marquee-inner {
   flex-shrink: 0;
   white-space: nowrap;
-  font-family: var(--font-heading);
+  font-family: 'Archivo Black', sans-serif;
   font-size: clamp(3.5rem, 7vw, 8rem);
   font-weight: 900;
   color: #FFFFFF;
@@ -975,6 +975,18 @@ button {
 
 .hero__marquee-inner--neon {
   color: var(--color-accent);
+}
+
+/* "LIMITS" — Cormorant Italic, accent color on row 1, white on row 2 */
+.marquee-limits {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.marquee-limits--inv {
+  color: #FFFFFF;
 }
 
 .hero__marquee-dot,
@@ -1381,7 +1393,7 @@ button {
   align-items: stretch;
   height: 100%;
   width: max-content;
-  gap: clamp(4rem, 8vw, 10rem);
+  gap: clamp(3rem, 5vw, 6rem);
   padding: 80px clamp(2rem, 5vw, 6rem);
   will-change: transform;
   transform: translateZ(0);
@@ -1401,27 +1413,27 @@ button {
 .about__card--top    { align-self: flex-start; }
 .about__card--mid    { align-self: center; }
 .about__card--end    { align-self: flex-end; }
-.about__card--offset { align-self: flex-start; margin-top: 0; }
+.about__card--offset { align-self: flex-start; margin-top: 6vh; }
 
 /* ── Width / size variants ─────────────────────────────────── */
-.about__card--tall    { width: clamp(192px, 19.2vw, 312px); }
+.about__card--tall    { width: clamp(200px, 20vw, 320px); }
 .about__card--portrait3x4 { width: clamp(180px, 20vw, 280px); }
 .about__card--portrait3x4 .about__card-img {
   flex: none;
   aspect-ratio: 3 / 4;
   width: 100%;
 }
-.about__card--wide    { width: clamp(280px, 32vw, 440px); }
-.about__card--portrait{ width: clamp(260px, 30vw, 420px); margin-left: calc(-4rem + 100px); align-self: flex-end; }
-.about__card--hero    { width: clamp(192px, 19.2vw, 312px); align-self: flex-end; margin-bottom: 2vh; }
-.about__card--sm      { width: clamp(192px, 19.2vw, 312px); }
-.about__card--sm.about__card--top { width: clamp(240px, 28vw, 380px); }
+.about__card--wide    { width: clamp(280px, 28vw, 400px); }
+.about__card--portrait{ width: clamp(220px, 24vw, 360px); margin-left: 0; align-self: flex-end; }
+.about__card--hero    { width: clamp(200px, 20vw, 320px); align-self: flex-end; margin-bottom: 4vh; }
+.about__card--sm      { width: clamp(200px, 20vw, 320px); }
+.about__card--sm.about__card--top { width: clamp(240px, 26vw, 360px); }
 .about__card--sm.about__card--top .about__card-img {
   flex: none;
   aspect-ratio: 4 / 3;
   width: 100%;
 }
-.about__card--copy    { width: clamp(240px, 26vw, 400px); max-width: 400px; justify-content: center; border-left: 2px solid rgba(204, 255, 0, 0.3); padding-left: 2rem; }
+.about__card--copy    { width: clamp(220px, 22vw, 340px); max-width: 340px; justify-content: center; border-left: 2px solid rgba(204, 255, 0, 0.3); padding-left: 1.5rem; }
 
 /* ── Placeholder image box ─────────────────────────────────── */
 .about__card-img {
@@ -1751,7 +1763,7 @@ button {
 
 .services__heading-accent {
   display: inline;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-accent);
   font-style: italic;
   font-weight: 700;
   font-size: clamp(2.2rem, 5vw, 4rem);
@@ -2704,7 +2716,7 @@ button {
   }
 
   .about__card--portrait {
-    margin-left: 100px;
+    margin-left: 0;
   }
 
   /* Nav adjusts on mobile */
@@ -2827,10 +2839,11 @@ button {
 }
 
 .contact__subtext {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
   margin: 0;
   opacity: 0;
 }
@@ -3677,13 +3690,14 @@ footer,
   z-index: 1;
   pointer-events: none;
   margin-bottom: -60px;
+  margin-top: -20px;
   opacity: 0;
 }
 
 .footer__bg-line1 {
   display: block;
   font-family: var(--font-heading);
-  font-size: clamp(28px, 4.5vw, 64px);
+  font-size: clamp(2.1rem, 6.3vw, 7.35rem);
   font-weight: 900;
   color: var(--color-text);
   text-transform: uppercase;
@@ -3696,7 +3710,7 @@ footer,
   font-family: var(--font-accent);
   font-style: italic;
   font-weight: 700;
-  font-size: clamp(36px, 6vw, 90px);
+  font-size: clamp(2.1rem, 6.3vw, 7.35rem);
   color: var(--color-accent);
   text-transform: uppercase;
   line-height: 1;
@@ -3869,11 +3883,11 @@ footer,
   }
 
   .footer__bg-line1 {
-    font-size: clamp(24px, 8vw, 40px);
+    font-size: clamp(1.5rem, 6.8vw, 7.35rem);
   }
 
   .footer__bg-line2 {
-    font-size: clamp(32px, 10vw, 52px);
+    font-size: clamp(1.5rem, 6.8vw, 7.35rem);
   }
 
   /* Columns — stacked centered, above astronaut */

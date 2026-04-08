@@ -239,8 +239,6 @@ const SUPABASE_TABLE = 'contact_submissions';
   // ----------------------------------------------------------
   // Field success — green checkmark + positive message on blur
   // ----------------------------------------------------------
-  var emailRegexSuccess = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   function showFieldSuccess(input) {
     var field = input.closest('.contact__field');
     if (!field) return;
@@ -252,7 +250,7 @@ const SUPABASE_TABLE = 'contact_submissions';
     var isValid = false;
 
     if (input.type === 'email') {
-      isValid = emailRegexSuccess.test(val);
+      isValid = emailRegex.test(val);
     } else if (input.tagName === 'TEXTAREA') {
       isValid = val.length > 0;
     } else {

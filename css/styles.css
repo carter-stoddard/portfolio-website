@@ -3646,7 +3646,7 @@ button {
 
 #earth-container .clouds {
   animation: rotate-day 50s linear infinite;
-  background-image: url(/assets/images/earth/earth-clouds.jpg);
+  background-image: url(/assets/images/earth/earth-clouds.webp);
   background-size: 200%;
   border-radius: var(--radius-circle);
   height: 100%;

@@ -85,6 +85,10 @@ const Loader = (() => {
   }
 
   function hideLoader(el) {
+    // Swap theme-color to black so Safari's status bar matches the site
+    var themeColor = document.getElementById('theme-color');
+    if (themeColor) themeColor.setAttribute('content', '#000000');
+
     el.classList.add('hidden');
 
     setTimeout(function() {

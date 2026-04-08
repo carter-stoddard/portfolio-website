@@ -2650,6 +2650,15 @@ button {
   padding: 10px 0;
   animation: testimonialScroll 46s linear infinite;
   will-change: transform;
+  cursor: grab;
+}
+
+.test__row:active {
+  cursor: grabbing;
+}
+
+.test__row.is-dragging {
+  animation-play-state: paused;
 }
 
 .test__row:hover {
@@ -2671,6 +2680,8 @@ button {
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
   border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  display: flex;
+  flex-direction: column;
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -2735,6 +2746,11 @@ button {
   color: var(--color-text);
   line-height: 1.6;
   margin: 0 0 1.25rem 0;
+  flex: 1;
+}
+
+.test__card .test__person {
+  margin-top: auto;
 }
 
 /* ── Testimonials Responsive ── */
@@ -3410,6 +3426,13 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.test-modal__person:hover {
+  opacity: 0.8;
 }
 
 .test-modal__avatar {

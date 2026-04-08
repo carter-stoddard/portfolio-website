@@ -152,7 +152,77 @@ document.addEventListener('DOMContentLoaded', () => {
     initCursorGlow('.clients__patch');
     initCursorGlow('.stats__cell');
 
-    // 3. Testimonial card popup modal
+    // 3. Testimonial carousel drag/swipe
+    (function() {
+      var row = document.querySelector('.test__row');
+      var wrap = document.querySelector('.test__row-wrap');
+      if (!row || !wrap) return;
+
+      var isDragging = false;
+      var startX = 0;
+      var scrollLeft = 0;
+      var dragDistance = 0;
+
+      // Get current translateX from the CSS animation
+      function getCurrentTranslateX() {
+        var style = window.getComputedStyle(row);
+        var matrix = new DOMMatrix(style.transform);
+        return matrix.m41;
+      }
+
+      function onDragStart(e) {
+        isDragging = true;
+        dragDistance = 0;
+        startX = (e.touches ? e.touches[0].clientX : e.clientX);
+        scrollLeft = getCurrentTranslateX();
+        row.classList.add('is-dragging');
+        row.style.animation = 'none';
+        row.style.transform = 'translateX(' + scrollLeft + 'px)';
+      }
+
+      function onDragMove(e) {
+        if (!isDragging) return;
+        var x = (e.touches ? e.touches[0].clientX : e.clientX);
+        var walk = x - startX;
+        dragDistance = Math.abs(walk);
+        row.style.transform = 'translateX(' + (scrollLeft + walk) + 'px)';
+      }
+
+      function onDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        row.classList.remove('is-dragging');
+        // Resume auto-scroll from current position
+        var currentX = getCurrentTranslateX();
+        var totalWidth = row.scrollWidth / 2;
+        // Normalize position within the loop range
+        var normalized = ((currentX % totalWidth) + totalWidth) % totalWidth;
+        var progress = normalized / totalWidth;
+        row.style.transform = '';
+        row.style.animation = '';
+        row.style.animationDelay = '-' + (progress * 46) + 's';
+      }
+
+      // Mouse events
+      wrap.addEventListener('mousedown', onDragStart);
+      window.addEventListener('mousemove', onDragMove);
+      window.addEventListener('mouseup', onDragEnd);
+
+      // Touch events
+      wrap.addEventListener('touchstart', onDragStart, { passive: true });
+      window.addEventListener('touchmove', onDragMove, { passive: true });
+      window.addEventListener('touchend', onDragEnd);
+
+      // Prevent card click from firing if user was dragging
+      wrap.addEventListener('click', function(e) {
+        if (dragDistance > 10) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }, true);
+    })();
+
+    // 4. Testimonial card popup modal
     (function() {
       var modal = document.getElementById('test-modal');
       var closeBtn = document.getElementById('test-modal-close');
@@ -164,18 +234,33 @@ document.addEventListener('DOMContentLoaded', () => {
       var companyEl = document.getElementById('test-modal-company');
       if (!modal) return;
 
+      var linkEl = document.getElementById('test-modal-link');
+
       function openTestModal(card) {
         var quote = card.querySelector('.test__card-quote');
         var avatar = card.querySelector('.test__avatar');
         var name = card.querySelector('.test__person-name');
         var title = card.querySelector('.test__person-title');
         var company = card.querySelector('.test__person-company');
+        var linkedin = card.dataset.linkedin || '';
 
         if (quoteEl) quoteEl.textContent = quote ? quote.textContent : '';
         if (avatarEl && avatar) { avatarEl.src = avatar.src; avatarEl.alt = avatar.alt; }
         if (nameEl) nameEl.textContent = name ? name.textContent : '';
         if (titleEl) titleEl.textContent = title ? title.textContent : '';
         if (companyEl) companyEl.textContent = company ? company.textContent : '';
+
+        if (linkEl) {
+          if (linkedin) {
+            linkEl.href = linkedin;
+            linkEl.style.cursor = 'pointer';
+            linkEl.onclick = null;
+          } else {
+            linkEl.href = 'javascript:void(0)';
+            linkEl.style.cursor = 'default';
+            linkEl.onclick = function(e) { e.preventDefault(); };
+          }
+        }
 
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');

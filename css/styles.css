@@ -1484,7 +1484,7 @@ button {
 }
 .about__card--wide    { width: clamp(280px, 28vw, 400px); }
 .about__card--portrait{ width: clamp(220px, 24vw, 360px); margin-left: 75px; align-self: flex-end; }
-.about__card--hero    { width: clamp(200px, 20vw, 320px); align-self: flex-end; margin-bottom: -50px; }
+.about__card--hero    { width: clamp(200px, 20vw, 320px); align-self: flex-end; margin-bottom: -50px; margin-left: -25px; }
 .about__card--sm      { width: clamp(200px, 20vw, 320px); }
 .about__card--sm.about__card--top { width: clamp(240px, 26vw, 360px); }
 .about__card--sm.about__card--top .about__card-img {
@@ -2751,6 +2751,7 @@ button {
 
 .test__card .test__person {
   margin-top: auto;
+  padding-top: 16px;
 }
 
 /* ── Testimonials Responsive ── */

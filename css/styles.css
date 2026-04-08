@@ -4091,7 +4091,7 @@ footer,
   }
 
   #footer #earth-container {
-    transform: translate(-50%, calc(-50% + 125px));
+    transform: translate(-50%, calc(-50% + 185px));
   }
 }
 

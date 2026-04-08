@@ -3968,7 +3968,7 @@ footer,
   footer,
   #footer {
     min-height: auto;
-    padding-top: clamp(60px, 10vw, 100px);
+    padding-top: clamp(0px, 2vw, 20px);
     /* Reserve space at the bottom for the absolute-positioned astronaut (160vw wide) */
     padding-bottom: 130vw;
     display: flex;
@@ -3981,7 +3981,7 @@ footer,
   .footer__bg-text {
     position: relative;
     margin-bottom: 0;
-    margin-top: 205px;
+    margin-top: 280px;
     order: 1;
   }
 

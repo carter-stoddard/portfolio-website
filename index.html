@@ -72,9 +72,23 @@
        Placeholder: 3-2-1 liftoff countdown. Final design TBD.
   ============================================================ -->
   <div id="loader" role="status" aria-label="Loading">
-    <span class="loader__countdown" aria-hidden="true">3</span>
-    <span class="loader__label">Initiating launch sequence</span>
-    <span class="loader__liftoff marker" aria-hidden="true">Liftoff.</span>
+    <div class="loader__progress-wrap">
+      <div class="loader__progress-bar" id="loader-progress"></div>
+    </div>
+    <svg class="loader__signature" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text
+        class="loader__sig-text"
+        x="300"
+        y="65"
+        text-anchor="middle"
+        font-family="'Permanent Marker', cursive"
+        font-size="52"
+        fill="none"
+        stroke="#000"
+        stroke-width="1.5"
+      >Carter Stoddard</text>
+    </svg>
+    <span class="loader__tagline">Full-Stack Creative</span>
   </div>
 
 

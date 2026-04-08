@@ -1,15 +1,12 @@
 /* ============================================================
    SECTION 00 — LOADER
-   3-2-1 countdown → "LIFTOFF" → hide loader, reveal site
-   Placeholder. Final design TBD.
+   Signature hand-drawn stroke + progress bar + tagline
    ============================================================ */
 
 const Loader = (() => {
 
-  const SEQUENCE = ['3', '2', '1'];
-  const STEP_DURATION = 800;       // ms per countdown number
-  const LIFTOFF_HOLD   = 1000;     // ms to hold "LIFTOFF" before hiding
-  const FADE_DURATION  = 800;      // matches CSS transition duration
+  const HOLD_DURATION = 800;
+  const FADE_DURATION = 800;
 
   let onComplete = null;
 
@@ -18,63 +15,79 @@ const Loader = (() => {
     const el = document.getElementById('loader');
     if (!el) { if (callback) callback(); return; }
 
-    // LOADER BYPASSED — skip sequence during development
-    // Remove the two lines below to restore the full 3-2-1 countdown
-    el.style.display = 'none';
-    if (callback) callback();
-    return;
+    const textEl = el.querySelector('.loader__sig-text');
+    const progressBar = document.getElementById('loader-progress');
+    const tagline = el.querySelector('.loader__tagline');
 
-    runSequence(el); // eslint-disable-line no-unreachable
-  }
+    if (!textEl || typeof gsap === 'undefined') {
+      el.style.display = 'none';
+      if (callback) callback();
+      return;
+    }
 
-  function runSequence(el) {
-    const countdown = el.querySelector('.loader__countdown');
-    const liftoff   = el.querySelector('.loader__liftoff');
+    // Show loader
+    el.style.display = 'flex';
 
-    let step = 0;
+    // Measure path length
+    var pathLength = textEl.getTotalLength ? textEl.getTotalLength() : 2000;
+    textEl.style.strokeDasharray = pathLength;
+    textEl.style.strokeDashoffset = pathLength;
 
-    // Show first number immediately
-    countdown.textContent = SEQUENCE[0];
-
-    const interval = setInterval(() => {
-      step++;
-
-      if (step < SEQUENCE.length) {
-        // Pulse out, swap number, pulse in
-        countdown.style.opacity = '0';
-        countdown.style.transform = 'scale(0.85)';
-
-        setTimeout(() => {
-          countdown.textContent = SEQUENCE[step];
-          countdown.style.transition = 'opacity 0.2s ease, transform 0.3s ease';
-          countdown.style.opacity = '1';
-          countdown.style.transform = 'scale(1)';
-        }, 150);
-
-      } else {
-        // Sequence done — show LIFTOFF
-        clearInterval(interval);
-
-        countdown.style.opacity = '0';
-        countdown.style.transform = 'scale(1.2)';
-
-        setTimeout(() => {
-          countdown.style.display = 'none';
-          liftoff.style.transition = 'opacity 0.4s ease';
-          liftoff.style.opacity = '1';
-
-          // Hold liftoff, then hide loader
-          setTimeout(() => hideLoader(el), LIFTOFF_HOLD);
-        }, 300);
+    var tl = gsap.timeline({
+      onComplete: function() {
+        gsap.delayedCall(HOLD_DURATION / 1000, function() {
+          hideLoader(el);
+        });
       }
-    }, STEP_DURATION);
+    });
+
+    // Progress bar — fills across the full animation duration
+    if (progressBar) {
+      tl.to(progressBar, {
+        width: '100%',
+        duration: 1.8,
+        ease: 'power2.inOut',
+      }, 0);
+    }
+
+    // Phase 1: Draw the stroke
+    tl.to(textEl, {
+      strokeDashoffset: 0,
+      duration: 1.2,
+      ease: 'power2.inOut',
+    }, 0);
+
+    // Phase 2: Fill in the text
+    tl.to(textEl, {
+      fill: '#000',
+      duration: 0.4,
+      ease: 'power2.out',
+    }, '-=0.2');
+
+    // Phase 3: Tagline fades in after signature fills
+    if (tagline) {
+      tl.to(tagline, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+      }, '-=0.3');
+
+      gsap.set(tagline, { y: 8 });
+    }
+
+    // Subtle scale settle on signature
+    tl.fromTo(el.querySelector('.loader__signature'),
+      { scale: 0.97 },
+      { scale: 1, duration: 0.8, ease: 'power2.out' },
+      0
+    );
   }
 
   function hideLoader(el) {
     el.classList.add('hidden');
 
-    // Remove from DOM after fade completes
-    setTimeout(() => {
+    setTimeout(function() {
       el.style.display = 'none';
       if (onComplete) onComplete();
     }, FADE_DURATION);

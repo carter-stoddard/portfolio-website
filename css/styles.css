@@ -535,36 +535,53 @@ button {
   position: fixed;
   inset: 0;
   z-index: var(--z-loader);
-  background: var(--color-bg);
-  display: none;
+  background: var(--color-accent);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
+  gap: 8px;
+  overflow: hidden;
 }
 
-.loader__countdown {
-  font-family: var(--font-heading);
-  font-size: clamp(6rem, 20vw, 14rem);
-  color: var(--color-text);
-  line-height: 1;
-  letter-spacing: -0.04em;
+.loader__progress-wrap {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.loader__label {
+.loader__progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #000;
+  border-radius: 2px;
+}
+
+.loader__signature {
+  width: clamp(280px, 60vw, 600px);
+  height: auto;
+}
+
+.loader__sig-text {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+
+.loader__tagline {
   font-family: var(--font-body);
-  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-size: 14px;
   font-weight: 300;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.loader__liftoff {
-  font-family: var(--font-marker);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: var(--color-accent);
+  color: rgba(0, 0, 0, 0.5);
   opacity: 0;
+  margin-top: 4px;
 }
 
 /* Loader hidden state — added by JS after sequence completes */

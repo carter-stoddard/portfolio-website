@@ -1348,6 +1348,16 @@ button {
   margin-bottom: 48px;
 }
 
+.about__subtext {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 12px 0 0;
+  opacity: 0;
+}
+
 .about__label {
   display: block;
   font-family: var(--font-label);
@@ -1393,7 +1403,7 @@ button {
   align-items: stretch;
   height: 100%;
   width: max-content;
-  gap: clamp(3rem, 5vw, 6rem);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
   padding: 80px clamp(2rem, 5vw, 6rem);
   will-change: transform;
   transform: translateZ(0);
@@ -1413,7 +1423,7 @@ button {
 .about__card--top    { align-self: flex-start; }
 .about__card--mid    { align-self: center; }
 .about__card--end    { align-self: flex-end; }
-.about__card--offset { align-self: flex-start; margin-top: 6vh; }
+.about__card--offset { align-self: flex-start; margin-top: -75px; }
 
 /* ── Width / size variants ─────────────────────────────────── */
 .about__card--tall    { width: clamp(200px, 20vw, 320px); }
@@ -1424,8 +1434,8 @@ button {
   width: 100%;
 }
 .about__card--wide    { width: clamp(280px, 28vw, 400px); }
-.about__card--portrait{ width: clamp(220px, 24vw, 360px); margin-left: 0; align-self: flex-end; }
-.about__card--hero    { width: clamp(200px, 20vw, 320px); align-self: flex-end; margin-bottom: 4vh; }
+.about__card--portrait{ width: clamp(220px, 24vw, 360px); margin-left: 75px; align-self: flex-end; }
+.about__card--hero    { width: clamp(200px, 20vw, 320px); align-self: flex-end; margin-bottom: -50px; }
 .about__card--sm      { width: clamp(200px, 20vw, 320px); }
 .about__card--sm.about__card--top { width: clamp(240px, 26vw, 360px); }
 .about__card--sm.about__card--top .about__card-img {
@@ -1434,6 +1444,7 @@ button {
   width: 100%;
 }
 .about__card--copy    { width: clamp(220px, 22vw, 340px); max-width: 340px; justify-content: center; border-left: 2px solid rgba(204, 255, 0, 0.3); padding-left: 1.5rem; }
+.about__card--overlap-left { margin-left: -130px; position: relative; z-index: 5; }
 
 /* ── Placeholder image box ─────────────────────────────────── */
 .about__card-img {
@@ -1494,7 +1505,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(204, 255, 0, 0.6);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .about__caption-text {
@@ -1549,6 +1560,16 @@ button {
   position: relative;
   z-index: 2;
   margin-bottom: 48px;
+}
+
+.stats__subtext {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 12px 0 0;
+  opacity: 0;
 }
 
 .stats__header-label {
@@ -1731,6 +1752,16 @@ button {
 /* ── Header ── */
 .services__header {
   margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.services__subtext {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 12px 0 0;
+  opacity: 0;
 }
 
 .services__label {
@@ -2077,6 +2108,16 @@ button {
   margin-bottom: 48px;
 }
 
+.clients__subtext {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 12px 0 0;
+  opacity: 0;
+}
+
 .clients__label {
   display: block;
   font-family: var(--font-label);
@@ -2363,6 +2404,16 @@ button {
   position: relative;
   z-index: 2;
   margin-bottom: 48px;
+}
+
+.test__subtext {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 12px 0 0;
+  opacity: 0;
 }
 
 .test__header-label {
@@ -2691,6 +2742,19 @@ button {
 
   .hero__scroll-prompt {
     bottom: 14px;
+  }
+
+  /* Reduce section spacing on mobile */
+  #about, #quote, #services, #clients, #testimonials, #contact {
+    padding: 4rem 0;
+  }
+
+  #stats {
+    padding: 4rem 0;
+  }
+
+  .section-spacer {
+    height: 2rem;
   }
 
   /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */

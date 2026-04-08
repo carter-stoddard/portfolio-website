@@ -210,6 +210,7 @@ const Animations = (() => {
     var aboutLabel = section.querySelector('.about__label');
     var aboutHeadMain = section.querySelector('.about__heading-main');
     var aboutHeadAccent = section.querySelector('.about__heading-accent');
+    var aboutSubtext = section.querySelector('.about__subtext');
 
     var headerTl = gsap.timeline({
       scrollTrigger: {
@@ -237,6 +238,13 @@ const Animations = (() => {
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
         '-=0.45'
+      );
+    }
+    if (aboutSubtext) {
+      headerTl.fromTo(aboutSubtext,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        '-=0.2'
       );
     }
 
@@ -400,9 +408,10 @@ const Animations = (() => {
     const statsLabel = section.querySelector('.stats__header-label');
     const statsHeadMain = section.querySelector('.stats__heading-main');
     const statsHeadAccent = section.querySelector('.stats__heading-accent');
+    const statsSubtext = section.querySelector('.stats__subtext');
 
     // Set everything hidden initially
-    var statsHeaderEls = [statsLabel, statsHeadMain, statsHeadAccent].filter(Boolean);
+    var statsHeaderEls = [statsLabel, statsHeadMain, statsHeadAccent, statsSubtext].filter(Boolean);
     gsap.set(statsHeaderEls, { opacity: 0, y: 14 });
     gsap.set(cells, { opacity: 0, y: 20 });
 
@@ -428,6 +437,11 @@ const Animations = (() => {
     if (statsHeadAccent) {
       tl.to(statsHeadAccent,
         { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15
+      );
+    }
+    if (statsSubtext) {
+      tl.to(statsSubtext,
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.2
       );
     }
 
@@ -699,11 +713,12 @@ const Animations = (() => {
     var label = section.querySelector('.services__label');
     var headMain = section.querySelector('.services__heading-main');
     var headAccent = section.querySelector('.services__heading-accent');
+    var subtext = section.querySelector('.services__subtext');
     var cta = section.querySelector('.services__cta');
     var panel = section.querySelector('.services__panel');
 
     // Set everything hidden initially
-    var svcHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    var svcHeaderEls = [label, headMain, headAccent, subtext].filter(Boolean);
     gsap.set(svcHeaderEls, { opacity: 0, y: 14 });
     gsap.set(rows, { opacity: 0, x: -20 });
     if (panel) gsap.set(panel, { opacity: 0, y: 10 });
@@ -719,6 +734,7 @@ const Animations = (() => {
         if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
         if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
         if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+        if (subtext) tl.to(subtext, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.2);
 
         tl.to(rows, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.06 }, 0.25);
 
@@ -740,10 +756,11 @@ const Animations = (() => {
     var label = section.querySelector('.clients__label');
     var headMain = section.querySelector('.clients__heading-main');
     var headAccent = section.querySelector('.clients__heading-accent');
+    var clientSubtext = section.querySelector('.clients__subtext');
     var patches = section.querySelectorAll('.clients__patch');
 
     // Set everything hidden initially
-    var clientHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    var clientHeaderEls = [label, headMain, headAccent, clientSubtext].filter(Boolean);
     gsap.set(clientHeaderEls, { opacity: 0, y: 14 });
     if (patches.length) gsap.set(patches, { opacity: 0, y: 30 });
     var ctaWrap = section.querySelector('.clients__cta-wrap');
@@ -759,6 +776,7 @@ const Animations = (() => {
         if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
         if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
         if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+        if (clientSubtext) tl.to(clientSubtext, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.2);
 
         if (patches.length) {
           tl.to(patches, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.07 }, 0.25);
@@ -782,12 +800,13 @@ const Animations = (() => {
     var label = section.querySelector('.test__header-label');
     var headMain = section.querySelector('.test__heading-main');
     var headAccent = section.querySelector('.test__heading-accent');
+    var testSubtext = section.querySelector('.test__subtext');
     var featured = section.querySelector('.test__featured');
     var quoteLines = section.querySelectorAll('.test__quote-line');
     var rowWrap = section.querySelector('.test__row-wrap');
 
     // Set everything hidden initially
-    var testHeaderEls = [label, headMain, headAccent].filter(Boolean);
+    var testHeaderEls = [label, headMain, headAccent, testSubtext].filter(Boolean);
     gsap.set(testHeaderEls, { opacity: 0, y: 14 });
     if (featured) gsap.set(featured, { opacity: 0, y: 16 });
     if (quoteLines.length) gsap.set(quoteLines, { opacity: 0, y: 20 });
@@ -803,6 +822,7 @@ const Animations = (() => {
         if (label) tl.to(label, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
         if (headMain) tl.to(headMain, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.1);
         if (headAccent) tl.to(headAccent, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.15);
+        if (testSubtext) tl.to(testSubtext, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.2);
 
         if (featured) tl.to(featured, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.2);
 

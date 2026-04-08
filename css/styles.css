@@ -2794,8 +2794,12 @@ button {
   }
 
   /* Reduce section spacing on mobile */
-  #about, #quote, #services, #clients, #testimonials, #contact {
+  #about, #quote, #services, #clients, #testimonials {
     padding: 4rem 0;
+  }
+
+  #contact {
+    padding: 4rem 0 1rem;
   }
 
   #stats {
@@ -2803,7 +2807,7 @@ button {
   }
 
   .section-spacer {
-    height: 2rem;
+    height: 1rem;
   }
 
   /* Portrait — anchored to bottom of hero on mobile so no crop gap shows */
@@ -4014,7 +4018,7 @@ footer,
     gap: 40px;
     padding: 0 20px;
     text-align: center;
-    margin-top: 283px;
+    margin-top: 258px;
     order: 3;
   }
 

@@ -3754,7 +3754,7 @@ footer,
   z-index: 1;
   pointer-events: none;
   margin-bottom: -60px;
-  margin-top: -20px;
+  margin-top: -70px;
   opacity: 0;
 }
 
@@ -3961,7 +3961,7 @@ footer,
     gap: 40px;
     padding: 0 20px;
     text-align: center;
-    margin-top: 48px;
+    margin-top: 108px;
     order: 3;
   }
 
@@ -4029,8 +4029,12 @@ footer,
     order: 1;
   }
 
+  .about__card--hero {
+    margin-bottom: -75px;
+  }
+
   #footer #earth-container {
-    transform: translate(-50%, calc(-50% + 20px));
+    transform: translate(-50%, calc(-50% + 75px));
   }
 }
 

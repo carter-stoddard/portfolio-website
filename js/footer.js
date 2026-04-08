@@ -51,7 +51,7 @@
         <span class="footer__col-label">CONNECT</span>
         <div class="footer__col-links">
           <a href="https://www.linkedin.com/in/carterstoddard/" class="footer__col-link" target="_blank" rel="noopener">LINKEDIN</a>
-          <a href="mailto:contact@carterstoddard.com" class="footer__col-link">EMAIL</a>
+          <a href="mailto:carter@carterstoddard.com" class="footer__col-link">EMAIL</a>
         </div>
       </div>
 

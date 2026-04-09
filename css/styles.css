@@ -2935,6 +2935,13 @@ button {
     gap: 8px;
   }
 
+  .nav__logo-first {
+    font-size: 22px;
+  }
+  .nav__logo-last {
+    font-size: 13px;
+  }
+
   .nav__portfolio-btn {
     padding: 0 14px;
     font-size: 11px;

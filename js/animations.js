@@ -65,6 +65,14 @@ const Animations = (() => {
       tl.to(scrollPrompt, { opacity: 0, duration: 0.15 }, 0);
     }
 
+    // Nav logo — fade out on scroll (mobile only)
+    if (isMobilePortal) {
+      var navLogo = document.querySelector('.nav__logo');
+      if (navLogo) {
+        tl.to(navLogo, { opacity: 0, duration: 0.15 }, 0);
+      }
+    }
+
     // Interior zooms in
     tl.to(interior, { scale: 6.5, duration: 1 }, 0)
 

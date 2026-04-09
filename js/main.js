@@ -103,7 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    Animations.heroEntrance();
+    // Start hero FIRST so WebGL renders before the wrapper fades in
+    var heroReady = (typeof Hero !== 'undefined') ? Hero.start() : Promise.resolve();
+    heroReady.then(function() {
+      Animations.heroEntrance();
+    });
+
     Animations.quoteReveal();
     Animations.aboutScroll();
     Animations.statsReveal();
@@ -112,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Animations.testimonialsReveal();
     Animations.contactReveal();
     Animations.footerReveal();
-    if (typeof Hero !== 'undefined') Hero.start();
 
     // Recalculate ScrollTrigger positions once images/fonts are fully loaded
     window.addEventListener('load', function() {
@@ -246,7 +250,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (quoteEl) quoteEl.textContent = quote ? quote.textContent : '';
         if (avatarEl && avatar) { avatarEl.src = avatar.src; avatarEl.alt = avatar.alt; }
-        if (nameEl) nameEl.textContent = name ? name.textContent : '';
+        var nameText = name ? name.textContent.replace(/\s*$/, '') : '';
+        if (nameEl) {
+          if (linkedin) {
+            nameEl.innerHTML = nameText + ' <svg class="test-modal__linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+          } else {
+            nameEl.textContent = nameText;
+          }
+        }
         if (titleEl) titleEl.textContent = title ? title.textContent : '';
         if (companyEl) companyEl.textContent = company ? company.textContent : '';
 
@@ -273,6 +284,14 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
+
+      // Inject LinkedIn icon on carousel cards that have a LinkedIn URL
+      document.querySelectorAll('.test__row .test__card[data-linkedin]').forEach(function(card) {
+        var nameEl = card.querySelector('.test__person-name');
+        if (nameEl && !nameEl.querySelector('.test__linkedin-icon')) {
+          nameEl.innerHTML = nameEl.textContent + ' <svg class="test__linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+        }
+      });
 
       // Inject 5 stars into every carousel card
       document.querySelectorAll('.test__row .test__card').forEach(function(card) {

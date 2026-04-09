@@ -576,6 +576,7 @@ const Hero = (() => {
   }
 
   // start() — call after loader completes. Textures already loading/loaded.
+  // Returns a Promise that resolves once the first frame is ready.
   function start() {
     if (isMobileHero) {
       // No WebGL on mobile — too heavy, causes layer detachment on pinch.
@@ -599,12 +600,18 @@ const Hero = (() => {
           repeatDelay: 1.5,
         });
       }
-      return;
+      return Promise.resolve();
     }
     if (!_texturesPromise) preload();
-    _texturesPromise
-      .then(([base, astro]) => init(base, astro))
-      .catch(err => console.error('Hero: Texture load failed:', err));
+    return _texturesPromise
+      .then(([base, astro]) => {
+        init(base, astro);
+        // Wait one frame so the WebGL canvas renders before fade-in
+        return new Promise(resolve => requestAnimationFrame(resolve));
+      })
+      .catch(err => {
+        console.error('Hero: Texture load failed:', err);
+      });
   }
 
   function destroy() {

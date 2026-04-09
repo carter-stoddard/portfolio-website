@@ -15,11 +15,11 @@ const Loader = (() => {
     const el = document.getElementById('loader');
     if (!el) { if (callback) callback(); return; }
 
-    const textEl = el.querySelector('.loader__sig-text');
+    const nameEl = el.querySelector('.loader__name');
     const progressBar = document.getElementById('loader-progress');
     const tagline = el.querySelector('.loader__tagline');
 
-    if (!textEl || typeof gsap === 'undefined') {
+    if (!nameEl || typeof gsap === 'undefined') {
       el.style.display = 'none';
       if (callback) callback();
       return;
@@ -35,11 +35,6 @@ const Loader = (() => {
     if (loaderStarfield && typeof Starfield !== 'undefined') {
       Starfield.init(loaderStarfield);
     }
-
-    // Measure path length
-    var pathLength = textEl.getTotalLength ? textEl.getTotalLength() : 2000;
-    textEl.style.strokeDasharray = pathLength;
-    textEl.style.strokeDashoffset = pathLength;
 
     // Preload hero portrait images while loader plays
     var heroImages = [
@@ -79,38 +74,21 @@ const Loader = (() => {
       }, 0);
     }
 
-    // Phase 1: Draw the stroke
-    tl.to(textEl, {
-      strokeDashoffset: 0,
-      duration: 1.2,
-      ease: 'power2.inOut',
-    }, 0);
-
-    // Phase 2: Fill in the text
-    tl.to(textEl, {
-      fill: '#CCFF00',
-      duration: 0.4,
-      ease: 'power2.out',
-    }, '-=0.2');
-
-    // Phase 3: Tagline fades in after signature fills
-    if (tagline) {
-      tl.to(tagline, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      }, '-=0.3');
-
-      gsap.set(tagline, { y: 8 });
-    }
-
-    // Subtle scale settle on signature
-    tl.fromTo(el.querySelector('.loader__signature'),
-      { scale: 0.97 },
-      { scale: 1, duration: 0.8, ease: 'power2.out' },
-      0
+    // Cinematic slow reveal — starts small and grows as it fades in
+    tl.fromTo(nameEl,
+      { opacity: 0, scale: 0.4 },
+      { opacity: 1, scale: 1, duration: 2.2, ease: 'power2.out' },
+      0.3
     );
+
+    if (tagline) {
+      gsap.set(tagline, { y: 6 });
+      tl.fromTo(tagline,
+        { opacity: 0 },
+        { opacity: 1, y: 0, duration: 1.4, ease: 'power1.out' },
+        0.8
+      );
+    }
   }
 
   function hideLoader(el) {

@@ -18,19 +18,13 @@ const Animations = (() => {
 
     const tl = gsap.timeline({ delay: 0.1 });
 
+    // Porthole + portrait visible immediately — no opacity fade so marquee doesn't bleed through
+    gsap.set('.hero__porthole', { opacity: 1 });
+    gsap.set('.hero__portrait-wrapper', { opacity: 1 });
+
     tl.fromTo('#nav',
       { opacity: 0, y: -16 },
       { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
-    )
-    .fromTo('.hero__porthole',
-      { opacity: 0, scale: 0.94 },
-      { opacity: 1, scale: 1, duration: 1.3, ease: 'power3.out' },
-      '-=0.4'
-    )
-    .fromTo('.hero__portrait-wrapper',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
-      '-=1.0'
     );
 
     setupPortalScroll();

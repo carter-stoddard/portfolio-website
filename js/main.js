@@ -103,20 +103,20 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Start hero FIRST so WebGL renders before the wrapper fades in
+    // Start hero FIRST so WebGL renders before the wrapper fades in,
+    // then init all ScrollTrigger animations AFTER hero pin is established
     var heroReady = (typeof Hero !== 'undefined') ? Hero.start() : Promise.resolve();
     heroReady.then(function() {
       Animations.heroEntrance();
+      Animations.quoteReveal();
+      Animations.aboutScroll();
+      Animations.statsReveal();
+      Animations.servicesReveal();
+      Animations.clientsGrid();
+      Animations.testimonialsReveal();
+      Animations.contactReveal();
+      Animations.footerReveal();
     });
-
-    Animations.quoteReveal();
-    Animations.aboutScroll();
-    Animations.statsReveal();
-    Animations.servicesReveal();
-    Animations.clientsGrid();
-    Animations.testimonialsReveal();
-    Animations.contactReveal();
-    Animations.footerReveal();
 
     // Recalculate ScrollTrigger positions once images/fonts are fully loaded
     window.addEventListener('load', function() {

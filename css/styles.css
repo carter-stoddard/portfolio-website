@@ -609,16 +609,31 @@ button {
   border-radius: 2px;
 }
 
-.loader__signature {
-  width: clamp(280px, 60vw, 600px);
-  height: auto;
+.loader__name {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+  opacity: 0;
 }
-
-.loader__sig-text {
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
+.loader__name-first {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(64px, 14vw, 140px);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.loader__name-last {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(38px, 8vw, 82px);
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
 }
 
 .loader__tagline {
@@ -687,6 +702,36 @@ button {
 }
 .nav__wordmark:hover {
   opacity: 0.7;
+}
+
+/* ── Nav logo — stacked first/last name ── */
+.nav__logo {
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.nav__logo:hover {
+  opacity: 0.7;
+}
+.nav__logo-first {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 44px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.nav__logo-last {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
 }
 
 /* Elevate nav above overlay when menu is open so X button is clickable */

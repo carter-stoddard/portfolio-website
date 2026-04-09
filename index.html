@@ -83,19 +83,10 @@
     <div class="loader__progress-wrap">
       <div class="loader__progress-bar" id="loader-progress"></div>
     </div>
-    <svg class="loader__signature" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <text
-        class="loader__sig-text"
-        x="300"
-        y="65"
-        text-anchor="middle"
-        font-family="'Permanent Marker', cursive"
-        font-size="52"
-        fill="none"
-        stroke="#CCFF00"
-        stroke-width="1.5"
-      >Carter Stoddard</text>
-    </svg>
+    <div class="loader__name" aria-hidden="true">
+      <span class="loader__name-first">Carter</span>
+      <span class="loader__name-last">Stoddard</span>
+    </div>
     <span class="loader__tagline">Full-Stack Creative</span>
   </div>
 
@@ -108,6 +99,10 @@
        Top-right. No logo for now.
   ============================================================ -->
   <nav id="nav" aria-label="Main navigation">
+    <a href="/" class="nav__logo" aria-label="Carter Stoddard — Home">
+      <span class="nav__logo-first">Carter</span>
+      <span class="nav__logo-last">Stoddard</span>
+    </a>
     <!-- Portfolio nav hidden while page is under construction -->
     <!-- <a href="portfolio.html" class="nav__portfolio-btn">
       <span class="nav__status-dot"></span>

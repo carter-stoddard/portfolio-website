@@ -25,8 +25,10 @@ const Loader = (() => {
       return;
     }
 
-    // Show loader
+    // Show loader, lock scroll
     el.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
 
     // Init starfield on loader canvas
     var loaderStarfield = document.getElementById('loader-starfield');
@@ -39,10 +41,31 @@ const Loader = (() => {
     textEl.style.strokeDasharray = pathLength;
     textEl.style.strokeDashoffset = pathLength;
 
+    // Preload hero portrait images while loader plays
+    var heroImages = [
+      'assets/images/portrait-base-desktop.webp',
+      'assets/images/portrait-astronaut-desktop.webp'
+    ];
+    var imagesLoaded = false;
+    var animationDone = false;
+
+    Promise.all(heroImages.map(function(src) {
+      return new Promise(function(resolve) {
+        var img = new Image();
+        img.onload = resolve;
+        img.onerror = resolve;
+        img.src = src;
+      });
+    })).then(function() {
+      imagesLoaded = true;
+      if (animationDone) hideLoader(el);
+    });
+
     var tl = gsap.timeline({
       onComplete: function() {
         gsap.delayedCall(HOLD_DURATION / 1000, function() {
-          hideLoader(el);
+          animationDone = true;
+          if (imagesLoaded) hideLoader(el);
         });
       }
     });
@@ -91,7 +114,9 @@ const Loader = (() => {
   }
 
   function hideLoader(el) {
-    // Destroy loader starfield so main starfield can init clean
+    // Unlock scroll, destroy loader starfield
+    document.body.style.overflow = '';
+    window.scrollTo(0, 0);
     if (typeof Starfield !== 'undefined') Starfield.destroy();
 
     el.classList.add('hidden');

@@ -611,6 +611,8 @@ const Hero = (() => {
       })
       .catch(err => {
         console.error('Hero: Texture load failed:', err);
+        // Resolve anyway so animations still initialize
+        return Promise.resolve();
       });
   }
 

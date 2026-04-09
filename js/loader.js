@@ -7,8 +7,10 @@ const Loader = (() => {
 
   const HOLD_DURATION = 800;
   const FADE_DURATION = 800;
+  const MAX_LOADER_MS = 8000; // Safety timeout — loader never stays longer than 8s
 
   let onComplete = null;
+  let loaderHidden = false;
 
   function init(callback) {
     onComplete = callback;
@@ -56,6 +58,9 @@ const Loader = (() => {
       if (animationDone) hideLoader(el);
     });
 
+    // Safety timeout — if something stalls, force the loader away
+    setTimeout(function() { hideLoader(el); }, MAX_LOADER_MS);
+
     var tl = gsap.timeline({
       onComplete: function() {
         gsap.delayedCall(HOLD_DURATION / 1000, function() {
@@ -92,6 +97,8 @@ const Loader = (() => {
   }
 
   function hideLoader(el) {
+    if (loaderHidden) return; // prevent double-call
+    loaderHidden = true;
     // Unlock scroll, destroy loader starfield
     document.body.style.overflow = '';
     window.scrollTo(0, 0);

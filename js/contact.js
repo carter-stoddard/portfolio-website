@@ -191,10 +191,7 @@ const SUPABASE_TABLE = 'contact_submissions';
       );
     }
 
-    // Show confirmation immediately — don't make user wait on network
-    showSuccess();
-
-    // Supabase REST API insert (best-effort, runs in background)
+    // Supabase REST API insert
     fetch(SUPABASE_URL + '/rest/v1/' + SUPABASE_TABLE, {
       method: 'POST',
       headers: {
@@ -208,10 +205,17 @@ const SUPABASE_TABLE = 'contact_submissions';
       if (!response.ok) {
         return response.json().catch(function() { return {}; }).then(function(errBody) {
           console.warn('[contact] Supabase insert failed:', errBody.message || response.status);
+          if (submitError) submitError.textContent = 'Something went wrong. Please try again.';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'LAUNCH';
         });
       }
+      showSuccess();
     }).catch(function(err) {
       console.warn('[contact] Supabase insert error:', err);
+      if (submitError) submitError.textContent = 'Network error. Please check your connection.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'LAUNCH';
     });
   });
 

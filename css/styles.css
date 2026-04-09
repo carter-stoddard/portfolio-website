@@ -425,7 +425,7 @@ button {
   width: 100%;
   max-width: 340px;
   margin: 0 auto 14px;
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: var(--radius-card, 4px);
   background: rgba(255, 255, 255, 0.03);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -438,7 +438,7 @@ button {
   bottom: 0;
   width: 16px;
   height: 16px;
-  border-color: rgba(204, 255, 0, 0.6);
+  border-color: rgba(204, 255, 0, 1);
   border-style: solid;
   transition: border-color 0.3s ease;
 }
@@ -973,9 +973,19 @@ button {
 
 .menu-overlay__tagline {
   margin-top: 48px;
-  font-family: var(--font-accent);
-  font-style: italic;
   font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.menu-overlay__tagline-main {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-text);
+}
+.menu-overlay__tagline-accent {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-style: italic;
   color: var(--color-accent);
 }
 
@@ -1562,7 +1572,7 @@ button {
   aspect-ratio: 4 / 3;
   width: 100%;
 }
-.about__card--copy    { width: clamp(220px, 22vw, 340px); max-width: 340px; justify-content: center; border-left: 2px solid rgba(204, 255, 0, 0.3); padding-left: 1.5rem; }
+.about__card--copy    { width: clamp(220px, 22vw, 340px); max-width: 340px; justify-content: center; border-left: 2px solid rgba(204, 255, 0, 1); padding-left: 1.5rem; }
 .about__card--overlap-left { margin-left: -130px; position: relative; z-index: 5; }
 
 /* ── Placeholder image box ─────────────────────────────────── */
@@ -1753,7 +1763,7 @@ button {
   padding: clamp(2rem, 3.5vw, 3rem) clamp(1rem, 2vw, 2rem);
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -1770,8 +1780,8 @@ button {
   left: 0;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-left: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 0 var(--radius-card);
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -1785,8 +1795,8 @@ button {
   right: 0;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-right: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 var(--radius-card) 0;
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -1943,7 +1953,7 @@ button {
   gap: 1rem;
   padding: clamp(0.75rem, 1.2vw, 1rem) 0;
   border: none;
-  border-bottom: 1px solid rgba(204, 255, 0, 0.2);
+  border-bottom: 1px solid rgba(204, 255, 0, 1);
   border-left: 2px solid transparent;
   background: none;
   cursor: pointer;
@@ -1954,7 +1964,7 @@ button {
 }
 
 .services__row:first-child {
-  border-top: 1px solid rgba(204, 255, 0, 0.2);
+  border-top: 1px solid rgba(204, 255, 0, 1);
 }
 
 .services__num {
@@ -2026,7 +2036,7 @@ button {
   border-radius: 0;
   background: transparent;
   border: none;
-  border-left: 2px solid rgba(204, 255, 0, 0.4);
+  border-left: 2px solid rgba(204, 255, 0, 1);
 }
 
 /* Hover — brighten all bracket elements + blink */
@@ -2076,11 +2086,11 @@ button {
 }
 
 .services__acc-item {
-  border-bottom: 1px solid rgba(204, 255, 0, 0.2);
+  border-bottom: 1px solid rgba(204, 255, 0, 1);
 }
 
 .services__acc-item:first-child {
-  border-top: 1px solid rgba(204, 255, 0, 0.2);
+  border-top: 1px solid rgba(204, 255, 0, 1);
 }
 
 .services__acc-trigger {
@@ -2288,7 +2298,7 @@ button {
   position: relative;
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -2314,8 +2324,8 @@ button {
   left: 0;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-left: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 0 var(--radius-card);
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -2329,8 +2339,8 @@ button {
   right: 0;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-right: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 var(--radius-card) 0;
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -2592,7 +2602,7 @@ button {
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -2608,8 +2618,8 @@ button {
   left: 0;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-left: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 0 var(--radius-card);
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -2623,8 +2633,8 @@ button {
   right: 0;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-right: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 var(--radius-card) 0;
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -2751,7 +2761,7 @@ button {
   padding: 28px;
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.04);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   display: flex;
   flex-direction: column;
   border-right: none;
@@ -2779,8 +2789,8 @@ button {
   left: 0;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-left: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 0 var(--radius-card);
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -2794,8 +2804,8 @@ button {
   right: 0;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-right: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 var(--radius-card) 0;
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -3122,7 +3132,7 @@ button {
   position: relative;
   background: rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-card);
-  border-top: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-top: 1.5px solid rgba(204, 255, 0, 1);
   border-right: none;
   border-bottom: none;
   border-left: none;
@@ -3141,8 +3151,8 @@ button {
   left: 0;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-left: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 0 var(--radius-card);
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -3156,8 +3166,8 @@ button {
   right: 0;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(204, 255, 0, 0.6);
-  border-bottom: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-right: 1.5px solid rgba(204, 255, 0, 1);
+  border-bottom: 1.5px solid rgba(204, 255, 0, 1);
   border-radius: 0 0 var(--radius-card) 0;
   pointer-events: none;
   transition: border-color 0.3s ease;
@@ -3234,7 +3244,7 @@ button {
 
 .contact__pill.is-selected {
   background: rgba(204, 255, 0, 0.12);
-  border: 1px solid rgba(204, 255, 0, 0.6);
+  border: 1px solid rgba(204, 255, 0, 1);
   color: var(--color-accent);
 }
 
@@ -3386,7 +3396,7 @@ button {
 .contact__success-email {
   color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(204, 255, 0, 0.3);
+  border-bottom: 1px solid rgba(204, 255, 0, 1);
   transition: border-color 0.2s ease;
 }
 
@@ -3430,8 +3440,8 @@ button {
   position: relative;
   z-index: 1;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(204, 255, 0, 0.25);
-  border-top: 2px solid rgba(204, 255, 0, 0.6);
+  border: 1px solid rgba(204, 255, 0, 1);
+  border-top: 2px solid rgba(204, 255, 0, 1);
   border-radius: var(--radius-card);
   padding: clamp(40px, 6vw, 64px) clamp(32px, 5vw, 56px);
   max-width: 580px;
@@ -3462,7 +3472,7 @@ button {
 }
 
 .test-modal__close:hover {
-  border-color: rgba(204, 255, 0, 0.6);
+  border-color: rgba(204, 255, 0, 1);
 }
 
 .test-modal__close span {
@@ -3543,7 +3553,7 @@ button {
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid rgba(204, 255, 0, 0.3);
+  border: 1px solid rgba(204, 255, 0, 1);
 }
 
 .test-modal__name {
@@ -3607,7 +3617,7 @@ button {
   position: relative;
   z-index: 1;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(204, 255, 0, 0.25);
+  border: 1px solid rgba(204, 255, 0, 1);
   border-radius: var(--radius-card);
   padding: clamp(40px, 6vw, 72px) clamp(32px, 6vw, 72px);
   max-width: 560px;
@@ -3639,7 +3649,7 @@ button {
 }
 
 .mission-modal__close:hover {
-  border-color: rgba(204, 255, 0, 0.6);
+  border-color: rgba(204, 255, 0, 1);
 }
 
 .mission-modal__close span {
@@ -3717,7 +3727,7 @@ button {
 .mission-modal__email {
   color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(204, 255, 0, 0.3);
+  border-bottom: 1px solid rgba(204, 255, 0, 1);
   transition: border-color 0.2s ease;
 }
 

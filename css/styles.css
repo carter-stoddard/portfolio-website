@@ -2576,14 +2576,15 @@ button {
   font-family: var(--font-accent);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: clamp(18px, 2.2vw, 28px);
   color: var(--color-text);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .test__quote-line {
   display: block;
   opacity: 0;
+  margin-bottom: 4px;
 }
 
 /* ── Person row — shared between featured + cards ── */
@@ -2773,7 +2774,7 @@ button {
   }
 
   .test__featured-quote {
-    font-size: clamp(20px, 5vw, 28px);
+    font-size: clamp(15px, 4vw, 20px);
   }
 
   .test__header-label {

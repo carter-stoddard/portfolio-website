@@ -11,8 +11,8 @@ const SUPABASE_TABLE = 'contact_submissions';
   var form = document.getElementById('contact-form');
   var submitBtn = document.getElementById('contact-submit');
   var submitError = document.getElementById('contact-submit-error');
+  if (!form) return;
   var modal = document.getElementById('mission-modal');
-  if (!form || !modal) return;
 
   var formLoadTime = Date.now();
 
@@ -22,7 +22,7 @@ const SUPABASE_TABLE = 'contact_submissions';
   // Modal open/close handled by inline onclick in HTML
   // Escape key to close
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+    if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
       modal.style.opacity = '0';
       modal.style.visibility = 'hidden';
       modal.style.pointerEvents = 'none';

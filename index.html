@@ -942,7 +942,7 @@
         </div>
 
         <!-- Submit -->
-        <button type="submit" class="glass-btn contact__submit" id="contact-submit">
+        <button type="submit" class="glass-btn contact__submit" id="contact-submit" onclick="var fn=document.getElementById('contact-first-name').value.trim(),ln=document.getElementById('contact-last-name').value.trim(),em=document.getElementById('contact-email').value.trim(),co=document.getElementById('contact-company').value.trim(),ro=document.getElementById('contact-role').value.trim(),pills=document.querySelectorAll('.contact__pill.is-selected').length,consent=document.getElementById('contact-consent').checked;if(fn&&ln&&em&&em.includes('@')&&co&&ro&&pills>0&&consent){var m=document.getElementById('mission-modal');m.style.opacity='1';m.style.visibility='visible';m.style.pointerEvents='all';m.classList.add('is-open');document.body.style.overflow='hidden';}">
           LAUNCH
         </button>
 
@@ -1104,17 +1104,17 @@
 
   <!-- ── Mission Accepted Modal ── -->
   <div id="mission-modal" class="mission-modal" role="dialog" aria-modal="true" aria-labelledby="mission-modal-heading" aria-hidden="true">
-    <div class="mission-modal__backdrop"></div>
+    <div class="mission-modal__backdrop" onclick="var m=document.getElementById('mission-modal');m.style.opacity='0';m.style.visibility='hidden';m.style.pointerEvents='none';m.classList.remove('is-open');document.body.style.overflow=''"></div>
     <div class="mission-modal__card">
-      <button class="mission-modal__close" id="mission-modal-close" aria-label="Close">
+      <button class="mission-modal__close" id="mission-modal-close" aria-label="Close" onclick="var m=document.getElementById('mission-modal');m.style.opacity='0';m.style.visibility='hidden';m.style.pointerEvents='none';m.classList.remove('is-open');document.body.style.overflow=''">
         <span></span><span></span>
       </button>
-      <span class="mission-modal__label">TRANSMISSION RECEIVED <span class="mission-modal__dot" aria-hidden="true"></span></span>
+      <span class="mission-modal__label">SIGNAL CONFIRMED <span class="mission-modal__dot" aria-hidden="true"></span></span>
       <h2 class="mission-modal__heading" id="mission-modal-heading">
-        <span class="mission-modal__heading-main">MISSION</span>
-        <span class="mission-modal__heading-accent">Accepted.</span>
+        <span class="mission-modal__heading-main">YOU'RE ON</span>
+        <span class="mission-modal__heading-accent">THE RADAR.</span>
       </h2>
-      <p class="mission-modal__body">I'll review your brief and get back to you within 48 hours.<br>In the meantime, reach me directly at<br><a href="mailto:carter@carterstoddard.com" class="mission-modal__email">carter@carterstoddard.com</a></p>
+      <p class="mission-modal__body">You're officially on the radar. I'll reach out within 24-48 hours to get things moving.<br>In the meantime, reach me directly at<br><a href="mailto:carter@carterstoddard.com" class="mission-modal__email">carter@carterstoddard.com</a></p>
     </div>
   </div>
 

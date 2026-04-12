@@ -3,60 +3,33 @@
    Form validation, service pill toggling, and Supabase submission.
    ============================================================ */
 
-// ============================================================
-// SUPABASE CREDENTIALS
-// Found in: Supabase Dashboard → Project Settings → API
-// ============================================================
 const SUPABASE_URL = 'https://bzvjguwpayeelmctvboi.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6dmpndXdwYXllZWxtY3R2Ym9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzkzMDksImV4cCI6MjA4OTU1NTMwOX0.R45g0zsVRJyml-jxPZ1jTIWdNSSHQn1r-RxIaYRSzaQ';
 const SUPABASE_TABLE = 'contact_submissions';
 
-
-(function contactForm() {
+(function() {
   var form = document.getElementById('contact-form');
   var submitBtn = document.getElementById('contact-submit');
   var submitError = document.getElementById('contact-submit-error');
-  var successBlock = document.getElementById('contact-success');
   var modal = document.getElementById('mission-modal');
-  var modalClose = document.getElementById('mission-modal-close');
-  if (!form) return;
+  if (!form || !modal) return;
 
-  // ----------------------------------------------------------
-  // Bot protection — honeypot + timing
-  // ----------------------------------------------------------
   var formLoadTime = Date.now();
-  var MIN_FILL_MS = 3000; // under 3s = almost certainly a bot
 
   // ----------------------------------------------------------
   // Modal open / close
   // ----------------------------------------------------------
-  function openModal() {
-    if (!modal) return;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    if (modalClose) modalClose.focus();
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
-  }
-
-  if (modal) {
-    // Close on backdrop click
-    modal.querySelector('.mission-modal__backdrop').addEventListener('click', closeModal);
-    // Close on Escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-    });
-  }
+  // Modal open/close handled by inline onclick in HTML
+  // Escape key to close
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      modal.style.opacity = '0';
+      modal.style.visibility = 'hidden';
+      modal.style.pointerEvents = 'none';
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  });
 
   // ----------------------------------------------------------
   // Service pill toggling
@@ -72,14 +45,12 @@ const SUPABASE_TABLE = 'contact_submissions';
   }
 
   // ----------------------------------------------------------
-  // Validation helpers
+  // Validation
   // ----------------------------------------------------------
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function clearErrors() {
-    form.querySelectorAll('.contact__error').forEach(function(el) {
-      el.textContent = '';
-    });
+    form.querySelectorAll('.contact__error').forEach(function(el) { el.textContent = ''; });
     if (submitError) submitError.textContent = '';
   }
 
@@ -92,45 +63,22 @@ const SUPABASE_TABLE = 'contact_submissions';
     clearErrors();
     var valid = true;
 
-    // First name
     var firstName = document.getElementById('contact-first-name');
-    if (!firstName.value.trim()) {
-      showError(firstName, 'First name is required.');
-      valid = false;
-    }
+    if (!firstName.value.trim()) { showError(firstName, 'First name is required.'); valid = false; }
 
-    // Last name
     var lastName = document.getElementById('contact-last-name');
-    if (!lastName.value.trim()) {
-      showError(lastName, 'Last name is required.');
-      valid = false;
-    }
+    if (!lastName.value.trim()) { showError(lastName, 'Last name is required.'); valid = false; }
 
-    // Email
     var email = document.getElementById('contact-email');
-    if (!email.value.trim()) {
-      showError(email, 'Email is required.');
-      valid = false;
-    } else if (!emailRegex.test(email.value.trim())) {
-      showError(email, 'Please enter a valid email address.');
-      valid = false;
-    }
+    if (!email.value.trim()) { showError(email, 'Email is required.'); valid = false; }
+    else if (!emailRegex.test(email.value.trim())) { showError(email, 'Please enter a valid email address.'); valid = false; }
 
-    // Company
     var company = document.getElementById('contact-company');
-    if (!company.value.trim()) {
-      showError(company, 'Company is required.');
-      valid = false;
-    }
+    if (!company.value.trim()) { showError(company, 'Company is required.'); valid = false; }
 
-    // Role
     var role = document.getElementById('contact-role');
-    if (!role.value.trim()) {
-      showError(role, 'Role is required.');
-      valid = false;
-    }
+    if (!role.value.trim()) { showError(role, 'Role is required.'); valid = false; }
 
-    // Services — at least one pill selected
     var selectedPills = form.querySelectorAll('.contact__pill.is-selected');
     if (selectedPills.length === 0) {
       var servicesField = document.getElementById('contact-services');
@@ -138,7 +86,6 @@ const SUPABASE_TABLE = 'contact_submissions';
       valid = false;
     }
 
-    // Consent
     var consent = document.getElementById('contact-consent');
     if (!consent.checked) {
       var consentRow = consent.closest('.contact__row');
@@ -151,21 +98,25 @@ const SUPABASE_TABLE = 'contact_submissions';
   }
 
   // ----------------------------------------------------------
-  // Submit handler
+  // Submit
   // ----------------------------------------------------------
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
+    e.stopPropagation();
 
     // Bot check — honeypot
     var honeypot = document.getElementById('contact-website');
-    if (honeypot && honeypot.value) return; // bot filled the hidden field
+    if (honeypot && honeypot.value) return;
 
-    // Bot check — timing (filled out too fast)
-    if (Date.now() - formLoadTime < MIN_FILL_MS) return;
+    // Bot check — timing
+    if (Date.now() - formLoadTime < 3000) {
+      if (submitError) submitError.textContent = 'Please wait a moment before submitting.';
+      return;
+    }
 
     if (!validate()) return;
 
-    // Gather values
+    // Gather data
     var data = {
       first_name: document.getElementById('contact-first-name').value.trim(),
       last_name: document.getElementById('contact-last-name').value.trim(),
@@ -179,19 +130,24 @@ const SUPABASE_TABLE = 'contact_submissions';
       consent: document.getElementById('contact-consent').checked,
     };
 
-    // Button loading state
+    // Loading state
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="contact__submit-dots">LAUNCHING<span>.</span><span>.</span><span>.</span></span>';
 
-    // Submit click scale pulse
-    if (typeof gsap !== 'undefined') {
-      gsap.fromTo(submitBtn,
-        { scale: 0.97 },
-        { scale: 1, duration: 0.2, ease: 'power2.out' }
-      );
-    }
+    // Reset form and show modal
+    form.reset();
+    form.querySelectorAll('.contact__pill.is-selected').forEach(function(p) {
+      p.classList.remove('is-selected');
+      p.setAttribute('aria-pressed', 'false');
+    });
+    form.querySelectorAll('.contact__success').forEach(function(el) {
+      el.classList.remove('is-visible');
+      el.textContent = '';
+    });
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'LAUNCH';
 
-    // Supabase REST API insert
+    // Supabase insert (background)
     fetch(SUPABASE_URL + '/rest/v1/' + SUPABASE_TABLE, {
       method: 'POST',
       headers: {
@@ -201,47 +157,13 @@ const SUPABASE_TABLE = 'contact_submissions';
         'Prefer': 'return=minimal',
       },
       body: JSON.stringify(data),
-    }).then(function(response) {
-      if (!response.ok) {
-        return response.json().catch(function() { return {}; }).then(function(errBody) {
-          console.warn('[contact] Supabase insert failed:', errBody.message || response.status);
-          if (submitError) submitError.textContent = 'Something went wrong. Please try again.';
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'LAUNCH';
-        });
-      }
-      showSuccess();
     }).catch(function(err) {
-      console.warn('[contact] Supabase insert error:', err);
-      if (submitError) submitError.textContent = 'Network error. Please check your connection.';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'LAUNCH';
+      console.warn('[contact] Supabase error:', err);
     });
   });
 
   // ----------------------------------------------------------
-  // Success state — opens modal
-  // ----------------------------------------------------------
-  function showSuccess() {
-    // Reset + re-enable the button so the form is usable if modal is closed
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'LAUNCH';
-    form.reset();
-    // Deselect any service pills
-    form.querySelectorAll('.contact__pill.is-selected').forEach(function(p) {
-      p.classList.remove('is-selected');
-      p.setAttribute('aria-pressed', 'false');
-    });
-    // Clear all success messages
-    form.querySelectorAll('.contact__success').forEach(function(el) {
-      el.classList.remove('is-visible');
-      el.textContent = '';
-    });
-    openModal();
-  }
-
-  // ----------------------------------------------------------
-  // Field success — green checkmark + positive message on blur
+  // Field success — green checkmark on blur
   // ----------------------------------------------------------
   function showFieldSuccess(input) {
     var field = input.closest('.contact__field');
@@ -253,33 +175,17 @@ const SUPABASE_TABLE = 'contact_submissions';
     var val = input.value.trim();
     var isValid = false;
 
-    if (input.type === 'email') {
-      isValid = emailRegex.test(val);
-    } else if (input.tagName === 'TEXTAREA') {
-      isValid = val.length > 0;
-    } else {
-      isValid = val.length > 0;
-    }
+    if (input.type === 'email') { isValid = emailRegex.test(val); }
+    else { isValid = val.length > 0; }
 
     if (isValid) {
-      // Hide error if showing
       if (errorEl) errorEl.textContent = '';
-
-      // Personalize first name message
       var msg = input.dataset.success || 'Got it';
-      if (input.id === 'contact-first-name' && val) {
-        msg = 'Nice to meet you, ' + val + '!';
-      }
-
+      if (input.id === 'contact-first-name' && val) msg = 'Nice to meet you, ' + val + '!';
       successEl.textContent = msg;
       successEl.classList.add('is-visible');
-
-      // Animate in
       if (typeof gsap !== 'undefined') {
-        gsap.fromTo(successEl,
-          { opacity: 0, y: 4 },
-          { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
-        );
+        gsap.fromTo(successEl, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
       }
     } else {
       successEl.classList.remove('is-visible');
@@ -287,29 +193,21 @@ const SUPABASE_TABLE = 'contact_submissions';
     }
   }
 
-  // Listen for blur on all form inputs/textareas
   form.querySelectorAll('.contact__input').forEach(function(input) {
-    input.addEventListener('blur', function() {
-      showFieldSuccess(input);
-    });
+    input.addEventListener('blur', function() { showFieldSuccess(input); });
   });
 
-  // Listen for pill selections — show success when at least one is selected
   if (pillContainer) {
     pillContainer.addEventListener('click', function() {
       var selected = pillContainer.querySelectorAll('.contact__pill.is-selected');
       var field = pillContainer.closest('.contact__field');
       var successEl = field ? field.querySelector('.contact__success') : null;
       if (!successEl) return;
-
       if (selected.length > 0) {
         successEl.textContent = 'Great choices';
         successEl.classList.add('is-visible');
         if (typeof gsap !== 'undefined') {
-          gsap.fromTo(successEl,
-            { opacity: 0, y: 4 },
-            { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
-          );
+          gsap.fromTo(successEl, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
         }
       } else {
         successEl.classList.remove('is-visible');
@@ -317,5 +215,4 @@ const SUPABASE_TABLE = 'contact_submissions';
       }
     });
   }
-
 })();

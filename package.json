@@ -1,7 +1,8 @@
 {
   "private": true,
   "dependencies": {
-    "@vercel/edge": "^1.1.1"
+    "@vercel/edge": "^1.1.1",
+    "resend": "^6.12.2"
   },
   "devDependencies": {
     "sharp": "^0.34.5"

@@ -1,11 +1,8 @@
 /* ============================================================
    CONTACT.JS
-   Form validation, service pill toggling, and Supabase submission.
+   Form validation, service pill toggling, and modal trigger.
+   Backend submission TBD (Resend integration pending).
    ============================================================ */
-
-const SUPABASE_URL = 'https://bzvjguwpayeelmctvboi.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6dmpndXdwYXllZWxtY3R2Ym9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzkzMDksImV4cCI6MjA4OTU1NTMwOX0.R45g0zsVRJyml-jxPZ1jTIWdNSSHQn1r-RxIaYRSzaQ';
-const SUPABASE_TABLE = 'contact_submissions';
 
 (function() {
   var form = document.getElementById('contact-form');
@@ -147,18 +144,13 @@ const SUPABASE_TABLE = 'contact_submissions';
     submitBtn.disabled = false;
     submitBtn.textContent = 'LAUNCH';
 
-    // Supabase insert (background)
-    fetch(SUPABASE_URL + '/rest/v1/' + SUPABASE_TABLE, {
+    // Send to Resend via Vercel serverless function (background)
+    fetch('/api/contact', {
       method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     }).catch(function(err) {
-      console.warn('[contact] Supabase error:', err);
+      console.warn('[contact] send error:', err);
     });
   });
 
